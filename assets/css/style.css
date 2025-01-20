@@ -352,6 +352,67 @@ img{
     margin-right: var(--mb-0-25);
 }
 
+
+
+
+/* =========== Keyframes Animations =============== */
+/* =========== HOME =============== */
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.home__social, .home__img, .home__data, .home__scroll {
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out, transform 2s ease-in-out;
+}
+
+.home__social.animate {
+    animation: fadeInLeft 2s ease-in-out forwards;
+}
+
+.home__img.animate {
+    animation: fadeInRight 1.5s ease-in-out forwards;
+}
+
+.home__data.animate {
+    animation: fadeInUp 3s ease-in-out forwards;
+}
+
+.home__scroll.animate {
+    animation: fadeInUp 3s ease-in-out forwards;
+}
+
+
+
 /* ========== BUTTONS ========== */
 .button{
     display: inline-block;
@@ -444,6 +505,36 @@ img{
     display: flex;
     justify-content: center;
 }
+
+
+/* ================ Keyframes Animations =============== */
+/* ========== TITLES ABOUT ============ */
+/* Add this CSS code */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.about__title, .about__subtitle {
+    opacity: 0;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+.about__title.animate {
+    animation: fadeInUp 1s ease-in-out forwards;
+}
+
+.about__subtitle.animate {
+    animation: fadeInUp 1.2s ease-in-out forwards;
+}
+
 
 /* ========== Skills ========== */
 .skills__container{
