@@ -32,6 +32,59 @@ function linkAction(){
 navLink.forEach(n => n.addEventListener('click', linkAction))
 
 
+// ==================== ANIMATION FOR THE HOME SECTION ====================
+    document.addEventListener('DOMContentLoaded', () => {
+        const elementsToAnimate = [
+            document.querySelector('.home__social'),
+            document.querySelector('.home__img'),
+            document.querySelector('.home__data'),
+            document.querySelector('.home__scroll')
+        ];
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+
+        elementsToAnimate.forEach(element => {
+            observer.observe(element);
+        });
+    });
+
+
+// ==================== ANIMATIONS FOR TITLES ABOUT SECTION =======================
+    document.addEventListener('DOMContentLoaded', () => {
+        const elementsToAnimate = [
+            document.querySelector('.section__title'),
+            document.querySelector('.section__subtitle')
+        ];
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+
+        elementsToAnimate.forEach(element => {
+            if (element) {
+                observer.observe(element);
+            }
+        });
+    });
+
+
+
 // ==================== ACCORDION SKILLS ====================
 const skillsContent = document.getElementsByClassName('skills__content'),
       skillsHeader = document.querySelectorAll('.skills__header')
