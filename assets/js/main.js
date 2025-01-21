@@ -84,6 +84,65 @@ navLink.forEach(n => n.addEventListener('click', linkAction))
     });
 
 
+// ==================== ANIMATIONS FOR ABOUT DIV - SECTION ==========================
+document.addEventListener('DOMContentLoaded', function () {
+    const observerOptions = {
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                let delay = 0;
+                if (entry.target.classList.contains('about__img')) {
+                    entry.target.style.animation = `slideInBottom 2s ${delay}s ease-out forwards`;
+                } else if (entry.target.classList.contains('about__data')) {
+                    delay = 0.2;
+                    entry.target.style.animation = `slideInTop 2s ${delay}s ease-out forwards`;
+                } else if (entry.target.querySelector('.about__info-title')) {
+                    if (entry.target.querySelector('.about__info-title').textContent.includes('Years')) {
+                        delay = 0.4;
+                        entry.target.style.animation = `slideInLeft 2s ${delay}s ease-out forwards`;
+                    } else if (entry.target.querySelector('.about__info-title').textContent.includes('Completed')) {
+                        delay = 0.6;
+                        entry.target.style.animation = `slideInRight 2s ${delay}s ease-out forwards`;
+                    }
+                } else if (entry.target.classList.contains('about__buttons')) {
+                    delay = 0.8;
+                    entry.target.style.animation = `slideInBottom 2s ${delay}s ease-out forwards`;
+                }
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.about__img, .about__data, .about__info > div, .about__buttons').forEach(element => {
+        observer.observe(element);
+    });
+});
+
+
+// =================== ANIMATIONS FOR SKILLS =================
+document.addEventListener('DOMContentLoaded', function () {
+    const observerOptions = {
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                entry.target.style.animation = `slideIn 1s ${index * 0.3}s ease-out forwards`;
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.skills__content').forEach(element => {
+        observer.observe(element);
+    });
+});
+
+
 
 // ==================== ACCORDION SKILLS ====================
 const skillsContent = document.getElementsByClassName('skills__content'),
