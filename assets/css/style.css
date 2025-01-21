@@ -535,6 +535,51 @@ img{
     animation: fadeInUp 1.2s ease-in-out forwards;
 }
 
+/* About Section */
+@keyframes slideInBottom {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInTop {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
 
 /* ========== Skills ========== */
 .skills__container{
@@ -664,6 +709,24 @@ img{
 .skills__open .skills__arrow{
     transform: rotate(-180deg);
 }
+
+/* ========== ANIMATIONS FOR SKILLS =============== */
+@keyframes slideIn {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.skills__content {
+    opacity: 0; /* Ensure elements are hidden initially */
+}
+
+
 
 /* ========== QUALIFICATIONS ========== */
 .qualification__tabs{
