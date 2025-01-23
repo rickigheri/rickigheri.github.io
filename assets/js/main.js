@@ -164,6 +164,13 @@ skillsHeader.forEach((el) =>{
 })
 
 
+
+
+
+
+
+
+
 // ==================== QUALIFIACTION TABS ====================
 const tabs = document.querySelectorAll('[data-target]'),
       tabContnets = document.querySelectorAll('[data-content]')
@@ -207,6 +214,8 @@ modalCloses.forEach((modalClose) =>{
         })
     })
 })
+
+
 
 
 // ==================== PORTFOLIO SWIPER ====================
