@@ -65,9 +65,21 @@
   }
 
   .nav-logo img {
-    height: 48px;
+    height: 54px;
     width: auto;
     object-fit: contain;
+  }
+  .logo-img {
+    mix-blend-mode: screen;
+    filter: brightness(1.1);
+  }
+
+  /* ========== RESPONSIVE IMPROVEMENTS ========== */
+  @media (max-width: 1200px) {
+    .hero-inner { padding: 3rem 2rem 4rem; gap: 2rem; }
+    .expertise-grid { grid-template-columns: repeat(2, 1fr); }
+    .practice-areas-grid { grid-template-columns: repeat(2, 1fr); }
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
 
@@ -1027,10 +1039,60 @@
     flex: 1;
   }
 
+  /* ========== HAMBURGER ========== */
+  .nav-hamburger {
+    display: none; flex-direction: column; justify-content: center;
+    gap: 5px; background: none; border: none; cursor: pointer;
+    padding: 4px 6px; z-index: 200; flex-shrink: 0;
+  }
+  .nav-hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: rgba(255,255,255,0.85); border-radius: 2px;
+    transition: all 0.3s ease; transform-origin: center;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ========== OVERLAY ========== */
+  #countryOverlay {
+    display: none; position: fixed; inset: 0; z-index: 9999;
+    background: rgba(10,18,40,0.93); overflow-y: auto; padding: 2rem 1rem;
+  }
+  #overlayBox {
+    max-width: 860px; margin: 0 auto; background: var(--off-white);
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  }
+  #overlayHead {
+    padding: 2rem 2.5rem; display: flex; align-items: center;
+    justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+  }
+  #overlayProjects { padding: 0 2.5rem 2.5rem; display: grid; gap: 1.2rem; }
+  .ov-card {
+    background: white; border-radius: 10px; padding: 1.5rem;
+    border: 1px solid var(--light-gray); border-left: 4px solid #ccc;
+  }
+  .ov-card h3 { font-size:.95rem;font-weight:600;color:var(--navy);line-height:1.5;margin:0 0 .7rem; }
+  .ov-card p  { font-size:.85rem;color:var(--text-mid);line-height:1.7;margin:0; }
+
   /* ========== RESPONSIVE ========== */
   @media (max-width: 900px) {
-    .hero-inner { grid-template-columns: 1fr; gap: 0; padding: 3rem 1.2rem 4rem; }
-    .hero-map-side { width: 90%; max-width: 480px; margin: 0 auto; min-height: auto; }
+    .nav-hamburger { display: flex; }
+    .nav-links {
+      position: fixed; top: 70px; left: 0; right: 0;
+      background: rgba(15,28,56,0.98);
+      flex-direction: column; gap: 0; padding: 0;
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease;
+      border-bottom: 1px solid rgba(212,160,23,0.2); z-index: 99;
+    }
+    .nav-links.open { max-height: 400px; padding: 0.5rem 0 1rem; }
+    .nav-links li { width: 100%; }
+    .nav-links a { display: block; padding: .9rem 2rem; font-size:14px; border-bottom:1px solid rgba(255,255,255,0.05); }
+    .nav-cta { margin: .8rem 2rem 0 !important; display:inline-block !important; width:auto !important; }
+    .hero-inner { grid-template-columns: 1fr; gap: 1.5rem; padding: 3rem 1.5rem 4rem; }
+    .hero-map-side { width: 85%; max-width: 420px; margin: 0 auto; min-height: auto; }
     .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .expertise-grid { grid-template-columns: repeat(2, 1fr); }
     .practice-areas-grid { grid-template-columns: 1fr; }
@@ -1039,13 +1101,39 @@
     .team-grid { grid-template-columns: 1fr; }
     .contact-layout { grid-template-columns: 1fr; }
     .expertise-intro { grid-template-columns: 1fr; gap: 1rem; }
+    #overlayHead { padding: 1.5rem; }
+    #overlayProjects { padding: 0 1.2rem 1.5rem; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 3.5rem 1rem; }
+    .section-inner { padding: 0 0.2rem; }
+    .expertise-grid { grid-template-columns: 1fr; }
+    .practice-areas-grid { grid-template-columns: 1fr; }
+    .team-card { grid-template-columns: 1fr; }
+    .team-avatar { width: 70px; height: 70px; font-size: 1.3rem; }
+    .hero-stats { grid-template-columns: repeat(3, 1fr); gap: 1px; }
+    .hero h1 { font-size: clamp(1.8rem, 6vw, 2.4rem); }
+    .hero p { font-size: 0.95rem; }
+    .hero-actions { flex-direction: column; }
+    .btn-primary, .btn-outline { text-align: center; }
+    .about-grid { gap: 2rem; }
+    .contact-layout { gap: 2rem; }
+    footer .footer-inner { flex-direction: column; text-align: center; }
+    footer .footer-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+    .portfolio-layout { gap: 2rem; }
+    .map-svg-container { padding: 1rem; }
+    h2.section-title { font-size: clamp(1.5rem, 5vw, 2rem); }
+    .contact-form { padding: 1.5rem; }
+    .expertise-intro { gap: 1.5rem; }
+    #overlayHead { padding: 1rem; }
+    #overlayProjects { padding: 0 1rem 1.5rem; }
+    .nav-inner { padding: 0 1rem; }
   }
 
-  @media (max-width: 600px) {
-    section { padding: 4rem 1.2rem; }
-    .expertise-grid { grid-template-columns: 1fr; }
-    .team-card { grid-template-columns: 1fr; }
+  @media (max-width: 400px) {
     .hero-stats { grid-template-columns: 1fr; }
+    .hero-stat .num { font-size: 1.6rem; }
+    section { padding: 3rem 0.8rem; }
   }
 
   /* Scroll Animation */
@@ -1059,6 +1147,27 @@
     opacity: 1;
     transform: none;
   }
+
+  /* ── Country Overlay ── */
+  #countryOverlay {
+    display: none; position: fixed; inset: 0; z-index: 9999;
+    background: rgba(10,18,40,0.93); overflow-y: auto; padding: 2rem 1rem;
+  }
+  #overlayBox {
+    max-width: 860px; margin: 0 auto; background: var(--off-white);
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  }
+  #overlayHead {
+    padding: 2rem 2.5rem; display: flex; align-items: center;
+    justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+  }
+  .ov-card {
+    background: white; border-radius: 10px; padding: 1.5rem;
+    border: 1px solid var(--light-gray); border-left: 4px solid #ccc;
+  }
+  .ov-card h3 { font-size:.95rem;font-weight:600;color:var(--navy);line-height:1.5;margin:0 0 .7rem; }
+  .ov-card p  { font-size:.85rem;color:var(--text-mid);line-height:1.7;margin:0; }
 </style>
 </head>
 <body>
@@ -1067,16 +1176,19 @@
 <nav>
   <div class="nav-inner">
     <a href="#" class="nav-logo">
-      <img src="data:image/jpeg;base64,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AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/Z" alt="KK Advisors Africa" style="height:44px; width:auto; object-fit:contain; mix-blend-mode:screen;">
+      <img src="assets/images/img/Screenshot_2026-04-03_at_17.43.55-removebg-preview.png" alt="KK Advisors Africa" class="logo-img">
     </a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#expertise">Expertise</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#portfolio">Portfolio</a></li>
-      <li><a href="#team">Leadership</a></li>
-      <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about" onclick="closeNav()">About</a></li>
+      <li><a href="#expertise" onclick="closeNav()">Expertise</a></li>
+      <li><a href="#services" onclick="closeNav()">Services</a></li>
+      <li><a href="#portfolio" onclick="closeNav()">Portfolio</a></li>
+      <li><a href="#team" onclick="closeNav()">Leadership</a></li>
+      <li><a href="#contact" class="nav-cta" onclick="closeNav()">Contact Us</a></li>
     </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
@@ -1099,7 +1211,7 @@
           <span class="lbl">Projects</span>
         </div>
         <div class="hero-stat">
-          <span class="num">3</span>
+          <span class="num">6</span>
           <span class="lbl">Countries</span>
         </div>
         <div class="hero-stat">
@@ -1109,191 +1221,66 @@
       </div>
     </div>
     <div class="hero-map-side">
-      <div class="hero-map-container">
-        <svg
-          viewBox="0 0 1000 1001"
-          xmlns="http://www.w3.org/2000/svg"
-          style="width:100%;height:auto;display:block;overflow:visible;"
-          role="img" aria-label="Africa map showing KK Advisors project countries">
-
-          <defs>
-            <filter id="hglow" x="-30%" y="-30%" width="160%" height="160%">
-              <feGaussianBlur stdDeviation="8" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-            <filter id="sglow" x="-60%" y="-60%" width="220%" height="220%">
-              <feGaussianBlur stdDeviation="18" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-
-          <!-- ══════════════════════════════════════════ -->
-          <!-- LAYER 1 · KK brand mark — gold S-curve    -->
-          <!-- Recreates the sweeping gold left stroke    -->
-          <!-- of the Africa logo icon                   -->
-          <!-- ══════════════════════════════════════════ -->
-          <path
-            d="M 330,55
-               C 310,95  285,145 268,200
-               C 248,265 248,330 262,395
-               C 278,465 308,510 318,570
-               C 330,638 315,695 292,748
-               C 272,795 245,840 230,895"
-            fill="none" stroke="#E8A800" stroke-width="52"
-            stroke-linecap="round" stroke-linejoin="round" opacity="0.22"/>
-
-          <!-- ══════════════════════════════════════════ -->
-          <!-- LAYER 2 · KK brand mark — green east edge -->
-          <!-- Recreates the angular green Horn+east     -->
-          <!-- coast stroke of the Africa logo icon      -->
-          <!-- ══════════════════════════════════════════ -->
-          <path
-            d="M 535,42
-               L 625,48  L 735,88  L 820,168
-               L 862,255 L 875,355 L 845,430
-               L 795,465 L 758,450
-               L 795,530 L 778,610
-               L 738,658 L 718,730
-               L 705,810 L 695,880"
-            fill="none" stroke="#2e7d4f" stroke-width="42"
-            stroke-linecap="round" stroke-linejoin="round" opacity="0.22"/>
-
-          <!-- Madagascar-like island tail from brand -->
-          <path
-            d="M 882,650 C 908,680 918,740 902,800 C 886,855 862,872 850,858"
-            fill="none" stroke="#2e7d4f" stroke-width="26"
-            stroke-linecap="round" opacity="0.18"/>
-
-          <!-- ══════════════════════════════════════════ -->
-          <!-- LAYER 3 · Africa continent — ghost fill   -->
-          <!-- All countries as subtle filled shapes     -->
-          <!-- ══════════════════════════════════════════ -->
-          <g fill="rgba(255,255,255,0.055)" stroke="rgba(255,255,255,0.13)" stroke-width="0.7" stroke-linejoin="round">
-            <!-- Angola --><path d="m 495.3,598.6 -36,-0.2 -4.3,1.7 -3.5,-0.3 -5.1,1.9 -1.1,2.7 6,8.7 2.4,9.3 3.6,13.4 -3.8,5.5 -0.6,2.8 2.9,8.3 3.1,8.4 3.6,5 0.6,7.8 -1.4,10.3 -4,6.1 -7.1,9.1 -2.9,5.6 -4.1,12.5 -0.8,5.9 -4.3,12.7 -1.9,12.2 1,8.7 5.9,-2.7 7.2,-2.3 7.8,0.4 7.1,6.3 1.9,-1 48.8,-0.6 8.2,6.6 29.1,2 22.4,-5.7 -7.6,-8.6 -7.8,-11.3 1.6,-44 25.3,0.1 -1,-4.7 2,-5.2 -2,-6.5 1.5,-6.7 -1.2,-4.3 -5.5,-0.8 -7.6,2 -5.3,-0.3 -3,1.3 0.9,-16.5 -3.9,-5.1 -0.8,-8.5 1.9,-8.4 -2.4,-5.3 -0.1,-8.7 -14.8,0.1 1.1,-5 -6.2,0.1 -0.7,2.4 -7.6,0.5 -3.1,8.1 -1.9,3.4 -6.7,-1.9 -4,1.9 -8.1,1.1 -4.6,-7.2 -2.7,-4.5 -3.5,-8.3 -2.9,-10.3 z m -47.4,-2.7 0.4,-6 2,-3.5 4.5,-2.9 -4.6,-4.8 -3.7,2.3 -5,6 3.3,10.4 3.1,-1.5 z"/>
-            <!-- Burundi --><path d="m 669,556.1 -0.6,-5.4 -6.5,-0.9 -3.8,7.9 -7.4,-1.1 3,6.3 0.1,2.4 4.3,13.2 0,0.6 1.2,-0.2 4.5,-5 4.9,-7.2 3,-2.9 -0.1,-4.5 -2.6,-3.2 z"/>
-            <!-- Benin --><path d="m 340,356 -9.3,-8 -4.3,0.1 -4.1,4 -2.6,4.2 -6,1.2 -2.5,6.1 -4.1,1.6 -1.6,7.2 3.7,4.1 4.3,4.9 0.4,6.8 2.5,2.8 -0.5,31.8 3,9.5 10.1,-1.6 0.6,-22.3 -0.3,-8.8 2.3,-8.7 3.7,-4.3 5.9,-8.5 -1.3,-3.7 2.4,-5.6 -2.8,-8.2 0.5,-4.6 z"/>
-            <!-- Burkina --><path d="m 300.7,310.8 -7.8,0 -3,-2.6 -6.7,1.9 -11.3,5.8 -2.3,4.3 -9.4,6.2 -1.7,3.6 -5.1,2.8 -5.8,-1.9 -3.4,3.4 -1.8,9.5 -9.7,11.4 0.3,4.7 -3.4,5.9 0.8,8 5.5,3 2.1,4.6 5.4,2.9 4.3,-3.4 5.7,-0.6 8.3,3.6 -1.6,-10.4 0.3,-7.9 21.1,-0.6 5.4,1 3.9,-2.2 5.6,1.1 10.7,0.3 4.1,-1.6 2.5,-6.1 6,-1.2 2.6,-4.2 0.3,-9.5 -14,-3.1 -0.4,-6.7 -6.9,-9 -1.6,-6.3 1,-6.7 z"/>
-            <!-- Botswana --><path d="m 600.6,762.7 -2.2,-1 -6.9,3.1 -3.6,0 -7.9,5.4 -4.4,-5.7 -18.7,4.9 -9,0.4 -1.9,49.3 -11.8,0.5 -1.4,40.4 3.2,2 6.5,13.2 -1.5,8.4 2.5,4.9 8.5,-1.4 6.2,-6.2 5.8,-4.2 3.2,-6.6 6,-3.2 4.9,1.7 5.5,3.9 9.6,0.6 7.8,-3.2 1.4,-4.3 2.4,-6.6 6.5,-1.1 3.9,-5.2 4.4,-9.3 11.2,-10.3 17.3,-10.2 -7.3,-6.2 -9.2,-2.1 -3.1,-8.8 0.2,-4.9 -5.1,-1.5 -13,-15.2 -3.5,-8 -2.3,-2.4 -4.2,-11.1 z"/>
-            <!-- CAR --><path d="m 587,398.1 -1,-0.7 -4.2,-4 -0.9,-4.3 1.9,-5.7 -0.1,-5.7 -7.2,-8.6 -1.5,-5.9 -7.7,2.3 -6,5.6 -8.6,15.1 -11.3,6.4 -11.8,-0.8 -3.4,1.2 1.2,4.9 -6.3,4.8 -5.1,5.4 -15.3,5.3 -3,-3.1 -2.1,-0.3 -2.2,3.6 -10,1 -6.1,14 -2.9,2.6 -0.8,10.7 1.2,5.8 -0.9,4.1 5.8,7.3 1,4.9 4.6,7.2 5.6,4.4 0.6,6.3 1.3,4 6.3,-12.8 7.3,-7.4 8.2,2.4 7.9,0.7 1,-9.6 4.7,-7.1 6.5,-4.4 10.1,4.7 7.8,5.1 9,1.4 9.1,2.7 3.6,-8.4 1.6,-1.1 5.6,1.4 13.5,-6.9 4.9,3 3.9,-0.5 1.8,-3.3 4.5,-1.2 9.2,1.4 7.9,0.4 4,-1.5 -2,-4.4 -9.2,-5.5 -3.2,-8.3 -5.2,-6 -8.3,-7.2 -0.1,-4.5 -6.8,-5.5 -8.4,-5.4 z"/>
-            <!-- Cote dIvoire --><path d="m 230.4,373.8 -5,2.1 -2.9,1.7 -1.8,-5.9 -3.5,1.6 -2.1,-0.3 -2.3,4 -9.4,-0.1 -3.3,-2.1 -1.6,1.3 -2.5,1.1 -1,4.7 2.8,5.7 3,11.1 -4.6,1.6 -1.1,1.9 0.9,2.7 -0.8,6.1 -1.9,0 -0.6,4 1.2,6.7 -2.7,6.1 3.6,3.8 3.8,0.9 5.2,5.8 0.3,5.5 -1.1,1.7 -1,11.4 2.3,0.4 12.1,-5.1 8.5,-4 14.5,-2.4 7.8,-0.2 8.5,2.7 5.6,-0.1 0.5,-5.5 -5.2,-11.9 3.2,-15.6 5.1,-11.6 -3.2,-19.7 -8.3,-3.6 -5.7,0.6 -4.3,3.4 -5.4,-2.9 -2.1,-4.6 -5.5,-3 z"/>
-            <!-- Cameroon --><path d="m 477.5,366.6 0.4,-9.2 -1,-9.1 -4.9,-8.9 -3.4,0.8 -0.4,4.4 4.9,5.5 -1.3,2.5 -0.5,4.6 -10.2,10.7 -3.1,8.8 -1.6,7.2 -2.6,3.1 -2.4,9.7 -6.4,5.7 -1.9,7 -2.7,5.6 -1.1,5.7 -8.3,4.7 -6.9,-5.7 -4.6,0.2 -7.2,8.1 -3.6,0.1 -5.7,13.4 -3.1,9.8 -0.1,3.8 3.1,2 2.5,6.2 5.6,2.3 4.8,9.2 -1.8,10.9 19.9,0.3 5.8,-0.9 7.4,1.9 7.3,-1.8 1.5,0.7 15.4,0.6 9.9,3.6 9.7,3.3 0.9,-7.5 -1.3,-4 -0.6,-6.3 -5.6,-4.4 -4.6,-7.2 -1,-4.9 -5.8,-7.3 0.9,-4.1 -1.2,-5.8 0.8,-10.7 2.9,-2.6 6.1,-14 1.8,-3.7 -3.9,-9.6 -1.8,-5.7 -5.3,-2.3 -7.2,-8.1 2.5,-6.5 5.6,1.3 3.4,-0.9 6.8,0.1 -6.8,-12.6 z"/>
-            <!-- DR Congo --><path d="m 618.3,446 -9.2,-1.4 -4.5,1.2 -1.8,3.3 -3.9,0.5 -4.9,-3 -13.5,6.9 -5.6,-1.4 -1.6,1.1 -3.6,8.4 -9.1,-2.7 -9,-1.4 -7.8,-5.1 -10.1,-4.7 -6.5,4.4 -4.7,7.1 -1,9.6 -0.7,8.4 -3.6,7.4 -2.4,8.6 -1.5,12.3 0.7,7.8 -2,4.8 -0.3,5.1 -1.4,4.4 -8.1,6.7 -5.6,7.1 -5.3,13.4 0.3,11.4 -3.1,4.4 -7.2,6.8 -7.2,8.7 -4.5,-2.5 -0.8,-3.9 -6.6,-0.1 -4.2,5.3 -3.2,-1.4 -4.5,2.9 -2,3.5 -0.4,6 -3.1,1.5 1.6,4.3 5.1,-1.9 3.5,0.3 4.3,-1.7 36,0.2 2.9,10.3 3.5,8.3 2.7,4.5 4.6,7.2 8.1,-1.1 4,-1.9 6.7,1.9 1.9,-3.4 3.1,-8.1 7.6,-0.5 0.7,-2.4 6.2,-0.1 -1.1,5 14.8,-0.1 0.1,8.7 2.4,5.3 -1.9,8.4 0.8,8.5 3.9,5.1 -0.9,16.5 3,-1.3 5.3,0.3 7.6,-2 5.5,0.8 4.2,0.3 0.6,4.3 5.7,-0.3 7.7,1.3 3.9,6.2 9.7,2 7.5,-4.4 2.6,7.3 9.2,1.9 4.3,5.9 4.8,7.6 9.3,0.1 -0.6,-14.9 -3.4,2.5 -8.4,-5.4 -3.2,-2.4 1.9,-13.9 2.5,-16.4 -2.6,-6.1 3.6,-8.8 3.3,-1.7 16.4,-2.3 2.1,0.6 0.6,-2.3 -3.4,-3.7 -1.5,-7.6 -7.3,-7.6 -4.1,-9.9 2.3,-5.8 -3.2,-7.8 2.4,-22.1 -3,-6.3 1.2,-7.6 1.7,-1 0.5,-8.3 3.5,-3.8 0.1,-10.5 2.9,-5.3 0.6,-11.1 2.6,-6.4 4.6,-7.2 4.7,-3.7 3.9,-4.9 -4.9,-1.9 0.6,-16.1 -10.9,-9.2 -2.9,-5.9 -6.8,2.9 -5.7,-0.9 -3.2,2.3 -5.5,-1.7 -7.5,-11.4 -4,1.5 -7.9,-0.4 z"/>
-            <!-- Congo --><path d="m 521.5,468.8 -7.9,-0.7 -8.2,-2.4 -7.3,7.4 -6.3,12.8 -0.9,7.5 -9.7,-3.3 -9.9,-3.6 -15.4,-0.6 -0.9,6.1 3.4,7.1 9.1,-1.1 3.1,2.7 -5.3,16.1 5.8,8.2 1.3,10.8 -1.6,9.2 -3.7,6.5 -10.8,-0.6 -6.5,-6.6 -1,6.1 -8.3,1.7 -4.2,3.5 4.6,9.1 -9.3,7.7 9.9,14.6 5,-6 3.7,-2.3 4.6,4.8 3.2,1.4 4.2,-5.3 6.6,0.1 0.8,3.9 4.5,2.5 7.2,-8.7 7.2,-6.8 3.1,-4.4 -0.3,-11.4 5.3,-13.4 5.6,-7.1 8.1,-6.7 1.4,-4.4 0.3,-5.1 2,-4.8 -0.7,-7.8 1.5,-12.3 2.4,-8.6 3.6,-7.4 0.7,-8.4 z"/>
-            <!-- Ethiopia --><path d="m 754.8,310.3 -3.3,10.4 -14.3,-2.9 -1.4,11.9 -4.5,13.6 -7.1,6.8 -4.8,10.6 -1.1,5.7 -5.6,3.8 -3.3,14.5 0.1,1.7 0.4,10.8 -1.8,4.2 -6.4,0.3 -4,7.9 7.5,1 6.3,6.7 2.2,5.6 5.7,3.2 7.4,15 6.4,2.4 0.1,7.7 4.2,4.6 8.5,0 15.7,11.7 3.8,0.2 2.9,-0.4 2.7,1.6 8.2,1.1 3.5,-5.8 11.1,-5.8 4.9,4.7 8.4,0 3.3,-4.4 7.8,-0.2 10.7,-9.8 15.9,-0.6 33.5,-41.5 -10.3,0.1 -40.3,-16.4 -4.8,-5 -4.6,-6.6 -4.8,-7.7 2.5,-4.9 -2.8,-2.4 -2.9,0.9 -6.8,-0.2 -0.3,-4.2 -1.1,-3.8 3.9,-6.5 4,-6.1 -4.3,-4.5 -5.4,-8.1 -5.5,-4.4 -3.4,-4.8 -10.8,-5.6 -8.3,-0.1 -3,-2.9 -7,3.2 -7.6,-6.3 z"/>
-            <!-- Gabon --><path d="m 455.9,485.9 -1.5,-0.7 -7.3,1.8 -7.4,-1.9 -5.8,0.9 0.1,16.7 -17.7,-0.2 -4.2,0.8 -2.4,10.3 -3,10.1 -2.7,4.4 -0.3,4.6 7.3,14.3 8.1,11.4 12.5,14 9.3,-7.7 -4.6,-9.1 4.2,-3.5 8.3,-1.7 1,-6.1 6.5,6.6 10.8,0.6 3.7,-6.5 1.6,-9.2 -1.3,-10.8 -5.8,-8.2 5.3,-16.1 -3.1,-2.7 -9.1,1.1 -3.4,-7.1 0.9,-6.1 z"/>
-            <!-- Ghana --><path d="m 296.4,364.9 -5.6,-1.1 -3.9,2.2 -5.4,-1 -21.1,0.6 -0.3,7.9 1.6,10.4 3.2,19.7 -5.1,11.6 -3.2,15.6 5.2,11.9 -0.5,5.5 10.9,3.9 11,-4 6.7,-4.7 19.2,-8.1 -2.8,-4.9 -3.2,-8.8 -1,-6.8 2.7,-12.5 -3,-5 -1.2,-10.9 0,-10.1 -5.1,-7.1 0.9,-4.3 z"/>
-            <!-- Kenya --><path d="m 807.2,463.1 -8.4,0 -4.9,-4.7 -11.1,5.8 -3.5,5.8 -8.2,-1.1 -2.7,-1.6 -2.9,0.4 -3.8,-0.2 -15.7,-11.7 -8.5,0 -4.2,-4.6 -0.1,-7.7 -6.4,-2.4 -8.1,9.1 -7.4,8.3 5.9,9.6 1.5,7 5.5,15.8 -4.4,10.1 -5.9,9.2 -3.5,5.6 0,0.7 2.9,5.2 -0.8,10.3 44.1,28.2 0.7,8 17.3,13.8 5,-4.6 2.5,-9.2 4,-5.5 1.9,-9.8 4.6,-1 3.1,-5.8 8.6,-5.5 -7.2,-11.4 -0.4,-50.4 10.5,-15.7 z"/>
-            <!-- Mali --><path d="m 347.4,252.3 -13.3,1.3 -0.2,-8.8 -5.5,-2.2 -7.5,-4 -2.9,-6.4 -40.4,-30.2 -40,-30.2 -18.2,0.2 5.1,59.7 5.4,59.7 2,1.8 -2.7,9.6 -48.5,0.2 -1.9,3.1 -4.6,-0.9 -6.9,2.7 -8.4,-3.8 -3.8,0.3 -2.2,8.2 -4.1,2.5 0.4,8.6 2.3,7.9 4.5,3.9 1,5.3 -0.6,4.4 0.6,5 2,0 3.2,-1.8 2,0.4 3.3,3.5 5.2,1.1 3.3,-3 4,-1.8 2.9,-1.9 2.4,0.3 2.7,3.1 1.4,3.8 5,5.8 -2.5,3.5 -0.6,4.5 2.6,-1.3 1.6,1.6 -0.7,4.1 3.7,4 1.6,-1.3 3.3,2.1 9.4,0.1 2.3,-4 2.1,0.3 3.5,-1.6 1.8,5.9 2.9,-1.7 5,-2.1 -0.8,-8 3.4,-5.9 -0.3,-4.7 9.7,-11.4 1.8,-9.5 3.4,-3.4 5.8,1.9 5.1,-2.8 1.7,-3.6 9.4,-6.2 2.3,-4.3 11.3,-5.8 6.7,-1.9 3,2.6 7.8,0 7.7,-0.6 4.5,-4.9 16.5,-1.2 10.7,-2.2 1,-8.5 6.6,-9.2 -0.3,-31.9 z"/>
-            <!-- Mozambique --><path d="m 788.2,666.2 -1.7,-6.2 -10,8.1 -13.4,5.3 -7.3,-0.2 -4.5,4.2 -8.4,0.3 -3.3,1.8 -14.4,-3.9 -4.7,0.5 -3.3,13.1 1.4,15.8 4.2,4.4 4.6,10 0.3,17.8 -5.4,3 -4.1,9.6 -7.5,-8.6 -0.5,-9.7 2.9,-6.5 -0.5,-5.5 -4.7,-3.5 -3.3,1.2 -6.8,-6.6 -37.1,11.4 0.8,9.9 0.6,5.1 10,-0.3 5.5,3 2.5,3.4 5.7,1 6.1,4.4 -0.8,17.5 -2.8,9.6 -1,10.4 1.7,4.1 -1.7,8.1 -1.9,1.3 -3.6,9.9 -13.4,15.7 4.7,19.5 2.5,9.9 -3,15.4 0.7,5 1.3,6.2 0.6,6.1 9,0.1 1.5,-7.3 -2.9,-0.9 -0.6,-5.8 5.5,-5.2 14.8,-7.5 10.1,-4.6 5.3,-5 2.1,-5.7 -2.7,-2.4 2.4,-6.4 1.1,-13.6 -2.2,0.7 0.1,-4.1 -1.9,-8.1 -5.2,-10.5 1.6,-9.9 5.1,-3.2 8.9,-9.8 4.7,-2.5 14.4,-14.9 14,-6.7 11.3,-5.3 8.1,-8.5 5.2,-9.6 4.1,-9.9 -1.8,-6.8 0.4,-21.6 -1,-12.2 0.9,-13.8 z"/>
-            <!-- Namibia --><path d="m 576,759.7 -22.4,5.7 -29.1,-2 -8.2,-6.6 -48.8,0.6 -1.9,1 -7.1,-6.3 -7.8,-0.4 -7.2,2.3 -5.9,2.7 0.6,10.6 9.5,13.5 2.5,8.7 6,16.6 5.9,11.4 4.6,5.7 1.3,7.6 -0.1,16.5 3.4,21.3 2.6,10.1 2.2,13.4 4.3,10.1 8.3,10.5 6,-6.8 4.5,3.7 1.7,6 5.2,1 7.3,2.6 6.4,-1 10.8,-7.1 2.2,-51.1 1.4,-40.4 11.8,-0.5 1.9,-49.3 9,-0.4 18.7,-4.9 4.4,5.7 7.9,-5.4 3.6,0 6.9,-3.1 0,-1.2 -4.7,-3.1 -7.8,-0.8 -9.9,3.1 z"/>
-            <!-- Niger --><path d="m 458.3,198.6 -19,-6 -40.5,26.4 -34.5,27.1 -16.9,6.2 0.3,31.9 -6.6,9.2 -1,8.5 -10.7,2.2 -16.5,1.2 -4.5,4.9 -7.7,0.6 -1,6.7 1.6,6.3 6.9,9 0.4,6.7 14,3.1 -0.3,9.5 4.1,-4 4.3,-0.1 9.3,8 0.8,-12.4 3.5,-5.5 1.6,-8 3.2,-3 13,-1.6 12.2,5.1 4.6,5.3 6.1,0.2 5.8,-3.4 14.7,7.1 6.2,-0.3 7.1,-5.9 7.1,0.4 3.5,-1.9 6.5,0.8 9.4,4 9.4,-7.7 2.9,0.6 8.4,15.1 2.2,-0.3 0.4,-4.4 3.4,-0.8 1.1,-6.5 -7.8,-0.3 -0.1,-8.9 -5.1,-5.2 4.9,-18.2 15.2,-13 0.2,-18 4,-28.1 2.5,-6 -5.1,-4.7 -0.3,-4.4 -4.6,-3.6 -3.4,-21.5 -8.3,5.1 -6.9,-7.5 z"/>
-            <!-- Nigeria --><path d="m 468.2,344.6 -2.2,0.3 -8.4,-15.1 -2.9,-0.6 -9.4,7.7 -9.4,-4 -6.5,-0.8 -3.5,1.9 -7.1,-0.4 -7.1,5.9 -6.2,0.3 -14.7,-7.1 -5.8,3.4 -6.1,-0.2 -4.6,-5.3 -12.2,-5.1 -13,1.6 -3.2,3 -1.6,8 -3.5,5.5 -0.8,12.4 -0.5,4.6 2.8,8.2 -2.4,5.6 1.3,3.7 -5.9,8.5 -3.7,4.3 -2.3,8.7 0.3,8.8 -0.6,22.3 10.7,0 9.2,-0.1 8.6,9.1 4.1,10 6.5,8.6 9.8,0.3 4.7,-3.1 4.6,0.8 12.7,-5 3.1,-9.8 5.7,-13.4 3.6,-0.1 7.2,-8.1 4.6,-0.2 6.9,5.7 8.3,-4.7 1.1,-5.7 2.7,-5.6 1.9,-7 6.4,-5.7 2.4,-9.7 2.6,-3.1 1.6,-7.2 3.1,-8.8 10.2,-10.7 0.5,-4.6 1.3,-2.5 -4.9,-5.5 z"/>
-            <!-- Rwanda --><path d="m 667.9,533 -7.4,4.3 -2.9,-1.4 -3.5,3.8 -0.5,8.3 -1.7,1 -1.2,7.6 7.4,1.1 3.8,-7.9 6.5,0.9 3.5,-1.8 0.8,-8.1 -4.8,-7.8 z"/>
-            <!-- Sudan --><path d="m 740,291.9 0.7,-9.2 3.6,-4.2 8.8,-2.3 5.7,-7.9 -6.9,-5.1 -4.8,-3.4 -5.3,-16.5 -2.5,-14.3 2.5,-2.5 -4.7,-13.6 -47.4,0 -46.4,0 -48.1,0 1,27.7 -13.8,0 0.1,5.8 2.4,54.9 -10.5,-0.9 -5.2,10.2 -3,8.5 2.6,3.2 -3.8,4.3 1.5,5.7 -3,5.8 -1.2,5 4.3,-0.8 2.6,5.4 0.3,8 4.6,4.1 -0.1,3.4 1.5,5.9 7.2,8.6 0.1,5.7 -1.9,5.7 0.9,4.3 4.2,4 1,0.7 3.8,-1.6 4.1,-2.6 2.9,-12.3 3.2,-6.4 8.8,-1.9 2.1,3.8 6.5,8 3.3,1.2 4.4,-2.3 8.7,0.4 1.8,2.9 12.1,0 0.3,-2.9 6.3,-2.6 1.1,-4 4.6,-2.9 10.4,8.1 6.2,-1.4 5.8,-10 6.5,-7.6 -1.3,-8.3 -3,-4 7.3,-0.8 0.7,-3 5.7,0.9 -1.2,10.2 1.7,10 6.5,5.5 1.5,4.7 0,6.9 1.7,0.3 -0.1,-1.7 3.3,-14.5 5.6,-3.8 1.1,-5.7 4.8,-10.6 7.1,-6.8 4.5,-13.6 1.4,-11.9 -1.5,-5.6 4.3,-20.3 z"/>
-            <!-- S Sudan --><path d="m 707.8,379.2 -1.5,-4.7 -6.5,-5.5 -1.7,-10 1.2,-10.2 -5.7,-0.9 -0.7,3 -7.3,0.8 3,4 1.3,8.3 -6.5,7.6 -5.8,10 -6.2,1.4 -10.4,-8.1 -4.6,2.9 -1.1,4 -6.3,2.6 -0.3,2.9 -12.1,0 -1.8,-2.9 -8.7,-0.4 -4.4,2.3 -3.3,-1.2 -6.5,-8 -2.1,-3.8 -8.8,1.9 -3.2,6.4 -2.9,12.3 -4.1,2.6 -3.8,1.6 8.4,5.4 6.8,5.5 0.1,4.5 8.3,7.2 5.2,6 3.2,8.3 9.2,5.5 2,4.4 7.5,11.4 5.5,1.7 3.2,-2.3 5.7,0.9 6.8,-2.9 2.9,5.9 10.9,9.2 5,-3.8 7.8,3.1 9.8,-3.3 8.6,0.1 7.4,-6.4 7.4,-8.3 8.1,-9.1 -7.4,-15 -5.7,-3.2 -2.2,-5.6 -6.3,-6.7 -7.5,-1 4,-7.9 6.4,-0.3 1.8,-4.2 -0.4,-10.8 -1.7,-0.3 0,-6.9 z"/>
-            <!-- Tanzania --><path d="m 672.2,531.3 -4.3,1.7 4.8,7.8 -0.8,8.1 -3.5,1.8 0.6,5.4 2.6,3.2 0.1,4.5 -3,2.9 -4.9,7.2 -4.5,5 -1.2,0.2 -0.7,5.9 2.3,2 -0.5,5.9 2.3,5.5 -2.9,5.3 9.7,9.4 0.8,8.5 5.9,14.2 0.6,0.4 4.8,2.3 7.7,2.4 6.8,4.1 11.9,2.6 2.3,3.8 0.8,-2.7 6.2,7.4 0.6,14.5 3.9,5.3 4.7,-0.5 14.4,3.9 3.3,-1.8 8.4,-0.3 4.5,-4.2 7.3,0.2 13.4,-5.3 10,-8.1 -4.4,-3 -4.7,-13.6 -4,-8.7 1,-6.6 -0.6,-4.2 3.5,-8.4 -0.3,-3.6 -7.7,-5 -0.6,-7.8 5.9,-17.1 -17.3,-13.8 -0.7,-8 -44.1,-28.2 -6,6.1 -4.1,6.3 4.8,4.7 -7,3.4 -1.5,-1.6 -7.1,0.9 -5.5,3.1 -3.3,-5.4 2.3,-9.7 0.5,-8.3 -13.4,-0.2 z"/>
-            <!-- Chad --><path d="m 582.5,246.4 -48.7,-26.5 -48.4,-26.5 -11.9,7.6 3.4,21.5 4.6,3.6 0.3,4.4 5.1,4.7 -2.5,6 -4,28.1 -0.2,18 -15.2,13 -4.9,18.2 5.1,5.2 0.1,8.9 7.8,0.3 -1.1,6.5 4.9,8.9 1,9.1 -0.4,9.2 6.8,12.6 -6.8,-0.1 -3.4,0.9 -5.6,-1.3 -2.5,6.5 7.2,8.1 5.3,2.3 1.8,5.7 3.9,9.6 -1.8,3.7 10,-1 2.2,-3.6 2.1,0.3 3,3.1 15.3,-5.3 5.1,-5.4 6.3,-4.8 -1.2,-4.9 3.4,-1.2 11.8,0.8 11.3,-6.4 8.6,-15.1 6,-5.6 7.7,-2.3 0.1,-3.4 -4.6,-4.1 -0.3,-8 -2.6,-5.4 -4.3,0.8 1.2,-5 3,-5.8 -1.5,-5.7 3.8,-4.3 -2.6,-3.2 3,-8.5 5.2,-10.2 10.5,0.9 -2.4,-54.9 z"/>
-            <!-- Togo --><path d="m 307.1,365.2 -10.7,-0.3 -0.9,4.3 5.1,7.1 0,10.1 1.2,10.9 3,5 -2.7,12.5 1,6.8 3.2,8.8 2.8,4.9 9.8,-3 -3,-9.5 0.5,-31.8 -2.5,-2.8 -0.4,-6.8 -4.3,-4.9 -3.7,-4.1 1.6,-7.2 z"/>
-            <!-- Somalia --><path d="m 832.6,372.8 -5.7,-5.8 -2.5,-5.7 -4.1,-2.6 -4.2,7.4 -2.5,4.9 4.8,7.7 4.6,6.6 4.8,5 40.3,16.4 10.3,-0.1 -33.5,41.5 -15.9,0.6 -10.7,9.8 -7.8,0.2 -3.3,4.4 -10.5,15.7 0.4,50.4 7.2,11.4 2.7,-3.3 2.9,-7.3 13.4,-16.7 11.4,-10.6 18.1,-13.7 12.1,-11.2 14.1,-18.9 10.1,-15.5 10,-20.2 7,-17.7 5.4,-15.5 2.9,-14.9 2.4,-5 -0.4,-7.3 0.8,-8 -0.5,-3.9 -4.6,0.1 -5.5,4.7 -6.4,1.4 -5.5,2.1 -3.9,0.2 -6.9,0.5 -4.2,2.6 -6,0.9 -10.5,4.3 -13.2,1.6 -11.3,3.5 -6.1,0 z"/>
-            <!-- Zambia --><path d="m 671.3,636 -4.1,-1.1 0.7,-3 -2.1,-0.6 -16.4,2.3 -3.3,1.7 -3.6,8.8 2.6,6.1 -2.5,16.4 -1.9,13.9 3.2,2.4 8.4,5.4 3.4,-2.5 0.6,14.9 -9.3,-0.1 -4.8,-7.6 -4.3,-5.9 -9.2,-1.9 -2.6,-7.3 -7.5,4.4 -9.7,-2 -3.9,-6.2 -7.7,-1.3 -5.7,0.3 -0.6,-4.3 -4.2,-0.3 1.2,4.3 -1.5,6.7 2,6.5 -2,5.2 1,4.7 -25.3,-0.1 -1.6,44 7.8,11.3 7.6,8.6 9.9,-3.1 7.8,0.8 4.7,3.1 0,1.2 2.2,1 13.4,1.5 3.8,1.6 4.1,-0.3 7,-9 10.9,-11.4 4.4,-1 1.7,-4.8 7,-5.5 9.3,-1.9 -0.8,-9.9 37.1,-11.4 -6.2,-3.6 4.1,-12.8 4,-4.8 -2,-11.5 2.7,-11.2 2.2,-3.8 -2.8,-11.7 -5.6,-6.2 -6.8,-4.1 -7.7,-2.4 -4.8,-2.3 -0.6,-0.4 0.9,2.3 -2,0.8 -2.6,-2.9 z"/>
-            <!-- South Africa --><path d="m 522.3,999 5.3,-0.3 7.5,-5.3 10,-2.2 12.3,-5.5 4.7,0.7 7.2,-1.7 12.3,2.7 5.9,-2.6 6.9,2 1.8,-3.8 6,-0.8 12.6,-5.3 9.3,-6.3 8.9,-8.3 14.4,-14.2 7.5,-9.9 3.9,-7.1 5.5,-7 2.5,-2 8.6,-7 3.5,-6.2 2.3,-11.5 3.7,-10.1 -9,-0.1 -2.8,6.1 -7,1.5 -6.6,-7.5 0.2,-4.8 3.6,-5.2 1.4,-4 3.5,-1 5.8,2.6 -0.7,-5 3,-15.4 -2.5,-9.9 -4.7,-19.5 -6.3,-1.3 -4.1,1.6 -5.7,-2.3 -4.9,-0.2 -17.3,10.2 -11.2,10.3 -4.4,9.3 -3.9,5.2 -6.5,1.1 -2.4,6.6 -1.4,4.3 -7.8,3.2 -9.6,-0.6 -5.5,-3.9 -4.9,-1.7 -6,3.2 -3.2,6.6 -5.8,4.2 -6.2,6.2 -8.5,1.4 -2.5,-4.9 1.5,-8.4 -6.5,-13.2 -3.2,-2 -2.2,51.1 -10.8,7.1 -6.4,1 -7.3,-2.6 -5.2,-1 -1.7,-6 -4.5,-3.7 -6,6.8 7.7,17.9 5.4,11.7 6.9,12.8 -0.2,10.6 -3.9,2.5 3.2,9.3 -0.5,8.1 1.3,3.8 0.7,-1.9 4.6,6.2 3.8,0.2 4.6,5 z"/>
-            <!-- Zimbabwe --><path d="m 669.1,825.1 13.4,-15.7 3.6,-9.9 1.9,-1.3 1.7,-8.1 -1.7,-4.1 1,-10.4 2.8,-9.6 0.8,-17.5 -6.1,-4.4 -5.7,-1 -2.5,-3.4 -5.5,-3 -10,0.3 -0.6,-5.1 -9.3,1.9 -7,5.5 -1.7,4.8 -4.4,1 -10.9,11.4 -7,9 -4.1,0.3 -3.8,-1.6 -13.4,-1.5 4.2,11.1 2.3,2.4 3.5,8 13,15.2 5.1,1.5 -0.2,4.9 3.1,8.8 9.2,2.1 7.3,6.2 4.9,0.2 5.7,2.3 4.1,-1.6 6.3,1.3 z"/>
-            <!-- Morocco --><path d="m 271.2,30.7 -5,-0.1 -11.9,-3.1 -11,0.9 -6.8,-5.9 -8.5,-0.1 -3.8,8.6 -8,14.5 -8.7,5.7 -11.8,6.4 -7.7,9.3 -1.8,7.3 -4.8,11.8 2.5,17.2 -10.1,11.5 -6,3.7 -9.6,9.4 -11,1.6 -6.1,5.3 -7.9,14.1 -8.1,5.1 -4.5,8.5 -0.5,7.4 -3.4,8.1 -4,2.2 -6.9,8.8 -4.4,9.8 0.7,4.6 -4.1,7.3 -4.7,3.7 -0.8,6.4 27,-1.1 1.6,-5 5,-6.2 4.4,-19.1 16.9,-15 6,-17.4 3.7,-1.1 4.2,-10.8 10,-1.4 4.2,1.8 5.4,0 3.9,-3.2 7.3,-0.4 -0.1,-7.5 1.8,0 0.2,-16.3 19.2,-10.2 11.8,-2.1 9.6,-3.7 4.6,-7 13.8,-5.4 0.6,-10.2 6.7,-1.2 5.4,-5.1 15.2,-2.3 2.2,-5.4 -3.1,-2.9 -3.9,-14.7 -0.7,-8.4 -4.2,-9 z"/>
-            <!-- Algeria --><path d="m 392.4,5.7 -7.8,0.8 -4.8,-3.2 -12.2,0.1 -10.6,5.5 -5.8,-2.1 -18.9,1.2 -19.4,2.5 -11,4.3 -7.2,5.8 -12.4,2.4 -11.1,7.7 4.2,9 0.7,8.4 3.9,14.7 3.1,2.9 -2.2,5.4 -15.2,2.3 -5.4,5.1 -6.7,1.2 -0.6,10.2 -13.8,5.4 -4.6,7 -9.6,3.7 -11.8,2.1 -19.2,10.2 -0.2,16.3 0,1 -0.3,2.7 44.1,33.5 40,30.2 40.4,30.2 2.9,6.4 7.5,4 5.5,2.2 0.2,8.8 13.3,-1.3 16.9,-6.2 34.5,-27.1 40.5,-26.4 -5.4,-8.7 -9.6,-6.4 -5.5,2.5 -4.3,-7.7 -0.6,-5.9 -7.2,-10.1 4.6,-5.8 -1.3,-8.7 1.4,-7.6 -1,-6.3 1.8,-11.3 -0.8,-6.4 -4.1,-12.2 -5.7,-24.7 -7.3,-5.6 -0.2,-3.3 -9.7,-8.3 -1.3,-10.4 7,-7.8 2.4,-11.6 -2.3,-13.4 2.2,-7.2 z"/>
-            <!-- Libya --><path d="m 589.8,80.6 -3.1,-4.5 -11.7,-1.6 -3.9,-2.4 -4.4,0 -4.4,-6.2 -15.9,-2.8 -7.9,1.8 -7.9,6.5 -3.3,6.7 3.4,10.6 -5.3,6.3 -5.5,3.6 -12.8,-5.4 -16.7,-5.7 -10.6,-2.7 -6.1,-12.3 -15.7,-6.1 -9.8,-2.3 -4.8,1.2 -13.8,-4.8 -0.3,10.6 -5.6,4 -3.4,4.4 -7.9,5.3 1.5,5.7 -0.9,5.8 -5.6,3.2 4.1,12.2 0.8,6.4 -1.8,11.3 1,6.3 -1.4,7.6 1.3,8.7 -4.6,5.8 7.2,10.1 0.6,5.9 4.3,7.7 5.5,-2.5 9.6,6.4 5.4,8.7 19,6 6.9,7.5 8.3,-5.1 11.9,-7.6 48.4,26.5 48.7,26.5 -0.1,-5.8 13.8,0 -1,-27.7 -2.2,-50.9 -2.9,-49.2 -4.2,-11.2 2.4,-8.5 -2.2,-5.9 3.7,-6.6 z"/>
-            <!-- Egypt --><path d="m 628.8,88.1 -11.9,-4 -11.5,-3.7 -15.6,0.2 -3.7,6.6 2.2,5.9 -2.4,8.5 4.2,11.2 2.9,49.2 2.2,50.9 48.1,0 46.4,0 47.4,0 -2.2,-2.8 -14.7,-12.4 -0.9,-9 2.2,-2.4 -11.6,-15.3 -4.4,-7.9 -4.9,-7.5 -10.5,-21.6 -8.4,-13.9 -6.1,-14.5 10.1,19.8 5.8,6.2 4.3,4.4 2.5,-2.4 2.7,-7.2 1.6,-10.4 2.8,-5.6 -1.5,-3.5 -8.5,-20.1 -5.4,3.4 -9.2,-0.8 -9.6,-3.2 -2.3,4.5 -3.8,-6.8 -8.5,-1.8 -10.2,1.2 -4.5,3.9 -8.6,4.4 -5.6,-2.2 z"/>
-            <!-- Senegal --><path d="m 148.8,315.1 -7.8,-9.5 -7.2,-10.2 -7.9,-3.7 -5.7,-4 -6.8,0.1 -5.9,3 -6,-1.2 -4.2,4.5 -3,7.1 -6.1,9.7 -5.4,2.6 6,4.9 4.8,10.8 13.2,-0.4 2.8,-3.3 3.8,-0.2 4.7,3.4 3.8,0.1 4,-2.3 2.4,4 -5.3,3.1 -5.2,-0.3 -5.2,-2.9 -4.5,3.2 -2.2,0.1 -3,1.9 -11,-0.2 1.8,10.6 6.5,-2.3 4,0.5 3.3,-1.6 22.4,0.6 5.8,0.1 8.7,3.4 2.7,-0.3 0.9,-1.6 6.6,1.1 1.8,-0.7 0.6,-4.4 -1,-5.3 -4.5,-3.9 -2.3,-7.9 -0.4,-8.6 z"/>
-            <!-- Guinea --><path d="m 156.4,345.2 -1.8,0.7 -6.6,-1.1 -0.9,1.6 -2.7,0.3 -8.7,-3.4 -5.8,-0.1 -0.3,4.7 -1.3,1.4 0.9,4.6 -1.9,1.8 -2.7,0.1 -3.2,2.3 -3.7,-0.3 -5.5,6.8 3.6,2.2 1.7,3.1 1.3,6.1 3,2.7 3.1,1.8 4.7,5.4 5.3,8.2 6.5,-6.1 1.5,-3.8 2.1,-3 3.3,-0.3 2.9,-2.6 9.7,0 3.3,5 2.6,5.8 -0.4,4 1.9,3.6 -0.1,5.1 3.3,-0.8 2.6,-0.3 3.2,-1.6 5.1,8.5 -0.9,5.6 2.4,2.9 3.4,0.1 2.6,-5.6 3.4,0.4 1.9,0 0.8,-6.1 -0.9,-2.7 1.1,-1.9 4.6,-1.6 -3,-11.1 -2.8,-5.7 1,-4.7 2.5,-1.1 -3.7,-4 0.7,-4.1 -1.6,-1.6 -2.6,1.3 0.6,-4.5 2.5,-3.5 -5,-5.8 -1.4,-3.8 -2.7,-3.1 -2.4,-0.3 -2.9,1.9 -4,1.8 -3.3,3 -5.2,-1.1 -3.3,-3.5 -2,-0.4 -3.2,1.8 -2,0 -0.6,-5 z"/>
-            <!-- Liberia --><path d="m 193.3,411 -3.4,-0.4 -2.6,5.6 -3.4,-0.1 -2.4,-2.9 0.9,-5.6 -5.1,-8.5 -3.2,1.6 -2.6,0.3 -5.7,6.5 -5.5,7.5 -0.7,4 -2.9,4.4 8.1,8.9 10.4,7.6 11,10.5 12.6,6.6 3.2,-0.1 1,-11.4 1.1,-1.7 -0.3,-5.5 -5.2,-5.8 -3.8,-0.9 -3.6,-3.8 2.7,-6.1 -1.2,-6.7 0.6,-4 z"/>
-            <!-- Mauritania --><path d="m 237.6,171.8 -44.1,-33.5 -0.5,20.9 -38.9,-0.7 -0.4,35.4 -11.2,1.3 -3.1,7.1 1.9,20 -46.9,-0.1 -2.7,4.6 6.1,6 3,6.5 -1.4,6.9 1.3,6.9 1,13.7 -1.8,13 -3.5,6.8 0.9,7.5 4.2,-4.5 6,1.2 5.9,-3 6.8,-0.1 5.7,4 7.9,3.7 7.2,10.2 7.8,9.5 4.1,-2.5 2.2,-8.2 3.8,-0.3 8.4,3.8 6.9,-2.7 4.6,0.9 1.9,-3.1 48.5,-0.2 2.7,-9.6 -2,-1.8 -5.4,-59.7 -5.1,-59.7 18.2,-0.2 z"/>
+            <div class="hero-map-container">
+        <svg viewBox="0 0 1000 1001" xmlns="http://www.w3.org/2000/svg"
+          style="width:100%;height:auto;display:block;"
+          role="img" aria-label="Africa map">
+          <g fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="0.8" stroke-linejoin="round">
+<path id="AO" d="m 495.3,598.6 -36,-0.2 -4.3,1.7 -3.5,-0.3 -5.1,1.9 -1.1,2.7 6,8.7 2.4,9.3 3.6,13.4 -3.8,5.5 -0.6,2.8 2.9,8.3 3.1,8.4 3.6,5 0.6,7.8 -1.4,10.3 -4,6.1 -7.1,9.1 -2.9,5.6 -4.1,12.5 -0.8,5.9 -4.3,12.7 -1.9,12.2 1,8.7 5.9,-2.7 7.2,-2.3 7.8,0.4 7.1,6.3 1.9,-1 48.8,-0.6 8.2,6.6 29.1,2 22.4,-5.7 -7.6,-8.6 -7.8,-11.3 1.6,-44 25.3,0.1 -1,-4.7 2,-5.2 -2,-6.5 1.5,-6.7 -1.2,-4.3 -5.5,-0.8 -7.6,2 -5.3,-0.3 -3,1.3 0.9,-16.5 -3.9,-5.1 -0.8,-8.5 1.9,-8.4 -2.4,-5.3 -0.1,-8.7 -14.8,0.1 1.1,-5 -6.2,0.1 -0.7,2.4 -7.6,0.5 -3.1,8.1 -1.9,3.4 -6.7,-1.9 -4,1.9 -8.1,1.1 -4.6,-7.2 -2.7,-4.5 -3.5,-8.3 -2.9,-10.3 z m -47.4,-2.7 0.4,-6 2,-3.5 4.5,-2.9 -4.6,-4.8 -3.7,2.3 -5,6 3.3,10.4 3.1,-1.5 z"/>
+<path id="BI" d="m 669,556.1 -0.6,-5.4 0,0 -6.5,-0.9 -3.8,7.9 -7.4,-1.1 3,6.3 0.1,2.4 4.3,13.2 0,0.6 1.2,-0.2 4.5,-5 4.9,-7.2 3,-2.9 -0.1,-4.5 -2.6,-3.2 z"/>
+<path id="BJ" d="m 340,356 -9.3,-8 -4.3,0.1 -4.1,4 -2.6,4.2 -6,1.2 -2.5,6.1 -4.1,1.6 -1.6,7.2 3.7,4.1 4.3,4.9 0.4,6.8 2.5,2.8 -0.5,31.8 3,9.5 10.1,-1.6 0.6,-22.3 -0.3,-8.8 2.3,-8.7 3.7,-4.3 5.9,-8.5 -1.3,-3.7 2.4,-5.6 -2.8,-8.2 0.5,-4.6 z"/>
+<path id="BF" d="m 300.7,310.8 -7.8,0 -3,-2.6 -6.7,1.9 -11.3,5.8 -2.3,4.3 -9.4,6.2 -1.7,3.6 -5.1,2.8 -5.8,-1.9 -3.4,3.4 -1.8,9.5 -9.7,11.4 0.3,4.7 -3.4,5.9 0.8,8 5.5,3 2.1,4.6 5.4,2.9 4.3,-3.4 5.7,-0.6 8.3,3.6 -1.6,-10.4 0.3,-7.9 21.1,-0.6 5.4,1 3.9,-2.2 5.6,1.1 10.7,0.3 4.1,-1.6 2.5,-6.1 6,-1.2 2.6,-4.2 0.3,-9.5 -14,-3.1 -0.4,-6.7 -6.9,-9 -1.6,-6.3 1,-6.7 z"/>
+<path id="BW" d="m 600.6,762.7 -2.2,-1 -6.9,3.1 -3.6,0 -7.9,5.4 -4.4,-5.7 -18.7,4.9 -9,0.4 -1.9,49.3 -11.8,0.5 -1.4,40.4 3.2,2 6.5,13.2 -1.5,8.4 2.5,4.9 8.5,-1.4 6.2,-6.2 5.8,-4.2 3.2,-6.6 6,-3.2 4.9,1.7 5.5,3.9 9.6,0.6 7.8,-3.2 1.4,-4.3 2.4,-6.6 6.5,-1.1 3.9,-5.2 4.4,-9.3 11.2,-10.3 17.3,-10.2 -7.3,-6.2 -9.2,-2.1 -3.1,-8.8 0.2,-4.9 -5.1,-1.5 -13,-15.2 -3.5,-8 -2.3,-2.4 -4.2,-11.1 z"/>
+<path id="CF" d="m 587,398.1 -1,-0.7 -4.2,-4 -0.9,-4.3 1.9,-5.7 -0.1,-5.7 -7.2,-8.6 -1.5,-5.9 -7.7,2.3 -6,5.6 -8.6,15.1 -11.3,6.4 -11.8,-0.8 -3.4,1.2 1.2,4.9 -6.3,4.8 -5.1,5.4 -15.3,5.3 -3,-3.1 -2.1,-0.3 -2.2,3.6 -10,1 -6.1,14 -2.9,2.6 -0.8,10.7 1.2,5.8 -0.9,4.1 5.8,7.3 1,4.9 4.6,7.2 5.6,4.4 0.6,6.3 1.3,4 6.3,-12.8 7.3,-7.4 8.2,2.4 7.9,0.7 1,-9.6 4.7,-7.1 6.5,-4.4 10.1,4.7 7.8,5.1 9,1.4 9.1,2.7 3.6,-8.4 1.6,-1.1 5.6,1.4 13.5,-6.9 4.9,3 3.9,-0.5 1.8,-3.3 4.5,-1.2 9.2,1.4 7.9,0.4 4,-1.5 -2,-4.4 -9.2,-5.5 -3.2,-8.3 -5.2,-6 -8.3,-7.2 -0.1,-4.5 -6.8,-5.5 -8.4,-5.4 z"/>
+<path id="CI" d="m 230.4,373.8 -5,2.1 -2.9,1.7 -1.8,-5.9 -3.5,1.6 -2.1,-0.3 -2.3,4 -9.4,-0.1 -3.3,-2.1 -1.6,1.3 -2.5,1.1 -1,4.7 2.8,5.7 3,11.1 -4.6,1.6 -1.1,1.9 0.9,2.7 -0.8,6.1 -1.9,0 -0.6,4 1.2,6.7 -2.7,6.1 3.6,3.8 3.8,0.9 5.2,5.8 0.3,5.5 -1.1,1.7 -1,11.4 2.3,0.4 12.1,-5.1 8.5,-4 14.5,-2.4 7.8,-0.2 8.5,2.7 5.6,-0.1 0.5,-5.5 -5.2,-11.9 3.2,-15.6 5.1,-11.6 -3.2,-19.7 -8.3,-3.6 -5.7,0.6 -4.3,3.4 -5.4,-2.9 -2.1,-4.6 -5.5,-3 z"/>
+<path id="CM" d="m 477.5,366.6 0.4,-9.2 -1,-9.1 -4.9,-8.9 -3.4,0.8 -0.4,4.4 4.9,5.5 -1.3,2.5 -0.5,4.6 -10.2,10.7 -3.1,8.8 -1.6,7.2 -2.6,3.1 -2.4,9.7 -6.4,5.7 -1.9,7 -2.7,5.6 -1.1,5.7 -8.3,4.7 -6.9,-5.7 -4.6,0.2 -7.2,8.1 -3.6,0.1 -5.7,13.4 -3.1,9.8 -0.1,3.8 3.1,2 2.5,6.2 5.6,2.3 4.8,9.2 -1.8,10.9 19.9,0.3 5.8,-0.9 7.4,1.9 7.3,-1.8 1.5,0.7 15.4,0.6 9.9,3.6 9.7,3.3 0.9,-7.5 -1.3,-4 -0.6,-6.3 -5.6,-4.4 -4.6,-7.2 -1,-4.9 -5.8,-7.3 0.9,-4.1 -1.2,-5.8 0.8,-10.7 2.9,-2.6 6.1,-14 1.8,-3.7 -3.9,-9.6 -1.8,-5.7 -5.3,-2.3 -7.2,-8.1 2.5,-6.5 5.6,1.3 3.4,-0.9 6.8,0.1 -6.8,-12.6 z"/>
+<path id="CD" d="m 618.3,446 -9.2,-1.4 -4.5,1.2 -1.8,3.3 -3.9,0.5 -4.9,-3 -13.5,6.9 -5.6,-1.4 -1.6,1.1 -3.6,8.4 -9.1,-2.7 -9,-1.4 -7.8,-5.1 -10.1,-4.7 -6.5,4.4 -4.7,7.1 -1,9.6 -0.7,8.4 -3.6,7.4 -2.4,8.6 -1.5,12.3 0.7,7.8 -2,4.8 -0.3,5.1 -1.4,4.4 -8.1,6.7 -5.6,7.1 -5.3,13.4 0.3,11.4 -3.1,4.4 -7.2,6.8 -7.2,8.7 -4.5,-2.5 -0.8,-3.9 -6.6,-0.1 -4.2,5.3 -3.2,-1.4 -4.5,2.9 -2,3.5 -0.4,6 -3.1,1.5 1.6,4.3 5.1,-1.9 3.5,0.3 4.3,-1.7 36,0.2 2.9,10.3 3.5,8.3 2.7,4.5 4.6,7.2 8.1,-1.1 4,-1.9 6.7,1.9 1.9,-3.4 3.1,-8.1 7.6,-0.5 0.7,-2.4 6.2,-0.1 -1.1,5 14.8,-0.1 0.1,8.7 2.4,5.3 -1.9,8.4 0.8,8.5 3.9,5.1 -0.9,16.5 3,-1.3 5.3,0.3 7.6,-2 5.5,0.8 4.2,0.3 0.6,4.3 5.7,-0.3 7.7,1.3 3.9,6.2 9.7,2 7.5,-4.4 2.6,7.3 9.2,1.9 4.3,5.9 4.8,7.6 9.3,0.1 -0.6,-14.9 -3.4,2.5 -8.4,-5.4 -3.2,-2.4 1.9,-13.9 2.5,-16.4 -2.6,-6.1 3.6,-8.8 3.3,-1.7 16.4,-2.3 2.1,0.6 0.6,-2.3 -3.4,-3.7 -1.5,-7.6 -7.3,-7.6 -4.1,-9.9 2.3,-5.8 -3.2,-7.8 2.4,-22.1 0.1,0.2 -0.1,-2.4 -3,-6.3 1.2,-7.6 1.7,-1 0.5,-8.3 3.5,-3.8 0.1,-10.5 2.9,-5.3 0.6,-11.1 2.6,-6.4 4.6,-7.2 4.7,-3.7 3.9,-4.9 -4.9,-1.9 0.6,-16.1 0,0 -10.9,-9.2 -2.9,-5.9 -6.8,2.9 -5.7,-0.9 -3.2,2.3 -5.5,-1.7 -7.5,-11.4 -4,1.5 -7.9,-0.4 z"/>
+<path id="CG" d="m 521.5,468.8 -7.9,-0.7 -8.2,-2.4 -7.3,7.4 -6.3,12.8 -0.9,7.5 -9.7,-3.3 -9.9,-3.6 -15.4,-0.6 -0.9,6.1 3.4,7.1 9.1,-1.1 3.1,2.7 -5.3,16.1 5.8,8.2 1.3,10.8 -1.6,9.2 -3.7,6.5 -10.8,-0.6 -6.5,-6.6 -1,6.1 -8.3,1.7 -4.2,3.5 4.6,9.1 -9.3,7.7 9.9,14.6 5,-6 3.7,-2.3 4.6,4.8 3.2,1.4 4.2,-5.3 6.6,0.1 0.8,3.9 4.5,2.5 7.2,-8.7 7.2,-6.8 3.1,-4.4 -0.3,-11.4 5.3,-13.4 5.6,-7.1 8.1,-6.7 1.4,-4.4 0.3,-5.1 2,-4.8 -0.7,-7.8 1.5,-12.3 2.4,-8.6 3.6,-7.4 0.7,-8.4 z"/>
+<path id="DJ" d="m 820.3,358.7 -5.3,-3.8 6.8,-3.3 0.1,-5.7 -3,-4.3 -3.6,3.4 -5.2,-1.2 -4,6.1 -3.9,6.5 1.1,3.8 0.3,4.2 6.8,0.2 2.9,-0.9 2.8,2.4 4.2,-7.4 z"/>
+<path id="DZ" d="M 392.4,5.7 384.6,6.5 379.8,3.3 367.6,3.4 357,8.9 351.2,6.8 332.3,8 l -19.4,2.5 -11,4.3 -7.2,5.8 -12.4,2.4 -11.1,7.7 4.2,9 0.7,8.4 3.9,14.7 3.1,2.9 -2.2,5.4 -15.2,2.3 -5.4,5.1 -6.7,1.2 -0.6,10.2 -13.8,5.4 -4.6,7 -9.6,3.7 -11.8,2.1 -19.2,10.2 -0.2,16.3 0,1 -0.3,2.7 44.1,33.5 40,30.2 40.4,30.2 2.9,6.4 7.5,4 5.5,2.2 0.2,8.8 13.3,-1.3 16.9,-6.2 34.5,-27.1 40.5,-26.4 -5.4,-8.7 -9.6,-6.4 -5.5,2.5 -4.3,-7.7 -0.6,-5.9 -7.2,-10.1 4.6,-5.8 -1.3,-8.7 1.4,-7.6 -1,-6.3 1.8,-11.3 -0.8,-6.4 -4.1,-12.2 -5.7,-24.7 -7.3,-5.6 -0.2,-3.3 -9.7,-8.3 -1.3,-10.4 7,-7.8 2.4,-11.6 -2.3,-13.4 2.2,-7.2 z"/>
+<path id="EG" d="m 628.8,88.1 -11.9,-4 -11.5,-3.7 -15.6,0.2 -3.7,6.6 2.2,5.9 -2.4,8.5 4.2,11.2 2.9,49.2 2.2,50.9 48.1,0 46.4,0 47.4,0 -2.2,-2.8 -14.7,-12.4 -0.9,-9 2.2,-2.4 -11.6,-15.3 -4.4,-7.9 -4.9,-7.5 -10.5,-21.6 -8.4,-13.9 -6.1,-14.5 1.1,-1.3 10.1,19.8 5.8,6.2 4.3,4.4 2.5,-2.4 2.7,-7.2 1.6,-10.4 2.8,-5.6 -1.5,-3.5 -8.5,-20.1 0,0 -5.4,3.4 -9.2,-0.8 -9.6,-3.2 -2.3,4.5 -3.8,-6.8 -8.5,-1.8 -10.2,1.2 -4.5,3.9 -8.6,4.4 -5.6,-2.2 z"/>
+<path id="ER" d="m 777.6,303.8 -7,-6.8 -4,-12.7 -7.8,-16 -5.7,7.9 -8.8,2.3 -3.6,4.2 -0.7,9.2 -4.3,20.3 1.5,5.6 14.3,2.9 3.3,-10.4 7.6,6.3 7,-3.2 3,2.9 8.3,0.1 10.8,5.6 3.4,4.8 5.5,4.4 5.4,8.1 4.3,4.5 5.2,1.2 3.6,-3.4 -6.2,-4.2 -4,-4.7 -6.9,-8 -7.1,-7.9 -17.1,-13 z"/>
+<path id="ET" d="m 754.8,310.3 -3.3,10.4 -14.3,-2.9 -1.4,11.9 -4.5,13.6 -7.1,6.8 -4.8,10.6 -1.1,5.7 -5.6,3.8 -3.3,14.5 0.1,1.7 0.4,10.8 -1.8,4.2 -6.4,0.3 -4,7.9 7.5,1 6.3,6.7 2.2,5.6 5.7,3.2 7.4,15 6.4,2.4 0.1,7.7 4.2,4.6 8.5,0 15.7,11.7 3.8,0.2 2.9,-0.4 2.7,1.6 8.2,1.1 3.5,-5.8 11.1,-5.8 4.9,4.7 8.4,0 3.3,-4.4 7.8,-0.2 10.7,-9.8 15.9,-0.6 33.5,-41.5 -10.3,0.1 -40.3,-16.4 -4.8,-5 -4.6,-6.6 -4.8,-7.7 2.5,-4.9 -2.8,-2.4 -2.9,0.9 -6.8,-0.2 -0.3,-4.2 -1.1,-3.8 3.9,-6.5 4,-6.1 -4.3,-4.5 -5.4,-8.1 -5.5,-4.4 -3.4,-4.8 -10.8,-5.6 -8.3,-0.1 -3,-2.9 -7,3.2 -7.6,-6.3 z"/>
+<path id="GA" d="m 455.9,485.9 -1.5,-0.7 -7.3,1.8 -7.4,-1.9 -5.8,0.9 0.1,16.7 -17.7,-0.2 -4.2,0.8 -2.4,10.3 -3,10.1 -2.7,4.4 -0.3,4.6 7.3,14.3 8.1,11.4 12.5,14 9.3,-7.7 -4.6,-9.1 4.2,-3.5 8.3,-1.7 1,-6.1 6.5,6.6 10.8,0.6 3.7,-6.5 1.6,-9.2 -1.3,-10.8 -5.8,-8.2 5.3,-16.1 -3.1,-2.7 -9.1,1.1 -3.4,-7.1 0.9,-6.1 z"/>
+<path id="GH" d="m 296.4,364.9 -5.6,-1.1 -3.9,2.2 -5.4,-1 -21.1,0.6 -0.3,7.9 1.6,10.4 3.2,19.7 -5.1,11.6 -3.2,15.6 5.2,11.9 -0.5,5.5 10.9,3.9 11,-4 6.7,-4.7 19.2,-8.1 -2.8,-4.9 -3.2,-8.8 -1,-6.8 2.7,-12.5 -3,-5 -1.2,-10.9 0,-10.1 -5.1,-7.1 0.9,-4.3 z"/>
+<path id="GN" d="m 156.4,345.2 -1.8,0.7 -6.6,-1.1 -0.9,1.6 -2.7,0.3 -8.7,-3.4 -5.8,-0.1 -0.3,4.7 -1.3,1.4 0.9,4.6 -1.9,1.8 -2.7,0.1 -3.2,2.3 -3.7,-0.3 -5.5,6.8 3.6,2.2 1.7,3.1 1.3,6.1 3,2.7 3.1,1.8 4.7,5.4 5.3,8.2 6.5,-6.1 1.5,-3.8 2.1,-3 3.3,-0.3 2.9,-2.6 9.7,0 3.3,5 2.6,5.8 -0.4,4 1.9,3.6 -0.1,5.1 3.3,-0.8 2.6,-0.3 3.2,-1.6 5.1,8.5 -0.9,5.6 2.4,2.9 3.4,0.1 2.6,-5.6 3.4,0.4 1.9,0 0.8,-6.1 -0.9,-2.7 1.1,-1.9 4.6,-1.6 -3,-11.1 -2.8,-5.7 1,-4.7 2.5,-1.1 -3.7,-4 0.7,-4.1 -1.6,-1.6 -2.6,1.3 0.6,-4.5 2.5,-3.5 -5,-5.8 -1.4,-3.8 -2.7,-3.1 -2.4,-0.3 -2.9,1.9 -4,1.8 -3.3,3 -5.2,-1.1 -3.3,-3.5 -2,-0.4 -3.2,1.8 -2,0 -0.6,-5 z"/>
+<path id="GM" d="m 91.9,335.4 11,0.2 3,-1.9 2.2,-0.1 4.5,-3.2 5.2,2.9 5.2,0.3 5.3,-3.1 -2.4,-4 -4,2.3 -3.8,-0.1 -4.7,-3.4 -3.8,0.2 -2.8,3.3 -13.2,0.4 -1.7,6.2 z"/>
+<path id="GW" d="m 129.9,343.2 -22.4,-0.6 -3.3,1.6 -4,-0.5 -6.5,2.3 0.7,2.9 3.7,3 -0.1,2.1 2.7,3.9 5.1,0.9 6.4,5.8 5.5,-6.8 3.7,0.3 3.2,-2.3 2.7,-0.1 1.9,-1.8 -0.9,-4.6 1.3,-1.4 0.3,-4.7 z"/>
+<path id="GQ" d="m 433.9,486 -19.9,-0.3 -4.1,15.5 2.2,2.1 4.2,-0.8 17.7,0.2 -0.1,-16.7 z"/>
+<path id="KE" d="m 807.2,463.1 -8.4,0 -4.9,-4.7 -11.1,5.8 -3.5,5.8 -8.2,-1.1 -2.7,-1.6 -2.9,0.4 -3.8,-0.2 -15.7,-11.7 -8.5,0 -4.2,-4.6 -0.1,-7.7 -6.4,-2.4 -8.1,9.1 -7.4,8.3 5.9,9.6 1.5,7 5.5,15.8 -4.4,10.1 -5.9,9.2 -3.5,5.6 0,0.7 2.9,5.2 -0.8,10.3 44.1,28.2 0.7,8 17.3,13.8 5,-4.6 2.5,-9.2 4,-5.5 1.9,-9.8 4.6,-1 3.1,-5.8 8.6,-5.5 -7.2,-11.4 -0.4,-50.4 10.5,-15.7 z"/>
+<path id="LR" d="m 193.3,411 -3.4,-0.4 -2.6,5.6 -3.4,-0.1 -2.4,-2.9 0.9,-5.6 -5.1,-8.5 -3.2,1.6 -2.6,0.3 -5.7,6.5 -5.5,7.5 -0.7,4 -2.9,4.4 8.1,8.9 10.4,7.6 11,10.5 12.6,6.6 3.2,-0.1 1,-11.4 1.1,-1.7 -0.3,-5.5 -5.2,-5.8 -3.8,-0.9 -3.6,-3.8 2.7,-6.1 -1.2,-6.7 0.6,-4 z"/>
+<path id="LY" d="m 589.8,80.6 -3.1,-4.5 -11.7,-1.6 -3.9,-2.4 -4.4,0 -4.4,-6.2 -15.9,-2.8 -7.9,1.8 -7.9,6.5 -3.3,6.7 3.4,10.6 -5.3,6.3 -5.5,3.6 L 507,91.7 490.3,86 479.7,83.3 473.6,71 l -15.7,-6.1 -9.8,-2.3 -4.8,1.2 -13.8,-4.8 -0.3,10.6 -5.6,4 -3.4,4.4 -7.9,5.3 1.5,5.7 -0.9,5.8 -5.6,3.2 4.1,12.2 0.8,6.4 -1.8,11.3 1,6.3 -1.4,7.6 1.3,8.7 -4.6,5.8 7.2,10.1 0.6,5.9 4.3,7.7 5.5,-2.5 9.6,6.4 5.4,8.7 19,6 6.9,7.5 8.3,-5.1 11.9,-7.6 48.4,26.5 48.7,26.5 -0.1,-5.8 13.8,0 -1,-27.7 -2.2,-50.9 -2.9,-49.2 -4.2,-11.2 2.4,-8.5 -2.2,-5.9 3.7,-6.6 z"/>
+<path id="LS" d="m 625.3,939.9 2.5,-4.4 6.7,-2.2 2.4,-4.5 4.1,-6.7 -3.8,-4.2 -4.8,-4.2 -5.7,2.8 -6.8,5.4 -6.9,8.7 8,10.6 4.3,-1.3 z"/>
+<path id="MA" d="m 271.2,30.7 -5,-0.1 -11.9,-3.1 -11,0.9 -6.8,-5.9 -8.5,-0.1 -3.8,8.6 -8,14.5 -8.7,5.7 -11.8,6.4 -7.7,9.3 -1.8,7.3 -4.8,11.8 2.5,17.2 -10.1,11.5 -6,3.7 -9.6,9.4 -11,1.6 -6.1,5.3 -0.2,0.2 -7.9,14.1 -8.1,5.1 -4.5,8.5 -0.5,7.4 -3.4,8.1 -4,2.2 -6.9,8.8 -4.4,9.8 0.7,4.6 -4.1,7.3 -4.7,3.7 -0.8,6.4 0.2,0.1 27,-1.1 1.6,-5 5,-6.2 4.4,-19.1 16.9,-15 6,-17.4 3.7,-1.1 4.2,-10.8 10,-1.4 4.2,1.8 5.4,0 3.9,-3.2 7.3,-0.4 -0.1,-7.5 0,0 1.8,0 0.2,-16.3 19.2,-10.2 11.8,-2.1 9.6,-3.7 4.6,-7 13.8,-5.4 0.6,-10.2 6.7,-1.2 5.4,-5.1 15.2,-2.3 2.2,-5.4 -3.1,-2.9 -3.9,-14.7 -0.7,-8.4 -4.2,-9 z"/>
+<path id="MG" d="m 902.9,704.8 -2.5,-9.1 -3,-5.9 -3.9,-5.9 -4.3,6.2 -0.7,8.3 -7.1,9.6 -5.1,-1.7 1.3,6 -4,6.9 -10.4,8.5 -7.3,7.9 -5.4,0.2 -4.6,2.5 -6.9,2.8 -6,0.6 -2.2,8.7 -4.7,7.8 0.2,12.7 1.7,8.7 2.4,6.6 -1.7,8.8 -6.4,10.5 -0.3,4.6 -5.7,2.4 -2.8,10 0.4,9.9 3.4,11 -0.1,12.3 2.6,7.3 9.1,5 6.5,3.5 10.9,-5.8 9.9,-3.3 6.8,-16.1 6.1,-19.2 9.3,-26.2 7.3,-19.1 5.9,-16.1 1.6,-11.7 3.5,-3.2 1.5,-5.9 -1.7,-10.2 2.6,-4.1 3.5,8.1 2.4,-4.1 1.7,-6.6 -2.8,-6.5 -1,-16.7 z"/>
+<path id="ML" d="m 347.4,252.3 -13.3,1.3 -0.2,-8.8 -5.5,-2.2 -7.5,-4 -2.9,-6.4 -40.4,-30.2 -40,-30.2 -18.2,0.2 5.1,59.7 5.4,59.7 2,1.8 -2.7,9.6 -48.5,0.2 -1.9,3.1 -4.6,-0.9 -6.9,2.7 -8.4,-3.8 -3.8,0.3 -2.2,8.2 -4.1,2.5 0.4,8.6 2.3,7.9 4.5,3.9 1,5.3 -0.6,4.4 0.6,5 2,0 3.2,-1.8 2,0.4 3.3,3.5 5.2,1.1 3.3,-3 4,-1.8 2.9,-1.9 2.4,0.3 2.7,3.1 1.4,3.8 5,5.8 -2.5,3.5 -0.6,4.5 2.6,-1.3 1.6,1.6 -0.7,4.1 3.7,4 1.6,-1.3 3.3,2.1 9.4,0.1 2.3,-4 2.1,0.3 3.5,-1.6 1.8,5.9 2.9,-1.7 5,-2.1 -0.8,-8 3.4,-5.9 -0.3,-4.7 9.7,-11.4 1.8,-9.5 3.4,-3.4 5.8,1.9 5.1,-2.8 1.7,-3.6 9.4,-6.2 2.3,-4.3 11.3,-5.8 6.7,-1.9 3,2.6 7.8,0 7.7,-0.6 4.5,-4.9 16.5,-1.2 10.7,-2.2 1,-8.5 6.6,-9.2 -0.3,-31.9 z"/>
+<path id="MZ" d="m 788.2,666.2 -1.7,-6.2 0,0 0,0 -10,8.1 -13.4,5.3 -7.3,-0.2 -4.5,4.2 -8.4,0.3 -3.3,1.8 -14.4,-3.9 -4.7,0.5 -3.3,13.1 1.4,15.8 0.7,0 4.2,4.4 4.6,10 0.3,17.8 -5.4,3 -4.1,9.6 -7.5,-8.6 -0.5,-9.7 2.9,-6.5 -0.5,-5.5 -4.7,-3.5 -3.3,1.2 -6.8,-6.6 -37.1,11.4 0.8,9.9 0.6,5.1 10,-0.3 5.5,3 2.5,3.4 5.7,1 6.1,4.4 -0.8,17.5 -2.8,9.6 -1,10.4 1.7,4.1 -1.7,8.1 -1.9,1.3 -3.6,9.9 -13.4,15.7 4.7,19.5 2.5,9.9 -3,15.4 0.7,5 1.3,6.2 0.6,6.1 9,0.1 1.5,-7.3 -2.9,-0.9 -0.6,-5.8 5.5,-5.2 14.8,-7.5 10.1,-4.6 5.3,-5 2.1,-5.7 -2.7,-2.4 2.4,-6.4 1.1,-13.6 -2.2,0.7 0.1,-4.1 -1.9,-8.1 -5.2,-10.5 1.6,-9.9 5.1,-3.2 8.9,-9.8 4.7,-2.5 14.4,-14.9 14,-6.7 11.3,-5.3 8.1,-8.5 5.2,-9.6 4.1,-9.9 -1.8,-6.8 0.4,-21.6 -1,-12.2 0.9,-13.8 z"/>
+<path id="MR" d="m 237.6,171.8 -44.1,-33.5 -0.5,20.9 -38.9,-0.7 -0.4,35.4 -11.2,1.3 -3.1,7.1 1.9,20 -46.9,-0.1 -2.7,4.6 6.1,6 3,6.5 -1.4,6.9 1.3,6.9 1,13.7 -1.8,13 -3.5,6.8 0.9,7.5 4.2,-4.5 6,1.2 5.9,-3 6.8,-0.1 5.7,4 7.9,3.7 7.2,10.2 7.8,9.5 4.1,-2.5 2.2,-8.2 3.8,-0.3 8.4,3.8 6.9,-2.7 4.6,0.9 1.9,-3.1 48.5,-0.2 2.7,-9.6 -2,-1.8 -5.4,-59.7 -5.1,-59.7 18.2,-0.2 z"/>
+<path id="MW" d="m 714.6,711.7 0.3,-5.2 -2.7,-4.1 0.4,-6 -3.3,-10.2 3.7,-7.7 -0.2,-16.7 -4.1,-8.9 0.4,-1.5 0,0 -2.3,-3.8 -11.9,-2.6 5.6,6.2 2.8,11.7 -2.2,3.8 -2.7,11.2 2,11.5 -4,4.8 -4.1,12.8 6.2,3.6 6.8,6.6 3.3,-1.2 4.7,3.5 0.5,5.5 -2.9,6.5 0.5,9.7 7.5,8.6 4.1,-9.6 5.4,-3 -0.3,-17.8 -4.6,-10 -4.2,-4.4 -0.7,0 0.1,1.9 2.3,0.5 2.2,7.4 -0.4,1.7 -4.1,-5.3 -2.2,3.4 -1.9,-2.9 z"/>
+<path id="NA" d="m 576,759.7 -22.4,5.7 -29.1,-2 -8.2,-6.6 -48.8,0.6 -1.9,1 -7.1,-6.3 -7.8,-0.4 -7.2,2.3 -5.9,2.7 0.6,10.6 9.5,13.5 2.5,8.7 6,16.6 5.9,11.4 4.6,5.7 1.3,7.6 -0.1,16.5 3.4,21.3 2.6,10.1 2.2,13.4 4.3,10.1 8.3,10.5 6,-6.8 4.5,3.7 1.7,6 5.2,1 7.3,2.6 6.4,-1 10.8,-7.1 2.2,-51.1 1.4,-40.4 11.8,-0.5 1.9,-49.3 9,-0.4 18.7,-4.9 4.4,5.7 7.9,-5.4 3.6,0 6.9,-3.1 0,-1.2 -4.7,-3.1 -7.8,-0.8 -9.9,3.1 z"/>
+<path id="NE" d="m 458.3,198.6 -19,-6 -40.5,26.4 -34.5,27.1 -16.9,6.2 0.3,31.9 -6.6,9.2 -1,8.5 -10.7,2.2 -16.5,1.2 -4.5,4.9 -7.7,0.6 -1,6.7 1.6,6.3 6.9,9 0.4,6.7 14,3.1 -0.3,9.5 4.1,-4 4.3,-0.1 9.3,8 0.8,-12.4 3.5,-5.5 1.6,-8 3.2,-3 13,-1.6 12.2,5.1 4.6,5.3 6.1,0.2 5.8,-3.4 14.7,7.1 6.2,-0.3 7.1,-5.9 7.1,0.4 3.5,-1.9 6.5,0.8 9.4,4 9.4,-7.7 2.9,0.6 8.4,15.1 2.2,-0.3 0.4,-4.4 3.4,-0.8 1.1,-6.5 -7.8,-0.3 -0.1,-8.9 -5.1,-5.2 4.9,-18.2 15.2,-13 0.2,-18 4,-28.1 2.5,-6 -5.1,-4.7 -0.3,-4.4 -4.6,-3.6 -3.4,-21.5 -8.3,5.1 -6.9,-7.5 z"/>
+<path id="NG" d="m 468.2,344.6 -2.2,0.3 -8.4,-15.1 -2.9,-0.6 -9.4,7.7 -9.4,-4 -6.5,-0.8 -3.5,1.9 -7.1,-0.4 -7.1,5.9 -6.2,0.3 -14.7,-7.1 -5.8,3.4 -6.1,-0.2 -4.6,-5.3 -12.2,-5.1 -13,1.6 -3.2,3 -1.6,8 -3.5,5.5 -0.8,12.4 -0.5,4.6 2.8,8.2 -2.4,5.6 1.3,3.7 -5.9,8.5 -3.7,4.3 -2.3,8.7 0.3,8.8 -0.6,22.3 10.7,0 9.2,-0.1 8.6,9.1 4.1,10 6.5,8.6 9.8,0.3 4.7,-3.1 4.6,0.8 12.7,-5 3.1,-9.8 5.7,-13.4 3.6,-0.1 7.2,-8.1 4.6,-0.2 6.9,5.7 8.3,-4.7 1.1,-5.7 2.7,-5.6 1.9,-7 6.4,-5.7 2.4,-9.7 2.6,-3.1 1.6,-7.2 3.1,-8.8 10.2,-10.7 0.5,-4.6 1.3,-2.5 -4.9,-5.5 z"/>
+<path id="RW" d="m 667.9,533 -7.4,4.3 -2.9,-1.4 -3.5,3.8 -0.5,8.3 -1.7,1 -1.2,7.6 7.4,1.1 3.8,-7.9 6.5,0.9 0,0 3.5,-1.8 0.8,-8.1 -4.8,-7.8 z"/>
+<path id="EH" d="m 193.8,134.6 -1.8,0 0,0 0.1,7.5 -7.3,0.4 -3.9,3.2 -5.4,0 -4.2,-1.8 -10,1.4 -4.2,10.8 -3.7,1.1 -6,17.4 -16.9,15 -4.4,19.1 -5,6.2 -1.6,5 -27,1.1 -0.2,-0.1 -0.6,5.9 2.7,-4.6 46.9,0.1 -1.9,-20 3.1,-7.1 11.2,-1.3 0.4,-35.4 38.9,0.7 0.5,-20.9 0.3,-2.7 0,-1 z"/>
+<path id="SD" d="m 740,291.9 0.7,-9.2 3.6,-4.2 8.8,-2.3 5.7,-7.9 -6.9,-5.1 -4.8,-3.4 -5.3,-16.5 -2.5,-14.3 2.5,-2.5 -4.7,-13.6 -47.4,0 -46.4,0 -48.1,0 1,27.7 -13.8,0 0.1,5.8 2.4,54.9 -10.5,-0.9 -5.2,10.2 -3,8.5 2.6,3.2 -3.8,4.3 1.5,5.7 -3,5.8 -1.2,5 4.3,-0.8 2.6,5.4 0.3,8 4.6,4.1 -0.1,3.4 1.5,5.9 7.2,8.6 0.1,5.7 -1.9,5.7 0.9,4.3 4.2,4 1,0.7 3.8,-1.6 4.1,-2.6 2.9,-12.3 3.2,-6.4 8.8,-1.9 2.1,3.8 6.5,8 3.3,1.2 4.4,-2.3 8.7,0.4 1.8,2.9 12.1,0 0.3,-2.9 6.3,-2.6 1.1,-4 4.6,-2.9 10.4,8.1 6.2,-1.4 5.8,-10 6.5,-7.6 -1.3,-8.3 -3,-4 7.3,-0.8 0.7,-3 5.7,0.9 -1.2,10.2 1.7,10 6.5,5.5 1.5,4.7 0,6.9 1.7,0.3 -0.1,-1.7 3.3,-14.5 5.6,-3.8 1.1,-5.7 4.8,-10.6 7.1,-6.8 4.5,-13.6 1.4,-11.9 -1.5,-5.6 4.3,-20.3 z"/>
+<path id="SS" d="m 707.8,379.2 -1.5,-4.7 -6.5,-5.5 -1.7,-10 1.2,-10.2 -5.7,-0.9 -0.7,3 -7.3,0.8 3,4 1.3,8.3 -6.5,7.6 -5.8,10 -6.2,1.4 -10.4,-8.1 -4.6,2.9 -1.1,4 -6.3,2.6 -0.3,2.9 -12.1,0 -1.8,-2.9 -8.7,-0.4 -4.4,2.3 -3.3,-1.2 -6.5,-8 -2.1,-3.8 -8.8,1.9 -3.2,6.4 -2.9,12.3 -4.1,2.6 -3.8,1.6 8.4,5.4 6.8,5.5 0.1,4.5 8.3,7.2 5.2,6 3.2,8.3 9.2,5.5 2,4.4 7.5,11.4 5.5,1.7 3.2,-2.3 5.7,0.9 6.8,-2.9 2.9,5.9 10.9,9.2 0,0 5,-3.8 7.8,3.1 9.8,-3.3 8.6,0.1 7.4,-6.4 7.4,-8.3 8.1,-9.1 -7.4,-15 -5.7,-3.2 -2.2,-5.6 -6.3,-6.7 -7.5,-1 4,-7.9 6.4,-0.3 1.8,-4.2 -0.4,-10.8 -1.7,-0.3 0,-6.9 z"/>
+<path id="SN" d="m 148.8,315.1 -7.8,-9.5 -7.2,-10.2 -7.9,-3.7 -5.7,-4 -6.8,0.1 -5.9,3 -6,-1.2 -4.2,4.5 -3,7.1 -6.1,9.7 -5.4,2.6 6,4.9 4.8,10.8 13.2,-0.4 2.8,-3.3 3.8,-0.2 4.7,3.4 3.8,0.1 4,-2.3 2.4,4 -5.3,3.1 -5.2,-0.3 -5.2,-2.9 -4.5,3.2 -2.2,0.1 -3,1.9 -11,-0.2 1.8,10.6 6.5,-2.3 4,0.5 3.3,-1.6 22.4,0.6 5.8,0.1 8.7,3.4 2.7,-0.3 0.9,-1.6 6.6,1.1 1.8,-0.7 0.6,-4.4 -1,-5.3 -4.5,-3.9 -2.3,-7.9 -0.4,-8.6 z"/>
+<path id="SL" d="m 171.5,401 -3.3,0.8 0.1,-5.1 -1.9,-3.6 0.4,-4 -2.6,-5.8 -3.3,-5 -9.7,0 -2.9,2.6 -3.3,0.3 -2.1,3 -1.5,3.8 -6.5,6.1 1.4,10.3 2.1,5 6.3,7.4 8.7,5.6 3.3,1 2.9,-4.4 0.7,-4 5.5,-7.5 5.7,-6.5 z"/>
+<path id="SZ" d="m 674,874.9 -5.8,-2.6 -3.5,1 -1.4,4 -3.6,5.2 -0.2,4.8 6.6,7.5 7,-1.5 2.8,-6.1 -0.6,-6.1 -1.3,-6.2 z"/>
+<path id="TD" d="m 582.5,246.4 -48.7,-26.5 -48.4,-26.5 -11.9,7.6 3.4,21.5 4.6,3.6 0.3,4.4 5.1,4.7 -2.5,6 -4,28.1 -0.2,18 -15.2,13 -4.9,18.2 5.1,5.2 0.1,8.9 7.8,0.3 -1.1,6.5 4.9,8.9 1,9.1 -0.4,9.2 6.8,12.6 -6.8,-0.1 -3.4,0.9 -5.6,-1.3 -2.5,6.5 7.2,8.1 5.3,2.3 1.8,5.7 3.9,9.6 -1.8,3.7 10,-1 2.2,-3.6 2.1,0.3 3,3.1 15.3,-5.3 5.1,-5.4 6.3,-4.8 -1.2,-4.9 3.4,-1.2 11.8,0.8 11.3,-6.4 8.6,-15.1 6,-5.6 7.7,-2.3 0.1,-3.4 -4.6,-4.1 -0.3,-8 -2.6,-5.4 -4.3,0.8 1.2,-5 3,-5.8 -1.5,-5.7 3.8,-4.3 -2.6,-3.2 3,-8.5 5.2,-10.2 10.5,0.9 -2.4,-54.9 z"/>
+<path id="TG" d="m 307.1,365.2 -10.7,-0.3 -0.9,4.3 5.1,7.1 0,10.1 1.2,10.9 3,5 -2.7,12.5 1,6.8 3.2,8.8 2.8,4.9 9.8,-3 -3,-9.5 0.5,-31.8 -2.5,-2.8 -0.4,-6.8 -4.3,-4.9 -3.7,-4.1 1.6,-7.2 z"/>
+<path id="TN" d="m 429.5,59 -4.5,-2.2 -3.2,-6.6 -6,-0.2 -2.4,-7.6 7.3,-7 1.1,-12.1 -4.1,-3.5 -0.2,-6.5 5.5,-7 -0.9,-2.7 -9.5,5.2 0.1,-7.1 -8.1,-1.7 -12.2,5.7 -2.2,7.2 2.3,13.4 -2.4,11.6 -7,7.8 1.3,10.4 9.7,8.3 0.2,3.3 7.3,5.6 5.7,24.7 5.6,-3.2 0.9,-5.8 -1.5,-5.7 7.9,-5.3 3.4,-4.4 5.6,-4 0.3,-10.6 z"/>
+<path id="TZ" d="m 672.2,531.3 -4.3,1.7 4.8,7.8 -0.8,8.1 -3.5,1.8 0,0 0.6,5.4 2.6,3.2 0.1,4.5 -3,2.9 -4.9,7.2 -4.5,5 -1.2,0.2 -0.7,5.9 2.3,2 -0.5,5.9 2.3,5.5 -2.9,5.3 9.7,9.4 0.8,8.5 5.9,14.2 0,0 0.6,0.4 4.8,2.3 7.7,2.4 6.8,4.1 11.9,2.6 2.3,3.8 0,0 0.8,-2.7 6.2,7.4 0.6,14.5 3.9,5.3 -0.1,0.2 4.7,-0.5 14.4,3.9 3.3,-1.8 8.4,-0.3 4.5,-4.2 7.3,0.2 13.4,-5.3 10,-8.1 0,0 -4.4,-3 -4.7,-13.6 -4,-8.7 1,-6.6 -0.6,-4.2 3.5,-8.4 -0.3,-3.6 -7.7,-5 -0.6,-7.8 5.9,-17.1 -17.3,-13.8 -0.7,-8 -44.1,-28.2 0,0 -6,6.1 -4.1,6.3 4.8,4.7 -7,3.4 -1.5,-1.6 -7.1,0.9 -5.5,3.1 -3.3,-5.4 2.3,-9.7 0.5,-8.3 0,0 0,0 -13.4,-0.2 z"/>
+<path id="UG" d="m 711.3,458.5 -7.4,6.4 -8.6,-0.1 -9.8,3.3 -7.8,-3.1 -5,3.8 0,0 -0.6,16.1 4.9,1.9 -3.9,4.9 -4.7,3.7 -4.6,7.2 -2.6,6.4 -0.6,11.1 -2.9,5.3 -0.1,10.5 2.9,1.4 7.4,-4.3 4.3,-1.7 13.4,0.2 0,0 -0.7,-5.3 5.7,-8.1 7.7,-2 5.2,-3.3 6.3,2.7 0.6,1 0,-0.7 3.5,-5.6 5.9,-9.2 4.4,-10.1 -5.5,-15.8 -1.5,-7 -5.9,-9.6 z"/>
+<path id="ZA" d="m 522.3,999 5.3,-0.3 7.5,-5.3 10,-2.2 12.3,-5.5 4.7,0.7 7.2,-1.7 12.3,2.7 5.9,-2.6 6.9,2 1.8,-3.8 6,-0.8 12.6,-5.3 9.3,-6.3 8.9,-8.3 14.4,-14.2 7.5,-9.9 3.9,-7.1 5.5,-7 2.5,-2 8.6,-7 3.5,-6.2 2.3,-11.5 3.7,-10.1 -9,-0.1 -2.8,6.1 -7,1.5 -6.6,-7.5 0.2,-4.8 3.6,-5.2 1.4,-4 3.5,-1 5.8,2.6 -0.7,-5 3,-15.4 -2.5,-9.9 -4.7,-19.5 -6.3,-1.3 -4.1,1.6 -5.7,-2.3 -4.9,-0.2 -17.3,10.2 -11.2,10.3 -4.4,9.3 -3.9,5.2 -6.5,1.1 -2.4,6.6 -1.4,4.3 -7.8,3.2 -9.6,-0.6 -5.5,-3.9 -4.9,-1.7 -6,3.2 -3.2,6.6 -5.8,4.2 -6.2,6.2 -8.5,1.4 -2.5,-4.9 1.5,-8.4 -6.5,-13.2 -3.2,-2 -2.2,51.1 -10.8,7.1 -6.4,1 -7.3,-2.6 -5.2,-1 -1.7,-6 -4.5,-3.7 -6,6.8 7.7,17.9 0,0.1 5.4,11.7 6.9,12.8 -0.2,10.6 -3.9,2.5 3.2,9.3 -0.5,8.1 1.3,3.8 0.7,-1.9 4.6,6.2 3.8,0.2 4.6,5 z m 103,-59.1 -4.3,1.3 -8,-10.6 6.9,-8.7 6.8,-5.4 5.7,-2.8 4.8,4.2 3.8,4.2 -4.1,6.7 -2.4,4.5 -6.7,2.2 -2.5,4.4 z"/>
+<path id="ZM" d="m 671.3,636 -4.1,-1.1 0.7,-3 -2.1,-0.6 -16.4,2.3 -3.3,1.7 -3.6,8.8 2.6,6.1 -2.5,16.4 -1.9,13.9 3.2,2.4 8.4,5.4 3.4,-2.5 0.6,14.9 -9.3,-0.1 -4.8,-7.6 -4.3,-5.9 -9.2,-1.9 -2.6,-7.3 -7.5,4.4 -9.7,-2 -3.9,-6.2 -7.7,-1.3 -5.7,0.3 -0.6,-4.3 -4.2,-0.3 1.2,4.3 -1.5,6.7 2,6.5 -2,5.2 1,4.7 -25.3,-0.1 -1.6,44 7.8,11.3 7.6,8.6 9.9,-3.1 7.8,0.8 4.7,3.1 0,1.2 2.2,1 13.4,1.5 3.8,1.6 4.1,-0.3 7,-9 10.9,-11.4 4.4,-1 1.7,-4.8 7,-5.5 9.3,-1.9 -0.8,-9.9 37.1,-11.4 -6.2,-3.6 4.1,-12.8 4,-4.8 -2,-11.5 2.7,-11.2 2.2,-3.8 -2.8,-11.7 -5.6,-6.2 -6.8,-4.1 -7.7,-2.4 -4.8,-2.3 -0.6,-0.4 0,0 0.9,2.3 -2,0.8 -2.6,-2.9 z"/>
+<path id="ZW" d="m 669.1,825.1 13.4,-15.7 3.6,-9.9 1.9,-1.3 1.7,-8.1 -1.7,-4.1 1,-10.4 2.8,-9.6 0.8,-17.5 -6.1,-4.4 -5.7,-1 -2.5,-3.4 -5.5,-3 -10,0.3 -0.6,-5.1 -9.3,1.9 -7,5.5 -1.7,4.8 -4.4,1 -10.9,11.4 -7,9 -4.1,0.3 -3.8,-1.6 -13.4,-1.5 4.2,11.1 2.3,2.4 3.5,8 13,15.2 5.1,1.5 -0.2,4.9 3.1,8.8 9.2,2.1 7.3,6.2 4.9,0.2 5.7,2.3 4.1,-1.6 6.3,1.3 z"/>
+<path id="SO" d="m 832.6,372.8 -5.7,-5.8 -2.5,-5.7 -4.1,-2.6 -4.2,7.4 -2.5,4.9 4.8,7.7 4.6,6.6 4.8,5 40.3,16.4 10.3,-0.1 -33.5,41.5 -15.9,0.6 -10.7,9.8 -7.8,0.2 -3.3,4.4 -10.5,15.7 0.4,50.4 7.2,11.4 2.7,-3.3 2.9,-7.3 13.4,-16.7 11.4,-10.6 18.1,-13.7 12.1,-11.2 14.1,-18.9 10.1,-15.5 10,-20.2 7,-17.7 5.4,-15.5 2.9,-14.9 2.4,-5 -0.4,-7.3 0.8,-8 -0.5,-3.9 -4.6,0.1 -5.5,4.7 -6.4,1.4 -5.5,2.1 -3.9,0.2 0,0 -6.9,0.5 -4.2,2.6 -6,0.9 -10.5,4.3 -13.2,1.6 -11.3,3.5 -6.1,0 z"/>
           </g>
-
-          <!-- ══════════════════════════════════════════════════════ -->
-          <!-- LAYER 4 · Highlighted countries — large & glowing     -->
-          <!-- ══════════════════════════════════════════════════════ -->
-
-          <!-- Uganda — gold -->
-          <path
-            d="m 711.3,458.5 -7.4,6.4 -8.6,-0.1 -9.8,3.3 -7.8,-3.1 -5,3.8
-               -0.6,16.1 4.9,1.9 -3.9,4.9 -4.7,3.7 -4.6,7.2 -2.6,6.4
-               -0.6,11.1 -2.9,5.3 -0.1,10.5 2.9,1.4 7.4,-4.3 4.3,-1.7
-               13.4,0.2 -0.7,-5.3 5.7,-8.1 7.7,-2 5.2,-3.3 6.3,2.7 0.6,1
-               0,-0.7 3.5,-5.6 5.9,-9.2 4.4,-10.1 -5.5,-15.8 -1.5,-7 -5.9,-9.6 z"
-            fill="#D4A017" stroke="rgba(255,255,255,0.7)" stroke-width="1.8"
-            filter="url(#hglow)"/>
-
-          <!-- Uganda pulse rings -->
-          <circle cx="693" cy="491" r="6" fill="white">
-            <animate attributeName="r" values="5;5" dur="1s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="693" cy="491" r="14" fill="#D4A017" opacity="0">
-            <animate attributeName="r" values="6;26;6" dur="2.8s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="0.6;0;0.6" dur="2.8s" repeatCount="indefinite"/>
-          </circle>
-          <text x="706" y="488" font-size="11" font-weight="700" fill="white"
-            font-family="DM Sans, sans-serif"
-            style="paint-order:stroke; stroke:rgba(0,0,0,0.6); stroke-width:3px; stroke-linejoin:round;">Uganda</text>
-
-          <!-- Sierra Leone — green -->
-          <path
-            d="m 171.5,401 -3.3,0.8 0.1,-5.1 -1.9,-3.6 0.4,-4
-               -2.6,-5.8 -3.3,-5 -9.7,0 -2.9,2.6 -3.3,0.3
-               -2.1,3 -1.5,3.8 -6.5,6.1 1.4,10.3 2.1,5
-               6.3,7.4 8.7,5.6 3.3,1 2.9,-4.4 0.7,-4 5.5,-7.5 5.7,-6.5 z"
-            fill="#2e7d4f" stroke="rgba(255,255,255,0.7)" stroke-width="1.8"
-            filter="url(#hglow)"/>
-
-          <!-- Sierra Leone pulse -->
-          <circle cx="155" cy="406" r="5.5" fill="white">
-          </circle>
-          <circle cx="155" cy="406" r="12" fill="#2e7d4f" opacity="0">
-            <animate attributeName="r" values="5;22;5" dur="3.2s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="0.6;0;0.6" dur="3.2s" repeatCount="indefinite"/>
-          </circle>
-          <text x="165" y="402" font-size="9.5" font-weight="700" fill="white"
-            font-family="DM Sans, sans-serif"
-            style="paint-order:stroke; stroke:rgba(0,0,0,0.6); stroke-width:3px; stroke-linejoin:round;">Sierra Leone</text>
-
-          <!-- Malawi — blue -->
-          <path
-            d="m 714.6,711.7 0.3,-5.2 -2.7,-4.1 0.4,-6 -3.3,-10.2
-               3.7,-7.7 -0.2,-16.7 -4.1,-8.9 0.4,-1.5
-               -2.3,-3.8 -11.9,-2.6 5.6,6.2 2.8,11.7 -2.2,3.8
-               -2.7,11.2 2,11.5 -4,4.8 -4.1,12.8 6.2,3.6
-               6.8,6.6 3.3,-1.2 4.7,3.5 0.5,5.5 -2.9,6.5
-               0.5,9.7 7.5,8.6 4.1,-9.6 5.4,-3 -0.3,-17.8
-               -4.6,-10 -4.2,-4.4 -0.7,0 0.1,1.9 2.3,0.5
-               2.2,7.4 -0.4,1.7 -4.1,-5.3 -2.2,3.4 -1.9,-2.9 z"
-            fill="#3a5fa5" stroke="rgba(255,255,255,0.7)" stroke-width="1.8"
-            filter="url(#hglow)"/>
-
-          <!-- Malawi pulse -->
-          <circle cx="705" cy="700" r="5.5" fill="white"/>
-          <circle cx="705" cy="700" r="12" fill="#3a5fa5" opacity="0">
-            <animate attributeName="r" values="5;22;5" dur="3.6s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="0.6;0;0.6" dur="3.6s" repeatCount="indefinite"/>
-          </circle>
-          <text x="716" y="696" font-size="10" font-weight="700" fill="white"
-            font-family="DM Sans, sans-serif"
-            style="paint-order:stroke; stroke:rgba(0,0,0,0.6); stroke-width:3px; stroke-linejoin:round;">Malawi</text>
-
         </svg>
-
-        <!-- Legend -->
-        <div style="display:flex;justify-content:center;gap:2rem;margin-top:1.2rem;flex-wrap:wrap;">
-          <div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:rgba(255,255,255,0.85);">
-            <span style="width:12px;height:12px;background:#D4A017;border-radius:50%;display:inline-block;box-shadow:0 0 8px #D4A017;flex-shrink:0;"></span>Uganda
-          </div>
-          <div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:rgba(255,255,255,0.85);">
-            <span style="width:12px;height:12px;background:#2e7d4f;border-radius:50%;display:inline-block;box-shadow:0 0 8px #2e7d4f;flex-shrink:0;"></span>Sierra Leone
-          </div>
-          <div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:rgba(255,255,255,0.85);">
-            <span style="width:12px;height:12px;background:#3a5fa5;border-radius:50%;display:inline-block;box-shadow:0 0 8px #3a5fa5;flex-shrink:0;"></span>Malawi
-          </div>
-        </div>
+      </div>
       </div>
     </div>
-  </div>
 </section>
 
 <!-- ABOUT -->
@@ -1308,7 +1295,7 @@
         <p>KK Advisors Africa is a <strong>locally incorporated advisory firm</strong> based in Uganda, East Africa, providing integrated technical, financial, and policy solutions to accelerate sustainable infrastructure development and strengthen electricity supply market systems across sub-Saharan Africa.</p>
         <p>Since our establishment in <strong>2021</strong>, we have delivered strategic advisory services to public and private market players, enabling the development of bankable infrastructure projects and advancing reforms that strengthen Africa's energy and infrastructure ecosystems.</p>
         <p>We translate ambition into execution. Our professionals combine local insights with regional experience, bringing decades of expertise in project development, policy, regulation, and operations across the electricity supply chain.</p>
-        <p>KK Advisors is comprised of four equal partners — <strong>Wakaabu Herbert, Atipo Peter Ambrose, Alinaitwe Brenda,</strong> and <strong>Nabatanzi Lynette Agatha Dorothy</strong> — each holding an equal 33.33% shareholding, ensuring equitable governance and decision-making.</p>
+        <!-- <p>KK Advisors is comprised of four equal partners — <strong>Wakaabu Herbert, Atipo Peter Ambrose, Alinaitwe Brenda,</strong> and <strong>Nabatanzi Lynette Agatha Dorothy</strong> — each holding an equal 33.33% shareholding, ensuring equitable governance and decision-making.</p> -->
         <div class="about-values">
           <div class="value-item">
             <div class="value-icon">
@@ -1509,7 +1496,7 @@
     <div style="margin-top: 4rem; padding-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1);">
       <h3 style="font-family: var(--font-serif); font-size: 1.3rem; color: white; margin-bottom: 0.6rem;">Future Business Practice Areas</h3>
       <p style="font-size: 0.9rem; color: rgba(255,255,255,0.5); margin-bottom: 2rem;">Areas we are actively developing for future client service:</p>
-      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem;">
         <div style="background: rgba(212,160,23,0.08); border: 1px solid rgba(212,160,23,0.2); border-radius: 8px; padding: 1.2rem;">
           <div style="font-size: 12px; font-weight: 700; color: var(--gold-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">Carbon Markets</div>
           <p style="font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.6;">Credit development, trading, offsetting strategies & pricing advisory</p>
@@ -1531,211 +1518,222 @@
   </div>
 </section>
 
+
+<!-- COUNTRY OVERLAY -->
+<div id="countryOverlay">
+  <div id="overlayBox">
+    <div id="overlayHead">
+      <div>
+        <div id="overlayTag" style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.75);margin-bottom:6px;"></div>
+        <h2 id="overlayTitle" style="font-family:var(--font-serif);font-size:1.8rem;font-weight:700;color:white;margin:0;"></h2>
+        <p id="overlayCount" style="font-size:.9rem;color:rgba(255,255,255,0.8);margin:6px 0 0;"></p>
+      </div>
+      <button onclick="closeOverlay()" style="background:rgba(255,255,255,0.2);color:white;border:none;border-radius:8px;width:42px;height:42px;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;" onmouseover="this.style.background='rgba(255,255,255,0.35)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">&#x2715;</button>
+    </div>
+    <div id="overlayProjects" style="padding:0 2.5rem 2.5rem;display:grid;gap:1.2rem;"></div>
+  </div>
+</div>
+
 <!-- PORTFOLIO -->
 <section class="portfolio" id="portfolio">
   <div class="section-inner">
     <div class="fade-up">
       <span class="section-tag">Track Record</span>
       <h2 class="section-title">Portfolio of Work</h2>
-      <p class="section-subtitle">Delivering results across Uganda, Sierra Leone, Malawi, and the wider East African region for leading global energy clients and development finance institutions.</p>
+      <p class="section-subtitle">Delivering results across Uganda, Sierra Leone, Malawi, Tanzania, Kenya and Ethiopia. <strong>Click any highlighted country</strong> on the map to explore its projects.</p>
     </div>
     <div class="portfolio-layout">
 
-      <!-- STICKY MAP -->
+      <!-- MAP -->
       <div class="portfolio-map-wrap fade-up">
         <div class="portfolio-map-label">Active Countries</div>
         <div class="map-svg-container">
-          <svg viewBox="100 240 730 680" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; stroke-linejoin:round; stroke:#ccc; fill:none;">
-            <!-- Base countries -->
-            <path d="m 495.3,598.6 -36,-0.2 -4.3,1.7 -3.5,-0.3 -5.1,1.9 -1.1,2.7 6,8.7 2.4,9.3 3.6,13.4 -3.8,5.5 -0.6,2.8 2.9,8.3 3.1,8.4 3.6,5 0.6,7.8 -1.4,10.3 -4,6.1 -7.1,9.1 -2.9,5.6 -4.1,12.5 -0.8,5.9 -4.3,12.7 -1.9,12.2 1,8.7 5.9,-2.7 7.2,-2.3 7.8,0.4 7.1,6.3 1.9,-1 48.8,-0.6 8.2,6.6 29.1,2 22.4,-5.7 -7.6,-8.6 -7.8,-11.3 1.6,-44 25.3,0.1 -1,-4.7 2,-5.2 -2,-6.5 1.5,-6.7 -1.2,-4.3 -5.5,-0.8 -7.6,2 -5.3,-0.3 -3,1.3 0.9,-16.5 -3.9,-5.1 -0.8,-8.5 1.9,-8.4 -2.4,-5.3 -0.1,-8.7 -14.8,0.1 1.1,-5 -6.2,0.1 -0.7,2.4 -7.6,0.5 -3.1,8.1 -1.9,3.4 -6.7,-1.9 -4,1.9 -8.1,1.1 -4.6,-7.2 -2.7,-4.5 -3.5,-8.3 -2.9,-10.3 z" fill="#e8e6df" stroke="#c8c5bc"/>
-            <path d="m 587,398.1 -1,-0.7 -4.2,-4 -0.9,-4.3 1.9,-5.7 -0.1,-5.7 -7.2,-8.6 -1.5,-5.9 -7.7,2.3 -6,5.6 -8.6,15.1 -11.3,6.4 -11.8,-0.8 -3.4,1.2 1.2,4.9 -6.3,4.8 -5.1,5.4 -15.3,5.3 -3,-3.1 -2.1,-0.3 -2.2,3.6 -10,1 -6.1,14 -2.9,2.6 -0.8,10.7 1.2,5.8 -0.9,4.1 5.8,7.3 1,4.9 4.6,7.2 5.6,4.4 0.6,6.3 1.3,4 6.3,-12.8 7.3,-7.4 8.2,2.4 7.9,0.7 1,-9.6 4.7,-7.1 6.5,-4.4 10.1,4.7 7.8,5.1 9,1.4 9.1,2.7 3.6,-8.4 1.6,-1.1 5.6,1.4 13.5,-6.9 4.9,3 3.9,-0.5 1.8,-3.3 4.5,-1.2 9.2,1.4 7.9,0.4 4,-1.5 -2,-4.4 -9.2,-5.5 -3.2,-8.3 -5.2,-6 -8.3,-7.2 -0.1,-4.5 -6.8,-5.5 -8.4,-5.4 z" fill="#e8e6df" stroke="#c8c5bc"/>
-            <path d="m 618.3,446 -9.2,-1.4 -4.5,1.2 -1.8,3.3 -3.9,0.5 -4.9,-3 -13.5,6.9 -5.6,-1.4 -1.6,1.1 -3.6,8.4 -9.1,-2.7 -9,-1.4 -7.8,-5.1 -10.1,-4.7 -6.5,4.4 -4.7,7.1 -1,9.6 -0.7,8.4 -3.6,7.4 -2.4,8.6 -1.5,12.3 0.7,7.8 -2,4.8 -0.3,5.1 -1.4,4.4 -8.1,6.7 -5.6,7.1 -5.3,13.4 0.3,11.4 -3.1,4.4 -7.2,6.8 -7.2,8.7 -4.5,-2.5 -0.8,-3.9 -6.6,-0.1 -4.2,5.3 -3.2,-1.4 -4.5,2.9 -2,3.5 -0.4,6 -3.1,1.5 1.6,4.3 5.1,-1.9 3.5,0.3 4.3,-1.7 36,0.2 2.9,10.3 3.5,8.3 2.7,4.5 4.6,7.2 8.1,-1.1 4,-1.9 6.7,1.9 1.9,-3.4 3.1,-8.1 7.6,-0.5 0.7,-2.4 6.2,-0.1 -1.1,5 14.8,-0.1 0.1,8.7 2.4,5.3 -1.9,8.4 0.8,8.5 3.9,5.1 -0.9,16.5 3,-1.3 5.3,0.3 7.6,-2 5.5,0.8 4.2,0.3 0.6,4.3 5.7,-0.3 7.7,1.3 3.9,6.2 9.7,2 7.5,-4.4 2.6,7.3 9.2,1.9 4.3,5.9 4.8,7.6 9.3,0.1 -0.6,-14.9 -3.4,2.5 -8.4,-5.4 -3.2,-2.4 1.9,-13.9 2.5,-16.4 -2.6,-6.1 3.6,-8.8 3.3,-1.7 16.4,-2.3 2.1,0.6 0.6,-2.3 -3.4,-3.7 -1.5,-7.6 -7.3,-7.6 -4.1,-9.9 2.3,-5.8 -3.2,-7.8 2.4,-22.1 0.1,0.2 -0.1,-2.4 -3,-6.3 1.2,-7.6 1.7,-1 0.5,-8.3 3.5,-3.8 0.1,-10.5 2.9,-5.3 0.6,-11.1 2.6,-6.4 4.6,-7.2 4.7,-3.7 3.9,-4.9 -4.9,-1.9 0.6,-16.1 0,0 -10.9,-9.2 -2.9,-5.9 -6.8,2.9 -5.7,-0.9 -3.2,2.3 -5.5,-1.7 -7.5,-11.4 -4,1.5 -7.9,-0.4 z" fill="#e8e6df" stroke="#c8c5bc"/>
-            <path d="m 521.5,468.8 -7.9,-0.7 -8.2,-2.4 -7.3,7.4 -6.3,12.8 -0.9,7.5 -9.7,-3.3 -9.9,-3.6 -15.4,-0.6 -0.9,6.1 3.4,7.1 9.1,-1.1 3.1,2.7 -5.3,16.1 5.8,8.2 1.3,10.8 -1.6,9.2 -3.7,6.5 -10.8,-0.6 -6.5,-6.6 -1,6.1 -8.3,1.7 -4.2,3.5 4.6,9.1 -9.3,7.7 9.9,14.6 5,-6 3.7,-2.3 4.6,4.8 3.2,1.4 4.2,-5.3 6.6,0.1 0.8,3.9 4.5,2.5 7.2,-8.7 7.2,-6.8 3.1,-4.4 -0.3,-11.4 5.3,-13.4 5.6,-7.1 8.1,-6.7 1.4,-4.4 0.3,-5.1 2,-4.8 -0.7,-7.8 1.5,-12.3 2.4,-8.6 3.6,-7.4 0.7,-8.4 z" fill="#e8e6df" stroke="#c8c5bc"/>
-            <path d="m 807.2,463.1 -8.4,0 -4.9,-4.7 -11.1,5.8 -3.5,5.8 -8.2,-1.1 -2.7,-1.6 -2.9,0.4 -3.8,-0.2 -15.7,-11.7 -8.5,0 -4.2,-4.6 -0.1,-7.7 -6.4,-2.4 -8.1,9.1 -7.4,8.3 5.9,9.6 1.5,7 5.5,15.8 -4.4,10.1 -5.9,9.2 -3.5,5.6 0,0.7 2.9,5.2 -0.8,10.3 44.1,28.2 0.7,8 17.3,13.8 5,-4.6 2.5,-9.2 4,-5.5 1.9,-9.8 4.6,-1 3.1,-5.8 8.6,-5.5 -7.2,-11.4 -0.4,-50.4 10.5,-15.7 z" fill="#e8e6df" stroke="#c8c5bc"/>
-            <path d="m 740,291.9 0.7,-9.2 3.6,-4.2 8.8,-2.3 5.7,-7.9 -6.9,-5.1 -4.8,-3.4 -5.3,-16.5 -2.5,-14.3 2.5,-2.5 -4.7,-13.6 -47.4,0 -46.4,0 -48.1,0 1,27.7 -13.8,0 0.1,5.8 2.4,54.9 -10.5,-0.9 -5.2,10.2 -3,8.5 2.6,3.2 -3.8,4.3 1.5,5.7 -3,5.8 -1.2,5 4.3,-0.8 2.6,5.4 0.3,8 4.6,4.1 -0.1,3.4 1.5,5.9 7.2,8.6 0.1,5.7 -1.9,5.7 0.9,4.3 4.2,4 1,0.7 3.8,-1.6 4.1,-2.6 2.9,-12.3 3.2,-6.4 8.8,-1.9 2.1,3.8 6.5,8 3.3,1.2 4.4,-2.3 8.7,0.4 1.8,2.9 12.1,0 0.3,-2.9 6.3,-2.6 1.1,-4 4.6,-2.9 10.4,8.1 6.2,-1.4 5.8,-10 6.5,-7.6 -1.3,-8.3 -3,-4 7.3,-0.8 0.7,-3 5.7,0.9 -1.2,10.2 1.7,10 6.5,5.5 1.5,4.7 0,6.9 1.7,0.3 -0.1,-1.7 3.3,-14.5 5.6,-3.8 1.1,-5.7 4.8,-10.6 7.1,-6.8 4.5,-13.6 1.4,-11.9 -1.5,-5.6 4.3,-20.3 z" fill="#e8e6df" stroke="#c8c5bc"/>
-            <path d="m 707.8,379.2 -1.5,-4.7 -6.5,-5.5 -1.7,-10 1.2,-10.2 -5.7,-0.9 -0.7,3 -7.3,0.8 3,4 1.3,8.3 -6.5,7.6 -5.8,10 -6.2,1.4 -10.4,-8.1 -4.6,2.9 -1.1,4 -6.3,2.6 -0.3,2.9 -12.1,0 -1.8,-2.9 -8.7,-0.4 -4.4,2.3 -3.3,-1.2 -6.5,-8 -2.1,-3.8 -8.8,1.9 -3.2,6.4 -2.9,12.3 -4.1,2.6 -3.8,1.6 8.4,5.4 6.8,5.5 0.1,4.5 8.3,7.2 5.2,6 3.2,8.3 9.2,5.5 2,4.4 7.5,11.4 5.5,1.7 3.2,-2.3 5.7,0.9 6.8,-2.9 2.9,5.9 10.9,9.2 0,0 5,-3.8 7.8,3.1 9.8,-3.3 8.6,0.1 7.4,-6.4 7.4,-8.3 8.1,-9.1 -7.4,-15 -5.7,-3.2 -2.2,-5.6 -6.3,-6.7 -7.5,-1 4,-7.9 6.4,-0.3 1.8,-4.2 -0.4,-10.8 -1.7,-0.3 0,-6.9 z" fill="#e8e6df" stroke="#c8c5bc"/>
-            <path d="m 788.2,666.2 -1.7,-6.2 -10,8.1 -13.4,5.3 -7.3,-0.2 -4.5,4.2 -8.4,0.3 -3.3,1.8 -14.4,-3.9 -4.7,0.5 -3.3,13.1 1.4,15.8 0.7,0 4.2,4.4 4.6,10 0.3,17.8 -5.4,3 -4.1,9.6 -7.5,-8.6 -0.5,-9.7 2.9,-6.5 -0.5,-5.5 -4.7,-3.5 -3.3,1.2 -6.8,-6.6 -37.1,11.4 0.8,9.9 0.6,5.1 10,-0.3 5.5,3 2.5,3.4 5.7,1 6.1,4.4 -0.8,17.5 -2.8,9.6 -1,10.4 1.7,4.1 -1.7,8.1 -1.9,1.3 -3.6,9.9 -13.4,15.7 4.7,19.5 2.5,9.9 -3,15.4 0.7,5 1.3,6.2 0.6,6.1 9,0.1 1.5,-7.3 -2.9,-0.9 -0.6,-5.8 5.5,-5.2 14.8,-7.5 10.1,-4.6 5.3,-5 2.1,-5.7 -2.7,-2.4 2.4,-6.4 1.1,-13.6 -2.2,0.7 0.1,-4.1 -1.9,-8.1 -5.2,-10.5 1.6,-9.9 5.1,-3.2 8.9,-9.8 4.7,-2.5 14.4,-14.9 14,-6.7 11.3,-5.3 8.1,-8.5 5.2,-9.6 4.1,-9.9 -1.8,-6.8 0.4,-21.6 -1,-12.2 0.9,-13.8 z" fill="#e8e6df" stroke="#c8c5bc"/>
-            <path d="m 672.2,531.3 -4.3,1.7 4.8,7.8 -0.8,8.1 -3.5,1.8 0,0 0.6,5.4 2.6,3.2 0.1,4.5 -3,2.9 -4.9,7.2 -4.5,5 -1.2,0.2 -0.7,5.9 2.3,2 -0.5,5.9 2.3,5.5 -2.9,5.3 9.7,9.4 0.8,8.5 5.9,14.2 0.6,0.4 4.8,2.3 7.7,2.4 6.8,4.1 11.9,2.6 2.3,3.8 0.8,-2.7 6.2,7.4 0.6,14.5 3.9,5.3 4.7,-0.5 14.4,3.9 3.3,-1.8 8.4,-0.3 4.5,-4.2 7.3,0.2 13.4,-5.3 10,-8.1 -4.4,-3 -4.7,-13.6 -4,-8.7 1,-6.6 -0.6,-4.2 3.5,-8.4 -0.3,-3.6 -7.7,-5 -0.6,-7.8 5.9,-17.1 -17.3,-13.8 -0.7,-8 -44.1,-28.2 -6,6.1 -4.1,6.3 4.8,4.7 -7,3.4 -1.5,-1.6 -7.1,0.9 -5.5,3.1 -3.3,-5.4 2.3,-9.7 0.5,-8.3 -13.4,-0.2 z" fill="#e8e6df" stroke="#c8c5bc"/>
-            <path d="m 671.3,636 -4.1,-1.1 0.7,-3 -2.1,-0.6 -16.4,2.3 -3.3,1.7 -3.6,8.8 2.6,6.1 -2.5,16.4 -1.9,13.9 3.2,2.4 8.4,5.4 3.4,-2.5 0.6,14.9 -9.3,-0.1 -4.8,-7.6 -4.3,-5.9 -9.2,-1.9 -2.6,-7.3 -7.5,4.4 -9.7,-2 -3.9,-6.2 -7.7,-1.3 -5.7,0.3 -0.6,-4.3 -4.2,-0.3 1.2,4.3 -1.5,6.7 2,6.5 -2,5.2 1,4.7 -25.3,-0.1 -1.6,44 7.8,11.3 7.6,8.6 9.9,-3.1 7.8,0.8 4.7,3.1 0,1.2 2.2,1 13.4,1.5 3.8,1.6 4.1,-0.3 7,-9 10.9,-11.4 4.4,-1 1.7,-4.8 7,-5.5 9.3,-1.9 -0.8,-9.9 37.1,-11.4 -6.2,-3.6 4.1,-12.8 4,-4.8 -2,-11.5 2.7,-11.2 2.2,-3.8 -2.8,-11.7 -5.6,-6.2 -6.8,-4.1 -7.7,-2.4 -4.8,-2.3 -0.6,-0.4 0.9,2.3 -2,0.8 -2.6,-2.9 z" fill="#e8e6df" stroke="#c8c5bc"/>
-            <path d="m 576,759.7 -22.4,5.7 -29.1,-2 -8.2,-6.6 -48.8,0.6 -1.9,1 -7.1,-6.3 -7.8,-0.4 -7.2,2.3 -5.9,2.7 0.6,10.6 9.5,13.5 2.5,8.7 6,16.6 5.9,11.4 4.6,5.7 1.3,7.6 -0.1,16.5 3.4,21.3 2.6,10.1 2.2,13.4 4.3,10.1 8.3,10.5 6,-6.8 4.5,3.7 1.7,6 5.2,1 7.3,2.6 6.4,-1 10.8,-7.1 2.2,-51.1 1.4,-40.4 11.8,-0.5 1.9,-49.3 9,-0.4 18.7,-4.9 4.4,5.7 7.9,-5.4 3.6,0 6.9,-3.1 0,-1.2 -4.7,-3.1 -7.8,-0.8 -9.9,3.1 z" fill="#e8e6df" stroke="#c8c5bc"/>
-            <path d="m 600.6,762.7 -2.2,-1 -6.9,3.1 -3.6,0 -7.9,5.4 -4.4,-5.7 -18.7,4.9 -9,0.4 -1.9,49.3 -11.8,0.5 -1.4,40.4 3.2,2 6.5,13.2 -1.5,8.4 2.5,4.9 8.5,-1.4 6.2,-6.2 5.8,-4.2 3.2,-6.6 6,-3.2 4.9,1.7 5.5,3.9 9.6,0.6 7.8,-3.2 1.4,-4.3 2.4,-6.6 6.5,-1.1 3.9,-5.2 4.4,-9.3 11.2,-10.3 17.3,-10.2 -7.3,-6.2 -9.2,-2.1 -3.1,-8.8 0.2,-4.9 -5.1,-1.5 -13,-15.2 -3.5,-8 -2.3,-2.4 -4.2,-11.1 z" fill="#e8e6df" stroke="#c8c5bc"/>
-            <path d="m 669.1,825.1 13.4,-15.7 3.6,-9.9 1.9,-1.3 1.7,-8.1 -1.7,-4.1 1,-10.4 2.8,-9.6 0.8,-17.5 -6.1,-4.4 -5.7,-1 -2.5,-3.4 -5.5,-3 -10,0.3 -0.6,-5.1 -9.3,1.9 -7,5.5 -1.7,4.8 -4.4,1 -10.9,11.4 -7,9 -4.1,0.3 -3.8,-1.6 -13.4,-1.5 4.2,11.1 2.3,2.4 3.5,8 13,15.2 5.1,1.5 -0.2,4.9 3.1,8.8 9.2,2.1 7.3,6.2 4.9,0.2 5.7,2.3 4.1,-1.6 6.3,1.3 z" fill="#e8e6df" stroke="#c8c5bc"/>
-            <path d="m 522.3,999 5.3,-0.3 7.5,-5.3 10,-2.2 12.3,-5.5 4.7,0.7 7.2,-1.7 12.3,2.7 5.9,-2.6 6.9,2 1.8,-3.8 6,-0.8 12.6,-5.3 9.3,-6.3 8.9,-8.3 14.4,-14.2 7.5,-9.9 3.9,-7.1 5.5,-7 2.5,-2 8.6,-7 3.5,-6.2 2.3,-11.5 3.7,-10.1 -9,-0.1 -2.8,6.1 -7,1.5 -6.6,-7.5 0.2,-4.8 3.6,-5.2 1.4,-4 3.5,-1 5.8,2.6 -0.7,-5 3,-15.4 -2.5,-9.9 -4.7,-19.5 -6.3,-1.3 -4.1,1.6 -5.7,-2.3 -4.9,-0.2 -17.3,10.2 -11.2,10.3 -4.4,9.3 -3.9,5.2 -6.5,1.1 -2.4,6.6 -1.4,4.3 -7.8,3.2 -9.6,-0.6 -5.5,-3.9 -4.9,-1.7 -6,3.2 -3.2,6.6 -5.8,4.2 -6.2,6.2 -8.5,1.4 -2.5,-4.9 1.5,-8.4 -6.5,-13.2 -3.2,-2 -2.2,51.1 -10.8,7.1 -6.4,1 -7.3,-2.6 -5.2,-1 -1.7,-6 -4.5,-3.7 -6,6.8 7.7,17.9 5.4,11.7 6.9,12.8 -0.2,10.6 -3.9,2.5 3.2,9.3 -0.5,8.1 1.3,3.8 0.7,-1.9 4.6,6.2 3.8,0.2 4.6,5 z" fill="#e8e6df" stroke="#c8c5bc"/>
+          <svg viewBox="50 0 960 1010" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;stroke-linejoin:round;">
+            <g>
+<path d="m 495.3,598.6 -36,-0.2 -4.3,1.7 -3.5,-0.3 -5.1,1.9 -1.1,2.7 6,8.7 2.4,9.3 3.6,13.4 -3.8,5.5 -0.6,2.8 2.9,8.3 3.1,8.4 3.6,5 0.6,7.8 -1.4,10.3 -4,6.1 -7.1,9.1 -2.9,5.6 -4.1,12.5 -0.8,5.9 -4.3,12.7 -1.9,12.2 1,8.7 5.9,-2.7 7.2,-2.3 7.8,0.4 7.1,6.3 1.9,-1 48.8,-0.6 8.2,6.6 29.1,2 22.4,-5.7 -7.6,-8.6 -7.8,-11.3 1.6,-44 25.3,0.1 -1,-4.7 2,-5.2 -2,-6.5 1.5,-6.7 -1.2,-4.3 -5.5,-0.8 -7.6,2 -5.3,-0.3 -3,1.3 0.9,-16.5 -3.9,-5.1 -0.8,-8.5 1.9,-8.4 -2.4,-5.3 -0.1,-8.7 -14.8,0.1 1.1,-5 -6.2,0.1 -0.7,2.4 -7.6,0.5 -3.1,8.1 -1.9,3.4 -6.7,-1.9 -4,1.9 -8.1,1.1 -4.6,-7.2 -2.7,-4.5 -3.5,-8.3 -2.9,-10.3 z m -47.4,-2.7 0.4,-6 2,-3.5 4.5,-2.9 -4.6,-4.8 -3.7,2.3 -5,6 3.3,10.4 3.1,-1.5 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 669,556.1 -0.6,-5.4 0,0 -6.5,-0.9 -3.8,7.9 -7.4,-1.1 3,6.3 0.1,2.4 4.3,13.2 0,0.6 1.2,-0.2 4.5,-5 4.9,-7.2 3,-2.9 -0.1,-4.5 -2.6,-3.2 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 340,356 -9.3,-8 -4.3,0.1 -4.1,4 -2.6,4.2 -6,1.2 -2.5,6.1 -4.1,1.6 -1.6,7.2 3.7,4.1 4.3,4.9 0.4,6.8 2.5,2.8 -0.5,31.8 3,9.5 10.1,-1.6 0.6,-22.3 -0.3,-8.8 2.3,-8.7 3.7,-4.3 5.9,-8.5 -1.3,-3.7 2.4,-5.6 -2.8,-8.2 0.5,-4.6 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 300.7,310.8 -7.8,0 -3,-2.6 -6.7,1.9 -11.3,5.8 -2.3,4.3 -9.4,6.2 -1.7,3.6 -5.1,2.8 -5.8,-1.9 -3.4,3.4 -1.8,9.5 -9.7,11.4 0.3,4.7 -3.4,5.9 0.8,8 5.5,3 2.1,4.6 5.4,2.9 4.3,-3.4 5.7,-0.6 8.3,3.6 -1.6,-10.4 0.3,-7.9 21.1,-0.6 5.4,1 3.9,-2.2 5.6,1.1 10.7,0.3 4.1,-1.6 2.5,-6.1 6,-1.2 2.6,-4.2 0.3,-9.5 -14,-3.1 -0.4,-6.7 -6.9,-9 -1.6,-6.3 1,-6.7 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 600.6,762.7 -2.2,-1 -6.9,3.1 -3.6,0 -7.9,5.4 -4.4,-5.7 -18.7,4.9 -9,0.4 -1.9,49.3 -11.8,0.5 -1.4,40.4 3.2,2 6.5,13.2 -1.5,8.4 2.5,4.9 8.5,-1.4 6.2,-6.2 5.8,-4.2 3.2,-6.6 6,-3.2 4.9,1.7 5.5,3.9 9.6,0.6 7.8,-3.2 1.4,-4.3 2.4,-6.6 6.5,-1.1 3.9,-5.2 4.4,-9.3 11.2,-10.3 17.3,-10.2 -7.3,-6.2 -9.2,-2.1 -3.1,-8.8 0.2,-4.9 -5.1,-1.5 -13,-15.2 -3.5,-8 -2.3,-2.4 -4.2,-11.1 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 587,398.1 -1,-0.7 -4.2,-4 -0.9,-4.3 1.9,-5.7 -0.1,-5.7 -7.2,-8.6 -1.5,-5.9 -7.7,2.3 -6,5.6 -8.6,15.1 -11.3,6.4 -11.8,-0.8 -3.4,1.2 1.2,4.9 -6.3,4.8 -5.1,5.4 -15.3,5.3 -3,-3.1 -2.1,-0.3 -2.2,3.6 -10,1 -6.1,14 -2.9,2.6 -0.8,10.7 1.2,5.8 -0.9,4.1 5.8,7.3 1,4.9 4.6,7.2 5.6,4.4 0.6,6.3 1.3,4 6.3,-12.8 7.3,-7.4 8.2,2.4 7.9,0.7 1,-9.6 4.7,-7.1 6.5,-4.4 10.1,4.7 7.8,5.1 9,1.4 9.1,2.7 3.6,-8.4 1.6,-1.1 5.6,1.4 13.5,-6.9 4.9,3 3.9,-0.5 1.8,-3.3 4.5,-1.2 9.2,1.4 7.9,0.4 4,-1.5 -2,-4.4 -9.2,-5.5 -3.2,-8.3 -5.2,-6 -8.3,-7.2 -0.1,-4.5 -6.8,-5.5 -8.4,-5.4 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 230.4,373.8 -5,2.1 -2.9,1.7 -1.8,-5.9 -3.5,1.6 -2.1,-0.3 -2.3,4 -9.4,-0.1 -3.3,-2.1 -1.6,1.3 -2.5,1.1 -1,4.7 2.8,5.7 3,11.1 -4.6,1.6 -1.1,1.9 0.9,2.7 -0.8,6.1 -1.9,0 -0.6,4 1.2,6.7 -2.7,6.1 3.6,3.8 3.8,0.9 5.2,5.8 0.3,5.5 -1.1,1.7 -1,11.4 2.3,0.4 12.1,-5.1 8.5,-4 14.5,-2.4 7.8,-0.2 8.5,2.7 5.6,-0.1 0.5,-5.5 -5.2,-11.9 3.2,-15.6 5.1,-11.6 -3.2,-19.7 -8.3,-3.6 -5.7,0.6 -4.3,3.4 -5.4,-2.9 -2.1,-4.6 -5.5,-3 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 477.5,366.6 0.4,-9.2 -1,-9.1 -4.9,-8.9 -3.4,0.8 -0.4,4.4 4.9,5.5 -1.3,2.5 -0.5,4.6 -10.2,10.7 -3.1,8.8 -1.6,7.2 -2.6,3.1 -2.4,9.7 -6.4,5.7 -1.9,7 -2.7,5.6 -1.1,5.7 -8.3,4.7 -6.9,-5.7 -4.6,0.2 -7.2,8.1 -3.6,0.1 -5.7,13.4 -3.1,9.8 -0.1,3.8 3.1,2 2.5,6.2 5.6,2.3 4.8,9.2 -1.8,10.9 19.9,0.3 5.8,-0.9 7.4,1.9 7.3,-1.8 1.5,0.7 15.4,0.6 9.9,3.6 9.7,3.3 0.9,-7.5 -1.3,-4 -0.6,-6.3 -5.6,-4.4 -4.6,-7.2 -1,-4.9 -5.8,-7.3 0.9,-4.1 -1.2,-5.8 0.8,-10.7 2.9,-2.6 6.1,-14 1.8,-3.7 -3.9,-9.6 -1.8,-5.7 -5.3,-2.3 -7.2,-8.1 2.5,-6.5 5.6,1.3 3.4,-0.9 6.8,0.1 -6.8,-12.6 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 618.3,446 -9.2,-1.4 -4.5,1.2 -1.8,3.3 -3.9,0.5 -4.9,-3 -13.5,6.9 -5.6,-1.4 -1.6,1.1 -3.6,8.4 -9.1,-2.7 -9,-1.4 -7.8,-5.1 -10.1,-4.7 -6.5,4.4 -4.7,7.1 -1,9.6 -0.7,8.4 -3.6,7.4 -2.4,8.6 -1.5,12.3 0.7,7.8 -2,4.8 -0.3,5.1 -1.4,4.4 -8.1,6.7 -5.6,7.1 -5.3,13.4 0.3,11.4 -3.1,4.4 -7.2,6.8 -7.2,8.7 -4.5,-2.5 -0.8,-3.9 -6.6,-0.1 -4.2,5.3 -3.2,-1.4 -4.5,2.9 -2,3.5 -0.4,6 -3.1,1.5 1.6,4.3 5.1,-1.9 3.5,0.3 4.3,-1.7 36,0.2 2.9,10.3 3.5,8.3 2.7,4.5 4.6,7.2 8.1,-1.1 4,-1.9 6.7,1.9 1.9,-3.4 3.1,-8.1 7.6,-0.5 0.7,-2.4 6.2,-0.1 -1.1,5 14.8,-0.1 0.1,8.7 2.4,5.3 -1.9,8.4 0.8,8.5 3.9,5.1 -0.9,16.5 3,-1.3 5.3,0.3 7.6,-2 5.5,0.8 4.2,0.3 0.6,4.3 5.7,-0.3 7.7,1.3 3.9,6.2 9.7,2 7.5,-4.4 2.6,7.3 9.2,1.9 4.3,5.9 4.8,7.6 9.3,0.1 -0.6,-14.9 -3.4,2.5 -8.4,-5.4 -3.2,-2.4 1.9,-13.9 2.5,-16.4 -2.6,-6.1 3.6,-8.8 3.3,-1.7 16.4,-2.3 2.1,0.6 0.6,-2.3 -3.4,-3.7 -1.5,-7.6 -7.3,-7.6 -4.1,-9.9 2.3,-5.8 -3.2,-7.8 2.4,-22.1 0.1,0.2 -0.1,-2.4 -3,-6.3 1.2,-7.6 1.7,-1 0.5,-8.3 3.5,-3.8 0.1,-10.5 2.9,-5.3 0.6,-11.1 2.6,-6.4 4.6,-7.2 4.7,-3.7 3.9,-4.9 -4.9,-1.9 0.6,-16.1 0,0 -10.9,-9.2 -2.9,-5.9 -6.8,2.9 -5.7,-0.9 -3.2,2.3 -5.5,-1.7 -7.5,-11.4 -4,1.5 -7.9,-0.4 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 521.5,468.8 -7.9,-0.7 -8.2,-2.4 -7.3,7.4 -6.3,12.8 -0.9,7.5 -9.7,-3.3 -9.9,-3.6 -15.4,-0.6 -0.9,6.1 3.4,7.1 9.1,-1.1 3.1,2.7 -5.3,16.1 5.8,8.2 1.3,10.8 -1.6,9.2 -3.7,6.5 -10.8,-0.6 -6.5,-6.6 -1,6.1 -8.3,1.7 -4.2,3.5 4.6,9.1 -9.3,7.7 9.9,14.6 5,-6 3.7,-2.3 4.6,4.8 3.2,1.4 4.2,-5.3 6.6,0.1 0.8,3.9 4.5,2.5 7.2,-8.7 7.2,-6.8 3.1,-4.4 -0.3,-11.4 5.3,-13.4 5.6,-7.1 8.1,-6.7 1.4,-4.4 0.3,-5.1 2,-4.8 -0.7,-7.8 1.5,-12.3 2.4,-8.6 3.6,-7.4 0.7,-8.4 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 820.3,358.7 -5.3,-3.8 6.8,-3.3 0.1,-5.7 -3,-4.3 -3.6,3.4 -5.2,-1.2 -4,6.1 -3.9,6.5 1.1,3.8 0.3,4.2 6.8,0.2 2.9,-0.9 2.8,2.4 4.2,-7.4 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="M 392.4,5.7 384.6,6.5 379.8,3.3 367.6,3.4 357,8.9 351.2,6.8 332.3,8 l -19.4,2.5 -11,4.3 -7.2,5.8 -12.4,2.4 -11.1,7.7 4.2,9 0.7,8.4 3.9,14.7 3.1,2.9 -2.2,5.4 -15.2,2.3 -5.4,5.1 -6.7,1.2 -0.6,10.2 -13.8,5.4 -4.6,7 -9.6,3.7 -11.8,2.1 -19.2,10.2 -0.2,16.3 0,1 -0.3,2.7 44.1,33.5 40,30.2 40.4,30.2 2.9,6.4 7.5,4 5.5,2.2 0.2,8.8 13.3,-1.3 16.9,-6.2 34.5,-27.1 40.5,-26.4 -5.4,-8.7 -9.6,-6.4 -5.5,2.5 -4.3,-7.7 -0.6,-5.9 -7.2,-10.1 4.6,-5.8 -1.3,-8.7 1.4,-7.6 -1,-6.3 1.8,-11.3 -0.8,-6.4 -4.1,-12.2 -5.7,-24.7 -7.3,-5.6 -0.2,-3.3 -9.7,-8.3 -1.3,-10.4 7,-7.8 2.4,-11.6 -2.3,-13.4 2.2,-7.2 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 628.8,88.1 -11.9,-4 -11.5,-3.7 -15.6,0.2 -3.7,6.6 2.2,5.9 -2.4,8.5 4.2,11.2 2.9,49.2 2.2,50.9 48.1,0 46.4,0 47.4,0 -2.2,-2.8 -14.7,-12.4 -0.9,-9 2.2,-2.4 -11.6,-15.3 -4.4,-7.9 -4.9,-7.5 -10.5,-21.6 -8.4,-13.9 -6.1,-14.5 1.1,-1.3 10.1,19.8 5.8,6.2 4.3,4.4 2.5,-2.4 2.7,-7.2 1.6,-10.4 2.8,-5.6 -1.5,-3.5 -8.5,-20.1 0,0 -5.4,3.4 -9.2,-0.8 -9.6,-3.2 -2.3,4.5 -3.8,-6.8 -8.5,-1.8 -10.2,1.2 -4.5,3.9 -8.6,4.4 -5.6,-2.2 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 777.6,303.8 -7,-6.8 -4,-12.7 -7.8,-16 -5.7,7.9 -8.8,2.3 -3.6,4.2 -0.7,9.2 -4.3,20.3 1.5,5.6 14.3,2.9 3.3,-10.4 7.6,6.3 7,-3.2 3,2.9 8.3,0.1 10.8,5.6 3.4,4.8 5.5,4.4 5.4,8.1 4.3,4.5 5.2,1.2 3.6,-3.4 -6.2,-4.2 -4,-4.7 -6.9,-8 -7.1,-7.9 -17.1,-13 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 754.8,310.3 -3.3,10.4 -14.3,-2.9 -1.4,11.9 -4.5,13.6 -7.1,6.8 -4.8,10.6 -1.1,5.7 -5.6,3.8 -3.3,14.5 0.1,1.7 0.4,10.8 -1.8,4.2 -6.4,0.3 -4,7.9 7.5,1 6.3,6.7 2.2,5.6 5.7,3.2 7.4,15 6.4,2.4 0.1,7.7 4.2,4.6 8.5,0 15.7,11.7 3.8,0.2 2.9,-0.4 2.7,1.6 8.2,1.1 3.5,-5.8 11.1,-5.8 4.9,4.7 8.4,0 3.3,-4.4 7.8,-0.2 10.7,-9.8 15.9,-0.6 33.5,-41.5 -10.3,0.1 -40.3,-16.4 -4.8,-5 -4.6,-6.6 -4.8,-7.7 2.5,-4.9 -2.8,-2.4 -2.9,0.9 -6.8,-0.2 -0.3,-4.2 -1.1,-3.8 3.9,-6.5 4,-6.1 -4.3,-4.5 -5.4,-8.1 -5.5,-4.4 -3.4,-4.8 -10.8,-5.6 -8.3,-0.1 -3,-2.9 -7,3.2 -7.6,-6.3 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 455.9,485.9 -1.5,-0.7 -7.3,1.8 -7.4,-1.9 -5.8,0.9 0.1,16.7 -17.7,-0.2 -4.2,0.8 -2.4,10.3 -3,10.1 -2.7,4.4 -0.3,4.6 7.3,14.3 8.1,11.4 12.5,14 9.3,-7.7 -4.6,-9.1 4.2,-3.5 8.3,-1.7 1,-6.1 6.5,6.6 10.8,0.6 3.7,-6.5 1.6,-9.2 -1.3,-10.8 -5.8,-8.2 5.3,-16.1 -3.1,-2.7 -9.1,1.1 -3.4,-7.1 0.9,-6.1 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 296.4,364.9 -5.6,-1.1 -3.9,2.2 -5.4,-1 -21.1,0.6 -0.3,7.9 1.6,10.4 3.2,19.7 -5.1,11.6 -3.2,15.6 5.2,11.9 -0.5,5.5 10.9,3.9 11,-4 6.7,-4.7 19.2,-8.1 -2.8,-4.9 -3.2,-8.8 -1,-6.8 2.7,-12.5 -3,-5 -1.2,-10.9 0,-10.1 -5.1,-7.1 0.9,-4.3 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 156.4,345.2 -1.8,0.7 -6.6,-1.1 -0.9,1.6 -2.7,0.3 -8.7,-3.4 -5.8,-0.1 -0.3,4.7 -1.3,1.4 0.9,4.6 -1.9,1.8 -2.7,0.1 -3.2,2.3 -3.7,-0.3 -5.5,6.8 3.6,2.2 1.7,3.1 1.3,6.1 3,2.7 3.1,1.8 4.7,5.4 5.3,8.2 6.5,-6.1 1.5,-3.8 2.1,-3 3.3,-0.3 2.9,-2.6 9.7,0 3.3,5 2.6,5.8 -0.4,4 1.9,3.6 -0.1,5.1 3.3,-0.8 2.6,-0.3 3.2,-1.6 5.1,8.5 -0.9,5.6 2.4,2.9 3.4,0.1 2.6,-5.6 3.4,0.4 1.9,0 0.8,-6.1 -0.9,-2.7 1.1,-1.9 4.6,-1.6 -3,-11.1 -2.8,-5.7 1,-4.7 2.5,-1.1 -3.7,-4 0.7,-4.1 -1.6,-1.6 -2.6,1.3 0.6,-4.5 2.5,-3.5 -5,-5.8 -1.4,-3.8 -2.7,-3.1 -2.4,-0.3 -2.9,1.9 -4,1.8 -3.3,3 -5.2,-1.1 -3.3,-3.5 -2,-0.4 -3.2,1.8 -2,0 -0.6,-5 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 91.9,335.4 11,0.2 3,-1.9 2.2,-0.1 4.5,-3.2 5.2,2.9 5.2,0.3 5.3,-3.1 -2.4,-4 -4,2.3 -3.8,-0.1 -4.7,-3.4 -3.8,0.2 -2.8,3.3 -13.2,0.4 -1.7,6.2 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 129.9,343.2 -22.4,-0.6 -3.3,1.6 -4,-0.5 -6.5,2.3 0.7,2.9 3.7,3 -0.1,2.1 2.7,3.9 5.1,0.9 6.4,5.8 5.5,-6.8 3.7,0.3 3.2,-2.3 2.7,-0.1 1.9,-1.8 -0.9,-4.6 1.3,-1.4 0.3,-4.7 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 433.9,486 -19.9,-0.3 -4.1,15.5 2.2,2.1 4.2,-0.8 17.7,0.2 -0.1,-16.7 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 807.2,463.1 -8.4,0 -4.9,-4.7 -11.1,5.8 -3.5,5.8 -8.2,-1.1 -2.7,-1.6 -2.9,0.4 -3.8,-0.2 -15.7,-11.7 -8.5,0 -4.2,-4.6 -0.1,-7.7 -6.4,-2.4 -8.1,9.1 -7.4,8.3 5.9,9.6 1.5,7 5.5,15.8 -4.4,10.1 -5.9,9.2 -3.5,5.6 0,0.7 2.9,5.2 -0.8,10.3 44.1,28.2 0.7,8 17.3,13.8 5,-4.6 2.5,-9.2 4,-5.5 1.9,-9.8 4.6,-1 3.1,-5.8 8.6,-5.5 -7.2,-11.4 -0.4,-50.4 10.5,-15.7 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 193.3,411 -3.4,-0.4 -2.6,5.6 -3.4,-0.1 -2.4,-2.9 0.9,-5.6 -5.1,-8.5 -3.2,1.6 -2.6,0.3 -5.7,6.5 -5.5,7.5 -0.7,4 -2.9,4.4 8.1,8.9 10.4,7.6 11,10.5 12.6,6.6 3.2,-0.1 1,-11.4 1.1,-1.7 -0.3,-5.5 -5.2,-5.8 -3.8,-0.9 -3.6,-3.8 2.7,-6.1 -1.2,-6.7 0.6,-4 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 589.8,80.6 -3.1,-4.5 -11.7,-1.6 -3.9,-2.4 -4.4,0 -4.4,-6.2 -15.9,-2.8 -7.9,1.8 -7.9,6.5 -3.3,6.7 3.4,10.6 -5.3,6.3 -5.5,3.6 L 507,91.7 490.3,86 479.7,83.3 473.6,71 l -15.7,-6.1 -9.8,-2.3 -4.8,1.2 -13.8,-4.8 -0.3,10.6 -5.6,4 -3.4,4.4 -7.9,5.3 1.5,5.7 -0.9,5.8 -5.6,3.2 4.1,12.2 0.8,6.4 -1.8,11.3 1,6.3 -1.4,7.6 1.3,8.7 -4.6,5.8 7.2,10.1 0.6,5.9 4.3,7.7 5.5,-2.5 9.6,6.4 5.4,8.7 19,6 6.9,7.5 8.3,-5.1 11.9,-7.6 48.4,26.5 48.7,26.5 -0.1,-5.8 13.8,0 -1,-27.7 -2.2,-50.9 -2.9,-49.2 -4.2,-11.2 2.4,-8.5 -2.2,-5.9 3.7,-6.6 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 625.3,939.9 2.5,-4.4 6.7,-2.2 2.4,-4.5 4.1,-6.7 -3.8,-4.2 -4.8,-4.2 -5.7,2.8 -6.8,5.4 -6.9,8.7 8,10.6 4.3,-1.3 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 271.2,30.7 -5,-0.1 -11.9,-3.1 -11,0.9 -6.8,-5.9 -8.5,-0.1 -3.8,8.6 -8,14.5 -8.7,5.7 -11.8,6.4 -7.7,9.3 -1.8,7.3 -4.8,11.8 2.5,17.2 -10.1,11.5 -6,3.7 -9.6,9.4 -11,1.6 -6.1,5.3 -0.2,0.2 -7.9,14.1 -8.1,5.1 -4.5,8.5 -0.5,7.4 -3.4,8.1 -4,2.2 -6.9,8.8 -4.4,9.8 0.7,4.6 -4.1,7.3 -4.7,3.7 -0.8,6.4 0.2,0.1 27,-1.1 1.6,-5 5,-6.2 4.4,-19.1 16.9,-15 6,-17.4 3.7,-1.1 4.2,-10.8 10,-1.4 4.2,1.8 5.4,0 3.9,-3.2 7.3,-0.4 -0.1,-7.5 0,0 1.8,0 0.2,-16.3 19.2,-10.2 11.8,-2.1 9.6,-3.7 4.6,-7 13.8,-5.4 0.6,-10.2 6.7,-1.2 5.4,-5.1 15.2,-2.3 2.2,-5.4 -3.1,-2.9 -3.9,-14.7 -0.7,-8.4 -4.2,-9 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 902.9,704.8 -2.5,-9.1 -3,-5.9 -3.9,-5.9 -4.3,6.2 -0.7,8.3 -7.1,9.6 -5.1,-1.7 1.3,6 -4,6.9 -10.4,8.5 -7.3,7.9 -5.4,0.2 -4.6,2.5 -6.9,2.8 -6,0.6 -2.2,8.7 -4.7,7.8 0.2,12.7 1.7,8.7 2.4,6.6 -1.7,8.8 -6.4,10.5 -0.3,4.6 -5.7,2.4 -2.8,10 0.4,9.9 3.4,11 -0.1,12.3 2.6,7.3 9.1,5 6.5,3.5 10.9,-5.8 9.9,-3.3 6.8,-16.1 6.1,-19.2 9.3,-26.2 7.3,-19.1 5.9,-16.1 1.6,-11.7 3.5,-3.2 1.5,-5.9 -1.7,-10.2 2.6,-4.1 3.5,8.1 2.4,-4.1 1.7,-6.6 -2.8,-6.5 -1,-16.7 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 347.4,252.3 -13.3,1.3 -0.2,-8.8 -5.5,-2.2 -7.5,-4 -2.9,-6.4 -40.4,-30.2 -40,-30.2 -18.2,0.2 5.1,59.7 5.4,59.7 2,1.8 -2.7,9.6 -48.5,0.2 -1.9,3.1 -4.6,-0.9 -6.9,2.7 -8.4,-3.8 -3.8,0.3 -2.2,8.2 -4.1,2.5 0.4,8.6 2.3,7.9 4.5,3.9 1,5.3 -0.6,4.4 0.6,5 2,0 3.2,-1.8 2,0.4 3.3,3.5 5.2,1.1 3.3,-3 4,-1.8 2.9,-1.9 2.4,0.3 2.7,3.1 1.4,3.8 5,5.8 -2.5,3.5 -0.6,4.5 2.6,-1.3 1.6,1.6 -0.7,4.1 3.7,4 1.6,-1.3 3.3,2.1 9.4,0.1 2.3,-4 2.1,0.3 3.5,-1.6 1.8,5.9 2.9,-1.7 5,-2.1 -0.8,-8 3.4,-5.9 -0.3,-4.7 9.7,-11.4 1.8,-9.5 3.4,-3.4 5.8,1.9 5.1,-2.8 1.7,-3.6 9.4,-6.2 2.3,-4.3 11.3,-5.8 6.7,-1.9 3,2.6 7.8,0 7.7,-0.6 4.5,-4.9 16.5,-1.2 10.7,-2.2 1,-8.5 6.6,-9.2 -0.3,-31.9 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 788.2,666.2 -1.7,-6.2 0,0 0,0 -10,8.1 -13.4,5.3 -7.3,-0.2 -4.5,4.2 -8.4,0.3 -3.3,1.8 -14.4,-3.9 -4.7,0.5 -3.3,13.1 1.4,15.8 0.7,0 4.2,4.4 4.6,10 0.3,17.8 -5.4,3 -4.1,9.6 -7.5,-8.6 -0.5,-9.7 2.9,-6.5 -0.5,-5.5 -4.7,-3.5 -3.3,1.2 -6.8,-6.6 -37.1,11.4 0.8,9.9 0.6,5.1 10,-0.3 5.5,3 2.5,3.4 5.7,1 6.1,4.4 -0.8,17.5 -2.8,9.6 -1,10.4 1.7,4.1 -1.7,8.1 -1.9,1.3 -3.6,9.9 -13.4,15.7 4.7,19.5 2.5,9.9 -3,15.4 0.7,5 1.3,6.2 0.6,6.1 9,0.1 1.5,-7.3 -2.9,-0.9 -0.6,-5.8 5.5,-5.2 14.8,-7.5 10.1,-4.6 5.3,-5 2.1,-5.7 -2.7,-2.4 2.4,-6.4 1.1,-13.6 -2.2,0.7 0.1,-4.1 -1.9,-8.1 -5.2,-10.5 1.6,-9.9 5.1,-3.2 8.9,-9.8 4.7,-2.5 14.4,-14.9 14,-6.7 11.3,-5.3 8.1,-8.5 5.2,-9.6 4.1,-9.9 -1.8,-6.8 0.4,-21.6 -1,-12.2 0.9,-13.8 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 237.6,171.8 -44.1,-33.5 -0.5,20.9 -38.9,-0.7 -0.4,35.4 -11.2,1.3 -3.1,7.1 1.9,20 -46.9,-0.1 -2.7,4.6 6.1,6 3,6.5 -1.4,6.9 1.3,6.9 1,13.7 -1.8,13 -3.5,6.8 0.9,7.5 4.2,-4.5 6,1.2 5.9,-3 6.8,-0.1 5.7,4 7.9,3.7 7.2,10.2 7.8,9.5 4.1,-2.5 2.2,-8.2 3.8,-0.3 8.4,3.8 6.9,-2.7 4.6,0.9 1.9,-3.1 48.5,-0.2 2.7,-9.6 -2,-1.8 -5.4,-59.7 -5.1,-59.7 18.2,-0.2 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 714.6,711.7 0.3,-5.2 -2.7,-4.1 0.4,-6 -3.3,-10.2 3.7,-7.7 -0.2,-16.7 -4.1,-8.9 0.4,-1.5 0,0 -2.3,-3.8 -11.9,-2.6 5.6,6.2 2.8,11.7 -2.2,3.8 -2.7,11.2 2,11.5 -4,4.8 -4.1,12.8 6.2,3.6 6.8,6.6 3.3,-1.2 4.7,3.5 0.5,5.5 -2.9,6.5 0.5,9.7 7.5,8.6 4.1,-9.6 5.4,-3 -0.3,-17.8 -4.6,-10 -4.2,-4.4 -0.7,0 0.1,1.9 2.3,0.5 2.2,7.4 -0.4,1.7 -4.1,-5.3 -2.2,3.4 -1.9,-2.9 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 576,759.7 -22.4,5.7 -29.1,-2 -8.2,-6.6 -48.8,0.6 -1.9,1 -7.1,-6.3 -7.8,-0.4 -7.2,2.3 -5.9,2.7 0.6,10.6 9.5,13.5 2.5,8.7 6,16.6 5.9,11.4 4.6,5.7 1.3,7.6 -0.1,16.5 3.4,21.3 2.6,10.1 2.2,13.4 4.3,10.1 8.3,10.5 6,-6.8 4.5,3.7 1.7,6 5.2,1 7.3,2.6 6.4,-1 10.8,-7.1 2.2,-51.1 1.4,-40.4 11.8,-0.5 1.9,-49.3 9,-0.4 18.7,-4.9 4.4,5.7 7.9,-5.4 3.6,0 6.9,-3.1 0,-1.2 -4.7,-3.1 -7.8,-0.8 -9.9,3.1 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 458.3,198.6 -19,-6 -40.5,26.4 -34.5,27.1 -16.9,6.2 0.3,31.9 -6.6,9.2 -1,8.5 -10.7,2.2 -16.5,1.2 -4.5,4.9 -7.7,0.6 -1,6.7 1.6,6.3 6.9,9 0.4,6.7 14,3.1 -0.3,9.5 4.1,-4 4.3,-0.1 9.3,8 0.8,-12.4 3.5,-5.5 1.6,-8 3.2,-3 13,-1.6 12.2,5.1 4.6,5.3 6.1,0.2 5.8,-3.4 14.7,7.1 6.2,-0.3 7.1,-5.9 7.1,0.4 3.5,-1.9 6.5,0.8 9.4,4 9.4,-7.7 2.9,0.6 8.4,15.1 2.2,-0.3 0.4,-4.4 3.4,-0.8 1.1,-6.5 -7.8,-0.3 -0.1,-8.9 -5.1,-5.2 4.9,-18.2 15.2,-13 0.2,-18 4,-28.1 2.5,-6 -5.1,-4.7 -0.3,-4.4 -4.6,-3.6 -3.4,-21.5 -8.3,5.1 -6.9,-7.5 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 468.2,344.6 -2.2,0.3 -8.4,-15.1 -2.9,-0.6 -9.4,7.7 -9.4,-4 -6.5,-0.8 -3.5,1.9 -7.1,-0.4 -7.1,5.9 -6.2,0.3 -14.7,-7.1 -5.8,3.4 -6.1,-0.2 -4.6,-5.3 -12.2,-5.1 -13,1.6 -3.2,3 -1.6,8 -3.5,5.5 -0.8,12.4 -0.5,4.6 2.8,8.2 -2.4,5.6 1.3,3.7 -5.9,8.5 -3.7,4.3 -2.3,8.7 0.3,8.8 -0.6,22.3 10.7,0 9.2,-0.1 8.6,9.1 4.1,10 6.5,8.6 9.8,0.3 4.7,-3.1 4.6,0.8 12.7,-5 3.1,-9.8 5.7,-13.4 3.6,-0.1 7.2,-8.1 4.6,-0.2 6.9,5.7 8.3,-4.7 1.1,-5.7 2.7,-5.6 1.9,-7 6.4,-5.7 2.4,-9.7 2.6,-3.1 1.6,-7.2 3.1,-8.8 10.2,-10.7 0.5,-4.6 1.3,-2.5 -4.9,-5.5 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 667.9,533 -7.4,4.3 -2.9,-1.4 -3.5,3.8 -0.5,8.3 -1.7,1 -1.2,7.6 7.4,1.1 3.8,-7.9 6.5,0.9 0,0 3.5,-1.8 0.8,-8.1 -4.8,-7.8 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 193.8,134.6 -1.8,0 0,0 0.1,7.5 -7.3,0.4 -3.9,3.2 -5.4,0 -4.2,-1.8 -10,1.4 -4.2,10.8 -3.7,1.1 -6,17.4 -16.9,15 -4.4,19.1 -5,6.2 -1.6,5 -27,1.1 -0.2,-0.1 -0.6,5.9 2.7,-4.6 46.9,0.1 -1.9,-20 3.1,-7.1 11.2,-1.3 0.4,-35.4 38.9,0.7 0.5,-20.9 0.3,-2.7 0,-1 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 740,291.9 0.7,-9.2 3.6,-4.2 8.8,-2.3 5.7,-7.9 -6.9,-5.1 -4.8,-3.4 -5.3,-16.5 -2.5,-14.3 2.5,-2.5 -4.7,-13.6 -47.4,0 -46.4,0 -48.1,0 1,27.7 -13.8,0 0.1,5.8 2.4,54.9 -10.5,-0.9 -5.2,10.2 -3,8.5 2.6,3.2 -3.8,4.3 1.5,5.7 -3,5.8 -1.2,5 4.3,-0.8 2.6,5.4 0.3,8 4.6,4.1 -0.1,3.4 1.5,5.9 7.2,8.6 0.1,5.7 -1.9,5.7 0.9,4.3 4.2,4 1,0.7 3.8,-1.6 4.1,-2.6 2.9,-12.3 3.2,-6.4 8.8,-1.9 2.1,3.8 6.5,8 3.3,1.2 4.4,-2.3 8.7,0.4 1.8,2.9 12.1,0 0.3,-2.9 6.3,-2.6 1.1,-4 4.6,-2.9 10.4,8.1 6.2,-1.4 5.8,-10 6.5,-7.6 -1.3,-8.3 -3,-4 7.3,-0.8 0.7,-3 5.7,0.9 -1.2,10.2 1.7,10 6.5,5.5 1.5,4.7 0,6.9 1.7,0.3 -0.1,-1.7 3.3,-14.5 5.6,-3.8 1.1,-5.7 4.8,-10.6 7.1,-6.8 4.5,-13.6 1.4,-11.9 -1.5,-5.6 4.3,-20.3 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 707.8,379.2 -1.5,-4.7 -6.5,-5.5 -1.7,-10 1.2,-10.2 -5.7,-0.9 -0.7,3 -7.3,0.8 3,4 1.3,8.3 -6.5,7.6 -5.8,10 -6.2,1.4 -10.4,-8.1 -4.6,2.9 -1.1,4 -6.3,2.6 -0.3,2.9 -12.1,0 -1.8,-2.9 -8.7,-0.4 -4.4,2.3 -3.3,-1.2 -6.5,-8 -2.1,-3.8 -8.8,1.9 -3.2,6.4 -2.9,12.3 -4.1,2.6 -3.8,1.6 8.4,5.4 6.8,5.5 0.1,4.5 8.3,7.2 5.2,6 3.2,8.3 9.2,5.5 2,4.4 7.5,11.4 5.5,1.7 3.2,-2.3 5.7,0.9 6.8,-2.9 2.9,5.9 10.9,9.2 0,0 5,-3.8 7.8,3.1 9.8,-3.3 8.6,0.1 7.4,-6.4 7.4,-8.3 8.1,-9.1 -7.4,-15 -5.7,-3.2 -2.2,-5.6 -6.3,-6.7 -7.5,-1 4,-7.9 6.4,-0.3 1.8,-4.2 -0.4,-10.8 -1.7,-0.3 0,-6.9 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 148.8,315.1 -7.8,-9.5 -7.2,-10.2 -7.9,-3.7 -5.7,-4 -6.8,0.1 -5.9,3 -6,-1.2 -4.2,4.5 -3,7.1 -6.1,9.7 -5.4,2.6 6,4.9 4.8,10.8 13.2,-0.4 2.8,-3.3 3.8,-0.2 4.7,3.4 3.8,0.1 4,-2.3 2.4,4 -5.3,3.1 -5.2,-0.3 -5.2,-2.9 -4.5,3.2 -2.2,0.1 -3,1.9 -11,-0.2 1.8,10.6 6.5,-2.3 4,0.5 3.3,-1.6 22.4,0.6 5.8,0.1 8.7,3.4 2.7,-0.3 0.9,-1.6 6.6,1.1 1.8,-0.7 0.6,-4.4 -1,-5.3 -4.5,-3.9 -2.3,-7.9 -0.4,-8.6 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 171.5,401 -3.3,0.8 0.1,-5.1 -1.9,-3.6 0.4,-4 -2.6,-5.8 -3.3,-5 -9.7,0 -2.9,2.6 -3.3,0.3 -2.1,3 -1.5,3.8 -6.5,6.1 1.4,10.3 2.1,5 6.3,7.4 8.7,5.6 3.3,1 2.9,-4.4 0.7,-4 5.5,-7.5 5.7,-6.5 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 674,874.9 -5.8,-2.6 -3.5,1 -1.4,4 -3.6,5.2 -0.2,4.8 6.6,7.5 7,-1.5 2.8,-6.1 -0.6,-6.1 -1.3,-6.2 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 582.5,246.4 -48.7,-26.5 -48.4,-26.5 -11.9,7.6 3.4,21.5 4.6,3.6 0.3,4.4 5.1,4.7 -2.5,6 -4,28.1 -0.2,18 -15.2,13 -4.9,18.2 5.1,5.2 0.1,8.9 7.8,0.3 -1.1,6.5 4.9,8.9 1,9.1 -0.4,9.2 6.8,12.6 -6.8,-0.1 -3.4,0.9 -5.6,-1.3 -2.5,6.5 7.2,8.1 5.3,2.3 1.8,5.7 3.9,9.6 -1.8,3.7 10,-1 2.2,-3.6 2.1,0.3 3,3.1 15.3,-5.3 5.1,-5.4 6.3,-4.8 -1.2,-4.9 3.4,-1.2 11.8,0.8 11.3,-6.4 8.6,-15.1 6,-5.6 7.7,-2.3 0.1,-3.4 -4.6,-4.1 -0.3,-8 -2.6,-5.4 -4.3,0.8 1.2,-5 3,-5.8 -1.5,-5.7 3.8,-4.3 -2.6,-3.2 3,-8.5 5.2,-10.2 10.5,0.9 -2.4,-54.9 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 307.1,365.2 -10.7,-0.3 -0.9,4.3 5.1,7.1 0,10.1 1.2,10.9 3,5 -2.7,12.5 1,6.8 3.2,8.8 2.8,4.9 9.8,-3 -3,-9.5 0.5,-31.8 -2.5,-2.8 -0.4,-6.8 -4.3,-4.9 -3.7,-4.1 1.6,-7.2 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 429.5,59 -4.5,-2.2 -3.2,-6.6 -6,-0.2 -2.4,-7.6 7.3,-7 1.1,-12.1 -4.1,-3.5 -0.2,-6.5 5.5,-7 -0.9,-2.7 -9.5,5.2 0.1,-7.1 -8.1,-1.7 -12.2,5.7 -2.2,7.2 2.3,13.4 -2.4,11.6 -7,7.8 1.3,10.4 9.7,8.3 0.2,3.3 7.3,5.6 5.7,24.7 5.6,-3.2 0.9,-5.8 -1.5,-5.7 7.9,-5.3 3.4,-4.4 5.6,-4 0.3,-10.6 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 672.2,531.3 -4.3,1.7 4.8,7.8 -0.8,8.1 -3.5,1.8 0,0 0.6,5.4 2.6,3.2 0.1,4.5 -3,2.9 -4.9,7.2 -4.5,5 -1.2,0.2 -0.7,5.9 2.3,2 -0.5,5.9 2.3,5.5 -2.9,5.3 9.7,9.4 0.8,8.5 5.9,14.2 0,0 0.6,0.4 4.8,2.3 7.7,2.4 6.8,4.1 11.9,2.6 2.3,3.8 0,0 0.8,-2.7 6.2,7.4 0.6,14.5 3.9,5.3 -0.1,0.2 4.7,-0.5 14.4,3.9 3.3,-1.8 8.4,-0.3 4.5,-4.2 7.3,0.2 13.4,-5.3 10,-8.1 0,0 -4.4,-3 -4.7,-13.6 -4,-8.7 1,-6.6 -0.6,-4.2 3.5,-8.4 -0.3,-3.6 -7.7,-5 -0.6,-7.8 5.9,-17.1 -17.3,-13.8 -0.7,-8 -44.1,-28.2 0,0 -6,6.1 -4.1,6.3 4.8,4.7 -7,3.4 -1.5,-1.6 -7.1,0.9 -5.5,3.1 -3.3,-5.4 2.3,-9.7 0.5,-8.3 0,0 0,0 -13.4,-0.2 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 711.3,458.5 -7.4,6.4 -8.6,-0.1 -9.8,3.3 -7.8,-3.1 -5,3.8 0,0 -0.6,16.1 4.9,1.9 -3.9,4.9 -4.7,3.7 -4.6,7.2 -2.6,6.4 -0.6,11.1 -2.9,5.3 -0.1,10.5 2.9,1.4 7.4,-4.3 4.3,-1.7 13.4,0.2 0,0 -0.7,-5.3 5.7,-8.1 7.7,-2 5.2,-3.3 6.3,2.7 0.6,1 0,-0.7 3.5,-5.6 5.9,-9.2 4.4,-10.1 -5.5,-15.8 -1.5,-7 -5.9,-9.6 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 522.3,999 5.3,-0.3 7.5,-5.3 10,-2.2 12.3,-5.5 4.7,0.7 7.2,-1.7 12.3,2.7 5.9,-2.6 6.9,2 1.8,-3.8 6,-0.8 12.6,-5.3 9.3,-6.3 8.9,-8.3 14.4,-14.2 7.5,-9.9 3.9,-7.1 5.5,-7 2.5,-2 8.6,-7 3.5,-6.2 2.3,-11.5 3.7,-10.1 -9,-0.1 -2.8,6.1 -7,1.5 -6.6,-7.5 0.2,-4.8 3.6,-5.2 1.4,-4 3.5,-1 5.8,2.6 -0.7,-5 3,-15.4 -2.5,-9.9 -4.7,-19.5 -6.3,-1.3 -4.1,1.6 -5.7,-2.3 -4.9,-0.2 -17.3,10.2 -11.2,10.3 -4.4,9.3 -3.9,5.2 -6.5,1.1 -2.4,6.6 -1.4,4.3 -7.8,3.2 -9.6,-0.6 -5.5,-3.9 -4.9,-1.7 -6,3.2 -3.2,6.6 -5.8,4.2 -6.2,6.2 -8.5,1.4 -2.5,-4.9 1.5,-8.4 -6.5,-13.2 -3.2,-2 -2.2,51.1 -10.8,7.1 -6.4,1 -7.3,-2.6 -5.2,-1 -1.7,-6 -4.5,-3.7 -6,6.8 7.7,17.9 0,0.1 5.4,11.7 6.9,12.8 -0.2,10.6 -3.9,2.5 3.2,9.3 -0.5,8.1 1.3,3.8 0.7,-1.9 4.6,6.2 3.8,0.2 4.6,5 z m 103,-59.1 -4.3,1.3 -8,-10.6 6.9,-8.7 6.8,-5.4 5.7,-2.8 4.8,4.2 3.8,4.2 -4.1,6.7 -2.4,4.5 -6.7,2.2 -2.5,4.4 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 671.3,636 -4.1,-1.1 0.7,-3 -2.1,-0.6 -16.4,2.3 -3.3,1.7 -3.6,8.8 2.6,6.1 -2.5,16.4 -1.9,13.9 3.2,2.4 8.4,5.4 3.4,-2.5 0.6,14.9 -9.3,-0.1 -4.8,-7.6 -4.3,-5.9 -9.2,-1.9 -2.6,-7.3 -7.5,4.4 -9.7,-2 -3.9,-6.2 -7.7,-1.3 -5.7,0.3 -0.6,-4.3 -4.2,-0.3 1.2,4.3 -1.5,6.7 2,6.5 -2,5.2 1,4.7 -25.3,-0.1 -1.6,44 7.8,11.3 7.6,8.6 9.9,-3.1 7.8,0.8 4.7,3.1 0,1.2 2.2,1 13.4,1.5 3.8,1.6 4.1,-0.3 7,-9 10.9,-11.4 4.4,-1 1.7,-4.8 7,-5.5 9.3,-1.9 -0.8,-9.9 37.1,-11.4 -6.2,-3.6 4.1,-12.8 4,-4.8 -2,-11.5 2.7,-11.2 2.2,-3.8 -2.8,-11.7 -5.6,-6.2 -6.8,-4.1 -7.7,-2.4 -4.8,-2.3 -0.6,-0.4 0,0 0.9,2.3 -2,0.8 -2.6,-2.9 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 669.1,825.1 13.4,-15.7 3.6,-9.9 1.9,-1.3 1.7,-8.1 -1.7,-4.1 1,-10.4 2.8,-9.6 0.8,-17.5 -6.1,-4.4 -5.7,-1 -2.5,-3.4 -5.5,-3 -10,0.3 -0.6,-5.1 -9.3,1.9 -7,5.5 -1.7,4.8 -4.4,1 -10.9,11.4 -7,9 -4.1,0.3 -3.8,-1.6 -13.4,-1.5 4.2,11.1 2.3,2.4 3.5,8 13,15.2 5.1,1.5 -0.2,4.9 3.1,8.8 9.2,2.1 7.3,6.2 4.9,0.2 5.7,2.3 4.1,-1.6 6.3,1.3 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+<path d="m 832.6,372.8 -5.7,-5.8 -2.5,-5.7 -4.1,-2.6 -4.2,7.4 -2.5,4.9 4.8,7.7 4.6,6.6 4.8,5 40.3,16.4 10.3,-0.1 -33.5,41.5 -15.9,0.6 -10.7,9.8 -7.8,0.2 -3.3,4.4 -10.5,15.7 0.4,50.4 7.2,11.4 2.7,-3.3 2.9,-7.3 13.4,-16.7 11.4,-10.6 18.1,-13.7 12.1,-11.2 14.1,-18.9 10.1,-15.5 10,-20.2 7,-17.7 5.4,-15.5 2.9,-14.9 2.4,-5 -0.4,-7.3 0.8,-8 -0.5,-3.9 -4.6,0.1 -5.5,4.7 -6.4,1.4 -5.5,2.1 -3.9,0.2 0,0 -6.9,0.5 -4.2,2.6 -6,0.9 -10.5,4.3 -13.2,1.6 -11.3,3.5 -6.1,0 z" fill="#ddd9cf" stroke="#bbb7ad" stroke-width="0.7"/>
+            </g>
 
-            <!-- HIGHLIGHTED UGANDA -->
-            <path d="m 711.3,458.5 -7.4,6.4 -8.6,-0.1 -9.8,3.3 -7.8,-3.1 -5,3.8 0,0 -0.6,16.1 4.9,1.9 -3.9,4.9 -4.7,3.7 -4.6,7.2 -2.6,6.4 -0.6,11.1 -2.9,5.3 -0.1,10.5 2.9,1.4 7.4,-4.3 4.3,-1.7 13.4,0.2 0,0 -0.7,-5.3 5.7,-8.1 7.7,-2 5.2,-3.3 6.3,2.7 0.6,1 0,-0.7 3.5,-5.6 5.9,-9.2 4.4,-10.1 -5.5,-15.8 -1.5,-7 -5.9,-9.6 z" fill="#D4A017" stroke="white" stroke-width="1.5"/>
-            <circle cx="692" cy="490" r="5" fill="white"/>
-            <text x="700" y="500" font-size="11" font-weight="700" fill="#1a2d52" font-family="DM Sans, sans-serif">Uganda</text>
+<!-- Uganda -->
+<path d="m 711.3,458.5 -7.4,6.4 -8.6,-0.1 -9.8,3.3 -7.8,-3.1 -5,3.8 0,0 -0.6,16.1 4.9,1.9 -3.9,4.9 -4.7,3.7 -4.6,7.2 -2.6,6.4 -0.6,11.1 -2.9,5.3 -0.1,10.5 2.9,1.4 7.4,-4.3 4.3,-1.7 13.4,0.2 0,0 -0.7,-5.3 5.7,-8.1 7.7,-2 5.2,-3.3 6.3,2.7 0.6,1 0,-0.7 3.5,-5.6 5.9,-9.2 4.4,-10.1 -5.5,-15.8 -1.5,-7 -5.9,-9.6 z" fill="#D4A017" stroke="white" stroke-width="1.5" style="cursor:pointer;transition:opacity .2s" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'" onclick="showCountry('Uganda')"/>
+<text x="693" y="510" text-anchor="middle" font-size="9" font-weight="700" fill="white" font-family="DM Sans,sans-serif" pointer-events="none" style="paint-order:stroke;stroke:#0005;stroke-width:3px">Uganda</text>
+<circle cx="693" cy="498" r="3.5" fill="white" opacity="0.9" pointer-events="none"/>
+<circle cx="693" cy="498" r="3.5" fill="#D4A017" opacity="0" pointer-events="none"><animate attributeName="r" values="3;16;3" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.7;0;0.7" dur="3s" repeatCount="indefinite"/></circle>
+<!-- Sierra Leone -->
+<path d="m 171.5,401 -3.3,0.8 0.1,-5.1 -1.9,-3.6 0.4,-4 -2.6,-5.8 -3.3,-5 -9.7,0 -2.9,2.6 -3.3,0.3 -2.1,3 -1.5,3.8 -6.5,6.1 1.4,10.3 2.1,5 6.3,7.4 8.7,5.6 3.3,1 2.9,-4.4 0.7,-4 5.5,-7.5 5.7,-6.5 z" fill="#2e7d4f" stroke="white" stroke-width="1.5" style="cursor:pointer;transition:opacity .2s" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'" onclick="showCountry('Sierra Leone')"/>
+<text x="155" y="422" text-anchor="middle" font-size="7" font-weight="700" fill="white" font-family="DM Sans,sans-serif" pointer-events="none" style="paint-order:stroke;stroke:#0005;stroke-width:3px">Sierra Leone</text>
+<circle cx="155" cy="410" r="3.5" fill="white" opacity="0.9" pointer-events="none"/>
+<circle cx="155" cy="410" r="3.5" fill="#2e7d4f" opacity="0" pointer-events="none"><animate attributeName="r" values="3;16;3" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.7;0;0.7" dur="3s" repeatCount="indefinite"/></circle>
+<!-- Malawi -->
+<path d="m 714.6,711.7 0.3,-5.2 -2.7,-4.1 0.4,-6 -3.3,-10.2 3.7,-7.7 -0.2,-16.7 -4.1,-8.9 0.4,-1.5 0,0 -2.3,-3.8 -11.9,-2.6 5.6,6.2 2.8,11.7 -2.2,3.8 -2.7,11.2 2,11.5 -4,4.8 -4.1,12.8 6.2,3.6 6.8,6.6 3.3,-1.2 4.7,3.5 0.5,5.5 -2.9,6.5 0.5,9.7 7.5,8.6 4.1,-9.6 5.4,-3 -0.3,-17.8 -4.6,-10 -4.2,-4.4 -0.7,0 0.1,1.9 2.3,0.5 2.2,7.4 -0.4,1.7 -4.1,-5.3 -2.2,3.4 -1.9,-2.9 z" fill="#3a5fa5" stroke="white" stroke-width="1.5" style="cursor:pointer;transition:opacity .2s" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'" onclick="showCountry('Malawi')"/>
+<text x="706" y="715" text-anchor="middle" font-size="9" font-weight="700" fill="white" font-family="DM Sans,sans-serif" pointer-events="none" style="paint-order:stroke;stroke:#0005;stroke-width:3px">Malawi</text>
+<circle cx="706" cy="703" r="3.5" fill="white" opacity="0.9" pointer-events="none"/>
+<circle cx="706" cy="703" r="3.5" fill="#3a5fa5" opacity="0" pointer-events="none"><animate attributeName="r" values="3;16;3" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.7;0;0.7" dur="3s" repeatCount="indefinite"/></circle>
+<!-- Tanzania -->
+<path d="m 672.2,531.3 -4.3,1.7 4.8,7.8 -0.8,8.1 -3.5,1.8 0,0 0.6,5.4 2.6,3.2 0.1,4.5 -3,2.9 -4.9,7.2 -4.5,5 -1.2,0.2 -0.7,5.9 2.3,2 -0.5,5.9 2.3,5.5 -2.9,5.3 9.7,9.4 0.8,8.5 5.9,14.2 0,0 0.6,0.4 4.8,2.3 7.7,2.4 6.8,4.1 11.9,2.6 2.3,3.8 0,0 0.8,-2.7 6.2,7.4 0.6,14.5 3.9,5.3 -0.1,0.2 4.7,-0.5 14.4,3.9 3.3,-1.8 8.4,-0.3 4.5,-4.2 7.3,0.2 13.4,-5.3 10,-8.1 0,0 -4.4,-3 -4.7,-13.6 -4,-8.7 1,-6.6 -0.6,-4.2 3.5,-8.4 -0.3,-3.6 -7.7,-5 -0.6,-7.8 5.9,-17.1 -17.3,-13.8 -0.7,-8 -44.1,-28.2 0,0 -6,6.1 -4.1,6.3 4.8,4.7 -7,3.4 -1.5,-1.6 -7.1,0.9 -5.5,3.1 -3.3,-5.4 2.3,-9.7 0.5,-8.3 0,0 0,0 -13.4,-0.2 z" fill="#b06010" stroke="white" stroke-width="1.5" style="cursor:pointer;transition:opacity .2s" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'" onclick="showCountry('Tanzania')"/>
+<text x="718" y="604" text-anchor="middle" font-size="9" font-weight="700" fill="white" font-family="DM Sans,sans-serif" pointer-events="none" style="paint-order:stroke;stroke:#0005;stroke-width:3px">Tanzania</text>
+<circle cx="718" cy="592" r="3.5" fill="white" opacity="0.9" pointer-events="none"/>
+<circle cx="718" cy="592" r="3.5" fill="#b06010" opacity="0" pointer-events="none"><animate attributeName="r" values="3;16;3" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.7;0;0.7" dur="3s" repeatCount="indefinite"/></circle>
+<!-- Kenya -->
+<path d="m 807.2,463.1 -8.4,0 -4.9,-4.7 -11.1,5.8 -3.5,5.8 -8.2,-1.1 -2.7,-1.6 -2.9,0.4 -3.8,-0.2 -15.7,-11.7 -8.5,0 -4.2,-4.6 -0.1,-7.7 -6.4,-2.4 -8.1,9.1 -7.4,8.3 5.9,9.6 1.5,7 5.5,15.8 -4.4,10.1 -5.9,9.2 -3.5,5.6 0,0.7 2.9,5.2 -0.8,10.3 44.1,28.2 0.7,8 17.3,13.8 5,-4.6 2.5,-9.2 4,-5.5 1.9,-9.8 4.6,-1 3.1,-5.8 8.6,-5.5 -7.2,-11.4 -0.4,-50.4 10.5,-15.7 z" fill="#6a22a8" stroke="white" stroke-width="1.5" style="cursor:pointer;transition:opacity .2s" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'" onclick="showCountry('Kenya')"/>
+<text x="800" y="524" text-anchor="middle" font-size="9" font-weight="700" fill="white" font-family="DM Sans,sans-serif" pointer-events="none" style="paint-order:stroke;stroke:#0005;stroke-width:3px">Kenya</text>
+<circle cx="800" cy="512" r="3.5" fill="white" opacity="0.9" pointer-events="none"/>
+<circle cx="800" cy="512" r="3.5" fill="#6a22a8" opacity="0" pointer-events="none"><animate attributeName="r" values="3;16;3" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.7;0;0.7" dur="3s" repeatCount="indefinite"/></circle>
+<!-- Ethiopia -->
+<path d="m 754.8,310.3 -3.3,10.4 -14.3,-2.9 -1.4,11.9 -4.5,13.6 -7.1,6.8 -4.8,10.6 -1.1,5.7 -5.6,3.8 -3.3,14.5 0.1,1.7 0.4,10.8 -1.8,4.2 -6.4,0.3 -4,7.9 7.5,1 6.3,6.7 2.2,5.6 5.7,3.2 7.4,15 6.4,2.4 0.1,7.7 4.2,4.6 8.5,0 15.7,11.7 3.8,0.2 2.9,-0.4 2.7,1.6 8.2,1.1 3.5,-5.8 11.1,-5.8 4.9,4.7 8.4,0 3.3,-4.4 7.8,-0.2 10.7,-9.8 15.9,-0.6 33.5,-41.5 -10.3,0.1 -40.3,-16.4 -4.8,-5 -4.6,-6.6 -4.8,-7.7 2.5,-4.9 -2.8,-2.4 -2.9,0.9 -6.8,-0.2 -0.3,-4.2 -1.1,-3.8 3.9,-6.5 4,-6.1 -4.3,-4.5 -5.4,-8.1 -5.5,-4.4 -3.4,-4.8 -10.8,-5.6 -8.3,-0.1 -3,-2.9 -7,3.2 -7.6,-6.3 z" fill="#a02020" stroke="white" stroke-width="1.5" style="cursor:pointer;transition:opacity .2s" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'" onclick="showCountry('Ethiopia')"/>
+<text x="784" y="390" text-anchor="middle" font-size="9" font-weight="700" fill="white" font-family="DM Sans,sans-serif" pointer-events="none" style="paint-order:stroke;stroke:#0005;stroke-width:3px">Ethiopia</text>
+<circle cx="784" cy="378" r="3.5" fill="white" opacity="0.9" pointer-events="none"/>
+<circle cx="784" cy="378" r="3.5" fill="#a02020" opacity="0" pointer-events="none"><animate attributeName="r" values="3;16;3" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.7;0;0.7" dur="3s" repeatCount="indefinite"/></circle>
 
-            <!-- HIGHLIGHTED MALAWI -->
-            <path d="m 714.6,711.7 0.3,-5.2 -2.7,-4.1 0.4,-6 -3.3,-10.2 3.7,-7.7 -0.2,-16.7 -4.1,-8.9 0.4,-1.5 0,0 -2.3,-3.8 -11.9,-2.6 5.6,6.2 2.8,11.7 -2.2,3.8 -2.7,11.2 2,11.5 -4,4.8 -4.1,12.8 6.2,3.6 6.8,6.6 3.3,-1.2 4.7,3.5 0.5,5.5 -2.9,6.5 0.5,9.7 7.5,8.6 4.1,-9.6 5.4,-3 -0.3,-17.8 -4.6,-10 -4.2,-4.4 -0.7,0 0.1,1.9 2.3,0.5 2.2,7.4 -0.4,1.7 -4.1,-5.3 -2.2,3.4 -1.9,-2.9 z" fill="#1a2d52" stroke="white" stroke-width="1.5"/>
-            <circle cx="705" cy="700" r="5" fill="white"/>
-            <text x="720" y="700" font-size="10" font-weight="700" fill="#1a2d52" font-family="DM Sans, sans-serif">Malawi</text>
           </svg>
-          <div class="map-legend">
-            <div class="legend-item">
-              <span class="legend-dot" style="background:#D4A017;"></span> Uganda
-            </div>
-            <div class="legend-item">
-              <span class="legend-dot" style="background:#2e7d4f;"></span> Sierra Leone
-            </div>
-            <div class="legend-item">
-              <span class="legend-dot" style="background:#1a2d52;"></span> Malawi
-            </div>
-            <div class="legend-item">
-              <span class="legend-dot" style="background:#e8e6df; border: 1px solid #ccc;"></span> Region
-            </div>
+          <div class="map-legend" style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:8px;">
+            <span onclick="showCountry('Uganda')" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--text-mid);cursor:pointer;padding:4px 10px 4px 6px;border-radius:20px;border:1px solid var(--light-gray);background:white;transition:border-color .2s" onmouseover="this.style.borderColor='#D4A017'" onmouseout="this.style.borderColor='var(--light-gray)'"><span style="width:10px;height:10px;background:#D4A017;border-radius:50%;flex-shrink:0;box-shadow:0 0 6px #D4A017"></span>Uganda</span><span onclick="showCountry('Sierra Leone')" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--text-mid);cursor:pointer;padding:4px 10px 4px 6px;border-radius:20px;border:1px solid var(--light-gray);background:white;transition:border-color .2s" onmouseover="this.style.borderColor='#2e7d4f'" onmouseout="this.style.borderColor='var(--light-gray)'"><span style="width:10px;height:10px;background:#2e7d4f;border-radius:50%;flex-shrink:0;box-shadow:0 0 6px #2e7d4f"></span>Sierra Leone</span><span onclick="showCountry('Malawi')" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--text-mid);cursor:pointer;padding:4px 10px 4px 6px;border-radius:20px;border:1px solid var(--light-gray);background:white;transition:border-color .2s" onmouseover="this.style.borderColor='#3a5fa5'" onmouseout="this.style.borderColor='var(--light-gray)'"><span style="width:10px;height:10px;background:#3a5fa5;border-radius:50%;flex-shrink:0;box-shadow:0 0 6px #3a5fa5"></span>Malawi</span><span onclick="showCountry('Tanzania')" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--text-mid);cursor:pointer;padding:4px 10px 4px 6px;border-radius:20px;border:1px solid var(--light-gray);background:white;transition:border-color .2s" onmouseover="this.style.borderColor='#b06010'" onmouseout="this.style.borderColor='var(--light-gray)'"><span style="width:10px;height:10px;background:#b06010;border-radius:50%;flex-shrink:0;box-shadow:0 0 6px #b06010"></span>Tanzania</span><span onclick="showCountry('Kenya')" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--text-mid);cursor:pointer;padding:4px 10px 4px 6px;border-radius:20px;border:1px solid var(--light-gray);background:white;transition:border-color .2s" onmouseover="this.style.borderColor='#6a22a8'" onmouseout="this.style.borderColor='var(--light-gray)'"><span style="width:10px;height:10px;background:#6a22a8;border-radius:50%;flex-shrink:0;box-shadow:0 0 6px #6a22a8"></span>Kenya</span><span onclick="showCountry('Ethiopia')" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--text-mid);cursor:pointer;padding:4px 10px 4px 6px;border-radius:20px;border:1px solid var(--light-gray);background:white;transition:border-color .2s" onmouseover="this.style.borderColor='#a02020'" onmouseout="this.style.borderColor='var(--light-gray)'"><span style="width:10px;height:10px;background:#a02020;border-radius:50%;flex-shrink:0;box-shadow:0 0 6px #a02020"></span>Ethiopia</span>
           </div>
         </div>
 
-        <!-- Clients -->
         <div style="margin-top:2rem;">
-          <div style="font-size:11px; font-weight:700; color:var(--text-light); letter-spacing:2px; text-transform:uppercase; margin-bottom:1rem;">Key Clients</div>
-          <div style="display:flex; flex-wrap:wrap; gap:8px;">
-            <span style="font-size:11px; font-weight:600; padding:5px 12px; background:var(--off-white); border:1px solid var(--light-gray); border-radius:4px; color:var(--text-mid);">TotalEnergies</span>
-            <span style="font-size:11px; font-weight:600; padding:5px 12px; background:var(--off-white); border:1px solid var(--light-gray); border-radius:4px; color:var(--text-mid);">CIFF / AfDB</span>
-            <span style="font-size:11px; font-weight:600; padding:5px 12px; background:var(--off-white); border:1px solid var(--light-gray); border-radius:4px; color:var(--text-mid);">Rockefeller Foundation</span>
-            <span style="font-size:11px; font-weight:600; padding:5px 12px; background:var(--off-white); border:1px solid var(--light-gray); border-radius:4px; color:var(--text-mid);">GEAPP</span>
-            <span style="font-size:11px; font-weight:600; padding:5px 12px; background:var(--off-white); border:1px solid var(--light-gray); border-radius:4px; color:var(--text-mid);">World Bank (UECCC)</span>
+          <div style="font-size:11px;font-weight:700;color:var(--text-light);letter-spacing:2px;text-transform:uppercase;margin-bottom:1rem;">Key Clients</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span style="font-size:11px;font-weight:600;padding:5px 12px;background:var(--off-white);border:1px solid var(--light-gray);border-radius:4px;color:var(--text-mid);">TotalEnergies</span>
+            <span style="font-size:11px;font-weight:600;padding:5px 12px;background:var(--off-white);border:1px solid var(--light-gray);border-radius:4px;color:var(--text-mid);">CIFF / AfDB</span>
+            <span style="font-size:11px;font-weight:600;padding:5px 12px;background:var(--off-white);border:1px solid var(--light-gray);border-radius:4px;color:var(--text-mid);">Rockefeller Foundation</span>
+            <span style="font-size:11px;font-weight:600;padding:5px 12px;background:var(--off-white);border:1px solid var(--light-gray);border-radius:4px;color:var(--text-mid);">GEAPP</span>
+            <span style="font-size:11px;font-weight:600;padding:5px 12px;background:var(--off-white);border:1px solid var(--light-gray);border-radius:4px;color:var(--text-mid);">World Bank</span>
+            <span style="font-size:11px;font-weight:600;padding:5px 12px;background:var(--off-white);border:1px solid var(--light-gray);border-radius:4px;color:var(--text-mid);">UECCC</span>
           </div>
         </div>
       </div>
 
-      <!-- PROJECTS LIST -->
+      <!-- PROJECTS -->
       <div class="projects-list">
-
         <div class="project-card uganda fade-up">
           <div class="project-header">
             <span class="project-num">01</span>
             <h3>Comprehensive Market Analysis for 40MWac Solar PV Projects — TotalEnergies</h3>
           </div>
-          <div class="project-meta">
-            <span class="project-badge badge-country">Uganda</span>
-            <span class="project-badge badge-year">Mar–Sep 2025</span>
-            <span class="project-badge badge-client">TotalEnergies</span>
-          </div>
+          <div class="project-meta"><span class="project-badge badge-country">Uganda</span><span class="project-badge badge-year">Mar–Sep 2025</span><span class="project-badge badge-client">TotalEnergies</span></div>
           <p class="project-desc">Analyzed economic and grid impacts of two 20MWac solar PV plants in Iganga and Tororo, Eastern Uganda. Covered demand-supply analysis, socio-economic impact, financing strategy, stakeholder management, and integration feasibility with Uganda's national grid.</p>
         </div>
-
         <div class="project-card uganda fade-up">
           <div class="project-header">
             <span class="project-num">02</span>
             <h3>Grid Integration & Impact Assessment — 40MW Solar PV, Iganga & Tororo</h3>
           </div>
-          <div class="project-meta">
-            <span class="project-badge badge-country">Uganda</span>
-            <span class="project-badge badge-year">Jun–Sep 2025</span>
-            <span class="project-badge badge-client">TotalEnergies EP</span>
-          </div>
+          <div class="project-meta"><span class="project-badge badge-country">Uganda</span><span class="project-badge badge-year">Jun–Sep 2025</span><span class="project-badge badge-client">TotalEnergies EP</span></div>
           <p class="project-desc">Assessed technical feasibility and system impacts of grid interconnection for two 20MW utility-scale solar PV plants. Developed reference substation design, DigSILENT PowerFactory simulations, bus-bar configuration, protection schemes, and SCADA specifications.</p>
         </div>
-
         <div class="project-card uganda fade-up">
           <div class="project-header">
             <span class="project-num">03</span>
             <h3>Utility-Scale Solar PV Electricity Tariff Benchmarking Study</h3>
           </div>
-          <div class="project-meta">
-            <span class="project-badge badge-country">Uganda</span>
-            <span class="project-badge badge-year">Feb 2026</span>
-            <span class="project-badge badge-client">TotalEnergies</span>
-            <span class="project-badge badge-ongoing">Ongoing</span>
-          </div>
+          <div class="project-meta"><span class="project-badge badge-country">Uganda</span><span class="project-badge badge-year">Feb 2026</span><span class="project-badge badge-client">TotalEnergies</span><span class="project-badge badge-ongoing">Ongoing</span></div>
           <p class="project-desc">Regional benchmarking of electricity tariffs for utility-scale solar PV projects across East and Central Africa. Examines capital expenditure, operating costs, financing arrangements, grid integration considerations, and regulatory factors to support ERA's review process.</p>
         </div>
-
         <div class="project-card uganda fade-up">
           <div class="project-header">
             <span class="project-num">04</span>
             <h3>Qualitative Curtailment, Evacuation & BESS Mitigation Study — Tororo 20MWac</h3>
           </div>
-          <div class="project-meta">
-            <span class="project-badge badge-country">Uganda</span>
-            <span class="project-badge badge-year">Feb 2026</span>
-            <span class="project-badge badge-client">TotalEnergies</span>
-            <span class="project-badge badge-ongoing">Ongoing</span>
-          </div>
+          <div class="project-meta"><span class="project-badge badge-country">Uganda</span><span class="project-badge badge-year">Feb 2026</span><span class="project-badge badge-client">TotalEnergies</span><span class="project-badge badge-ongoing">Ongoing</span></div>
           <p class="project-desc">Evidence-based assessment of curtailment and evacuation risks for solar PV plants under low-demand conditions. Evaluates Battery Energy Storage System deployment as mitigation, including technical sizing, economic viability, regulatory and PPA implications.</p>
         </div>
-
         <div class="project-card multi fade-up">
           <div class="project-header">
             <span class="project-num">05</span>
             <h3>Enhancing Regulatory Frameworks for Green Energy Transition — 5-Country Study</h3>
           </div>
-          <div class="project-meta">
-            <span class="project-badge badge-country">Uganda · Tanzania · Kenya · Ethiopia · Malawi</span>
-            <span class="project-badge badge-year">Apr 2025 – Apr 2026</span>
-            <span class="project-badge badge-client">CIFF / AfDB</span>
-          </div>
-          <p class="project-desc">Multi-country analysis of tariff structures, policy frameworks, and demand response opportunities for the Children Investment Fund Foundation under the AfDB Climate Action Window. Covers dynamic load integration (e-cooking, BESS, e-mobility), time-of-use tariff design, and capacity building.</p>
+          <div class="project-meta"><span class="project-badge badge-country">Uganda · Tanzania · Kenya · Ethiopia · Malawi</span><span class="project-badge badge-year">Apr 2025–Apr 2026</span><span class="project-badge badge-client">CIFF / AfDB</span></div>
+          <p class="project-desc">Multi-country analysis of tariff structures, policy frameworks, and demand response opportunities for the Children Investment Fund Foundation under the AfDB Climate Action Window. Covers dynamic load integration, time-of-use tariff design, and capacity building.</p>
         </div>
-
         <div class="project-card uganda fade-up">
           <div class="project-header">
             <span class="project-num">06</span>
             <h3>Working Capital & Master Guarantee Agreement — World Bank ERT III Project</h3>
           </div>
-          <div class="project-meta">
-            <span class="project-badge badge-country">Uganda</span>
-            <span class="project-badge badge-year">2017</span>
-            <span class="project-badge badge-client">UECCC / World Bank</span>
-          </div>
-          <p class="project-desc">Developed model financing agreements for UECCC to enable working capital and consumer financing for off-grid solar energy businesses. Delivered eligibility checklists, Working Capital Facility Agreement, Master Guarantee Agreement, and standardized forms for financial intermediation.</p>
+          <div class="project-meta"><span class="project-badge badge-country">Uganda</span><span class="project-badge badge-year">2017</span><span class="project-badge badge-client">UECCC / World Bank</span></div>
+          <p class="project-desc">Developed model financing agreements for UECCC to enable working capital and consumer financing for off-grid solar energy businesses. Delivered eligibility checklists, Working Capital Facility Agreement, Master Guarantee Agreement, and standardized forms.</p>
         </div>
-
         <div class="project-card sierra fade-up">
           <div class="project-header">
             <span class="project-num">07</span>
             <h3>Training in PPA Negotiations & Financial Modelling — Sierra Leone & Malawi</h3>
           </div>
-          <div class="project-meta">
-            <span class="project-badge badge-country">Sierra Leone · Malawi</span>
-            <span class="project-badge badge-year">2023</span>
-            <span class="project-badge badge-client">GEAPP</span>
-          </div>
-          <p class="project-desc">5-day immersive training for electricity sector institutions from Sierra Leone and Malawi, partnering with Uganda's ERA, UETCL, and UDB. Built capacity in IPP business models, PPA negotiation, financial modelling, and project risk allocation in collaboration with Uganda's electricity industry experts.</p>
+          <div class="project-meta"><span class="project-badge badge-country">Sierra Leone · Malawi</span><span class="project-badge badge-year">2023</span><span class="project-badge badge-client">GEAPP</span></div>
+          <p class="project-desc">5-day immersive training for electricity sector institutions from Sierra Leone and Malawi, partnering with Uganda's ERA, UETCL, and UDB. Built capacity in IPP business models, PPA negotiation, financial modelling, and project risk allocation.</p>
         </div>
-
         <div class="project-card uganda fade-up">
           <div class="project-header">
             <span class="project-num">08</span>
             <h3>Uganda Electricity Sector Regulatory Landscape — Rockefeller Foundation</h3>
           </div>
-          <div class="project-meta">
-            <span class="project-badge badge-country">Uganda</span>
-            <span class="project-badge badge-year">2020–2022</span>
-            <span class="project-badge badge-client">Rockefeller / GEAPP</span>
-          </div>
-          <p class="project-desc">Comprehensive analysis of Uganda's rural electrification legal and regulatory framework, paired with an electricity access and demand stimulation market assessment. Designed a Partial Risk Guarantee Facility with ERA and Uganda Development Bank to catalyze consumer connection financing.</p>
+          <div class="project-meta"><span class="project-badge badge-country">Uganda</span><span class="project-badge badge-year">2020–2022</span><span class="project-badge badge-client">Rockefeller / GEAPP</span></div>
+          <p class="project-desc">Comprehensive analysis of Uganda's rural electrification legal and regulatory framework, paired with an electricity access and demand stimulation market assessment. Designed a Partial Risk Guarantee Facility with ERA and Uganda Development Bank.</p>
         </div>
-
         <div class="project-card malawi fade-up">
           <div class="project-header">
             <span class="project-num">09</span>
             <h3>Bankability Assessment of the Electricity Supply Industry — Malawi</h3>
           </div>
-          <div class="project-meta">
-            <span class="project-badge badge-country">Malawi</span>
-            <span class="project-badge badge-year">2021–2022</span>
-            <span class="project-badge badge-client">Rockefeller Foundation</span>
-          </div>
-          <p class="project-desc">Rapid assessment and gap analysis of Malawi's ESI bankability, identifying challenges in power supply availability, system losses, private sector participation, and financing gaps. Designed interventions to unlock quality private sector investment and improve project viability.</p>
+          <div class="project-meta"><span class="project-badge badge-country">Malawi</span><span class="project-badge badge-year">2021–2022</span><span class="project-badge badge-client">Rockefeller Foundation</span></div>
+          <p class="project-desc">Rapid assessment and gap analysis of Malawi's ESI bankability, identifying challenges in power supply availability, system losses, private sector participation, and financing gaps. Designed interventions to unlock quality private sector investment.</p>
         </div>
-
         <div class="project-card sierra fade-up">
           <div class="project-header">
             <span class="project-num">10</span>
             <h3>Bankability Assessment of the Electricity Supply Industry — Sierra Leone</h3>
           </div>
-          <div class="project-meta">
-            <span class="project-badge badge-country">Sierra Leone</span>
-            <span class="project-badge badge-year">2021–2022</span>
-            <span class="project-badge badge-client">Rockefeller / GEAPP</span>
-          </div>
-          <p class="project-desc">In-depth assessment of Sierra Leone's power sector policy, legal framework, regulatory environment, and investment landscape. Identified key barriers including sector restructuring gaps, high fossil fuel reliance, tariff inefficiencies, and financing constraints hindering bankable project development.</p>
+          <div class="project-meta"><span class="project-badge badge-country">Sierra Leone</span><span class="project-badge badge-year">2021–2022</span><span class="project-badge badge-client">Rockefeller / GEAPP</span></div>
+          <p class="project-desc">In-depth assessment of Sierra Leone's power sector policy, legal framework, regulatory environment, and investment landscape. Identified key barriers including sector restructuring gaps, high fossil fuel reliance, tariff inefficiencies, and financing constraints.</p>
         </div>
-
       </div>
     </div>
   </div>
@@ -1797,7 +1795,7 @@
             <div class="contact-icon">
               <svg viewBox="0 0 18 18" fill="none" stroke="#D4A017" stroke-width="1.5"><path d="M3 5a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"/><path d="M3 7h12"/></svg>
             </div>
-            <a href="mailto:info@kkadvisors.africa">info@kkadvisors.africa</a>
+            <a href="/cdn-cgi/l/email-protection#88e1e6eee7c8e3e3e9ecfee1fbe7fafba6e9eefae1ebe9"><span class="__cf_email__" data-cfemail="4821262e27082323292c3e213b273a3b66292e3a212b29">[email&#160;protected]</span></a>
           </div>
           <div class="contact-item">
             <div class="contact-icon">
@@ -1860,8 +1858,8 @@
 <footer>
   <div class="footer-inner">
     <div style="display:flex; align-items:center; gap:10px;">
-      <img src="data:image/jpeg;base64,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AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/Z" alt="KK Advisors" style="height:32px; width:auto; object-fit:contain; opacity:0.85; mix-blend-mode:screen;">
-      <span style="color:rgba(255,255,255,0.35); font-size:12px;">© 2026 KK Advisors Africa Ltd. All rights reserved. · Kampala, Uganda</span>
+      <img src="assets/images/img/Screenshot_2026-04-03_at_17.43.55-removebg-preview.png" alt="KK Advisors Africa" class="logo-img" style="height:36px;width:auto;object-fit:contain;">
+      <span style="color:rgba(255,255,255,0.35); font-size:12px;">© 2026 KK Advisors Africa LLP. All rights reserved. · Kampala, Uganda</span>
     </div>
     <div class="footer-links">
       <a href="#about">About</a>
@@ -1869,40 +1867,88 @@
       <a href="#portfolio">Portfolio</a>
       <a href="#team">Team</a>
       <a href="#contact">Contact</a>
-      <a href="mailto:info@kkadvisors.africa">info@kkadvisors.africa</a>
+      <a href="mailto:info@kkadvisors.africa"><span class="__cf_email__" data-cfemail="fe97909891be95959f9a88978d918c8dd09f988c979d9f">info@kkadvisors.africa</span></a>
     </div>
   </div>
 </footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+var ALL_PROJECTS = [{"id": 1, "title": "Comprehensive Market Analysis for 40MWac Solar PV Projects \u2014 TotalEnergies", "countries": ["Uganda"], "year": "Mar\u2013Sep 2025", "client": "TotalEnergies", "ongoing": false, "desc": "Analyzed economic and grid impacts of two 20MWac solar PV plants in Iganga and Tororo, Eastern Uganda. Covered demand-supply analysis, socio-economic impact, financing strategy, stakeholder management, and integration feasibility with Uganda's national grid."}, {"id": 2, "title": "Grid Integration & Impact Assessment \u2014 40MW Solar PV, Iganga & Tororo", "countries": ["Uganda"], "year": "Jun\u2013Sep 2025", "client": "TotalEnergies EP", "ongoing": false, "desc": "Assessed technical feasibility and system impacts of grid interconnection for two 20MW utility-scale solar PV plants. Developed reference substation design, DigSILENT PowerFactory simulations, bus-bar configuration, protection schemes, and SCADA specifications."}, {"id": 3, "title": "Utility-Scale Solar PV Electricity Tariff Benchmarking Study", "countries": ["Uganda"], "year": "Feb 2026", "client": "TotalEnergies", "ongoing": true, "desc": "Regional benchmarking of electricity tariffs for utility-scale solar PV projects across East and Central Africa. Examines capital expenditure, operating costs, financing arrangements, grid integration considerations, and regulatory factors to support ERA's review process."}, {"id": 4, "title": "Qualitative Curtailment, Evacuation & BESS Mitigation Study \u2014 Tororo 20MWac", "countries": ["Uganda"], "year": "Feb 2026", "client": "TotalEnergies", "ongoing": true, "desc": "Evidence-based assessment of curtailment and evacuation risks for solar PV plants under low-demand conditions. Evaluates Battery Energy Storage System deployment as mitigation, including technical sizing, economic viability, regulatory and PPA implications."}, {"id": 5, "title": "Enhancing Regulatory Frameworks for Green Energy Transition \u2014 5-Country Study", "countries": ["Uganda", "Tanzania", "Kenya", "Ethiopia", "Malawi"], "year": "Apr 2025\u2013Apr 2026", "client": "CIFF / AfDB", "ongoing": false, "desc": "Multi-country analysis of tariff structures, policy frameworks, and demand response opportunities for the Children Investment Fund Foundation under the AfDB Climate Action Window. Covers dynamic load integration, time-of-use tariff design, and capacity building."}, {"id": 6, "title": "Working Capital & Master Guarantee Agreement \u2014 World Bank ERT III Project", "countries": ["Uganda"], "year": "2017", "client": "UECCC / World Bank", "ongoing": false, "desc": "Developed model financing agreements for UECCC to enable working capital and consumer financing for off-grid solar energy businesses. Delivered eligibility checklists, Working Capital Facility Agreement, Master Guarantee Agreement, and standardized forms."}, {"id": 7, "title": "Training in PPA Negotiations & Financial Modelling \u2014 Sierra Leone & Malawi", "countries": ["Sierra Leone", "Malawi"], "year": "2023", "client": "GEAPP", "ongoing": false, "desc": "5-day immersive training for electricity sector institutions from Sierra Leone and Malawi, partnering with Uganda's ERA, UETCL, and UDB. Built capacity in IPP business models, PPA negotiation, financial modelling, and project risk allocation."}, {"id": 8, "title": "Uganda Electricity Sector Regulatory Landscape \u2014 Rockefeller Foundation", "countries": ["Uganda"], "year": "2020\u20132022", "client": "Rockefeller / GEAPP", "ongoing": false, "desc": "Comprehensive analysis of Uganda's rural electrification legal and regulatory framework, paired with an electricity access and demand stimulation market assessment. Designed a Partial Risk Guarantee Facility with ERA and Uganda Development Bank."}, {"id": 9, "title": "Bankability Assessment of the Electricity Supply Industry \u2014 Malawi", "countries": ["Malawi"], "year": "2021\u20132022", "client": "Rockefeller Foundation", "ongoing": false, "desc": "Rapid assessment and gap analysis of Malawi's ESI bankability, identifying challenges in power supply availability, system losses, private sector participation, and financing gaps. Designed interventions to unlock quality private sector investment."}, {"id": 10, "title": "Bankability Assessment of the Electricity Supply Industry \u2014 Sierra Leone", "countries": ["Sierra Leone"], "year": "2021\u20132022", "client": "Rockefeller / GEAPP", "ongoing": false, "desc": "In-depth assessment of Sierra Leone's power sector policy, legal framework, regulatory environment, and investment landscape. Identified key barriers including sector restructuring gaps, high fossil fuel reliance, tariff inefficiencies, and financing constraints."}];
+var COUNTRY_META = {"Uganda": {"color": "#D4A017", "flag": "\ud83c\uddfa\ud83c\uddec", "sub": "East Africa \u00b7 Primary Market"}, "Sierra Leone": {"color": "#2e7d4f", "flag": "\ud83c\uddf8\ud83c\uddf1", "sub": "West Africa \u00b7 Bankability & Capacity"}, "Malawi": {"color": "#3a5fa5", "flag": "\ud83c\uddf2\ud83c\uddfc", "sub": "Southern Africa \u00b7 Bankability & Training"}, "Tanzania": {"color": "#b06010", "flag": "\ud83c\uddf9\ud83c\uddff", "sub": "East Africa \u00b7 Regulatory Frameworks"}, "Kenya": {"color": "#6a22a8", "flag": "\ud83c\uddf0\ud83c\uddea", "sub": "East Africa \u00b7 Regulatory Frameworks"}, "Ethiopia": {"color": "#a02020", "flag": "\ud83c\uddea\ud83c\uddf9", "sub": "East Africa \u00b7 Regulatory Frameworks"}};
 
-<script>
-  // Scroll-triggered fade-up animation
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(el => {
-      if (el.isIntersecting) {
-        el.target.classList.add('visible');
-        observer.unobserve(el.target);
-      }
-    });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+function showCountry(name) {
+  var meta = COUNTRY_META[name];
+  if (!meta) return;
+  var matching = ALL_PROJECTS.filter(function(p){ return p.countries.indexOf(name) > -1; });
 
-  document.querySelectorAll('.fade-up').forEach((el, i) => {
-    el.style.transitionDelay = `${(i % 4) * 0.07}s`;
-    observer.observe(el);
+  document.getElementById('overlayHead').style.background = meta.color;
+  document.getElementById('overlayTag').textContent = meta.flag + '  ' + meta.sub;
+  document.getElementById('overlayTitle').textContent = name;
+  document.getElementById('overlayCount').textContent = matching.length + ' project' + (matching.length===1?'':'s') + ' in this country';
+
+  document.getElementById('overlayProjects').innerHTML = matching.map(function(p) {
+    var num = ('0'+p.id).slice(-2);
+    var ctags = p.countries.map(function(c){return c;}).join(' · ');
+    return '<div class="ov-card" style="border-left-color:'+meta.color+'">'
+      + '<div style="display:flex;align-items:flex-start;gap:.8rem;margin-bottom:.7rem;">'
+      + '<span style="font-size:.75rem;font-weight:700;color:var(--text-light);letter-spacing:1px;flex-shrink:0;margin-top:2px;">'+num+'</span>'
+      + '<h3>'+p.title+'</h3></div>'
+      + '<div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:.8rem;">'
+      + '<span class="project-badge badge-country">'+ctags+'</span>'
+      + '<span class="project-badge badge-year">'+p.year+'</span>'
+      + '<span class="project-badge badge-client">'+p.client+'</span>'
+      + (p.ongoing?'<span class="project-badge badge-ongoing">Ongoing</span>':'')
+      + '</div><p>'+p.desc+'</p></div>';
+  }).join('');
+
+  document.getElementById('countryOverlay').style.display = 'block';
+  document.getElementById('countryOverlay').scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeOverlay() {
+  document.getElementById('countryOverlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+document.getElementById('countryOverlay').addEventListener('click', function(e){
+  if (e.target === this) closeOverlay();
+});
+document.addEventListener('keydown', function(e){ if (e.key==='Escape') closeOverlay(); });
+
+function toggleNav() {
+  document.getElementById('navHamburger').classList.toggle('open');
+  document.getElementById('navLinks').classList.toggle('open');
+}
+function closeNav() {
+  document.getElementById('navHamburger').classList.remove('open');
+  document.getElementById('navLinks').classList.remove('open');
+}
+document.addEventListener('click', function(e){
+  var h=document.getElementById('navHamburger'), n=document.getElementById('navLinks');
+  if (h&&n&&!h.contains(e.target)&&!n.contains(e.target)) closeNav();
+});
+
+var obs = new IntersectionObserver(function(entries){
+  entries.forEach(function(el){
+    if (el.isIntersecting){ el.target.classList.add('visible'); obs.unobserve(el.target); }
   });
+}, {threshold:0.08, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-up').forEach(function(el,i){
+  el.style.transitionDelay=(i%4)*0.07+'s';  obs.observe(el);
+});
 
-  // Smooth nav active link
-  const sections = document.querySelectorAll('section[id], nav');
-  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
-
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => {
-      if (window.scrollY >= s.offsetTop - 100) current = s.id || '';
-    });
-    navLinks.forEach(a => {
-      a.style.color = a.getAttribute('href') === '#' + current ? '#F0C040' : '';
-    });
+// Smooth nav active link highlight
+var sections = document.querySelectorAll('section[id]');
+var navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+window.addEventListener('scroll', function(){
+  var current = '';
+  sections.forEach(function(s){
+    if (window.scrollY >= s.offsetTop - 100) current = s.id || '';
   });
+  navAnchors.forEach(function(a){
+    a.style.color = a.getAttribute('href') === '#' + current ? '#F0C040' : '';
+  });
+});
 </script>
 </body>
 </html>
