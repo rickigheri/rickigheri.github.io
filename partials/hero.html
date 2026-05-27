@@ -1,0 +1,27 @@
+<!--
+  ============================================================
+  PARTIAL: hero.html
+  ------------------------------------------------------------
+  The homepage hero is intentionally bespoke (see index.html).
+  This file documents the reusable inner-page hero pattern
+  that becomes a template-part in WordPress:
+    get_template_part( 'template-parts/page-hero' );
+  ACF fields suggested:
+    - eyebrow (text)
+    - title (text)
+    - lead (textarea)
+    - breadcrumb_parent (post object — optional)
+  ============================================================
+-->
+<section class="page-hero">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">/</span>
+      <span>Page Title</span>
+    </nav>
+    <span class="eyebrow">Eyebrow Label</span>
+    <h1>Page Title Goes Here</h1>
+    <p class="lead">Supporting summary that sets context for the page in one to two sentences.</p>
+  </div>
+</section>

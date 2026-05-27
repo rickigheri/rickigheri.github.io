@@ -1,0 +1,97 @@
+/* ==========================================================================
+   ASK GEORGE LTD. — Responsive Stylesheet
+   Mobile-first refinements & breakpoint adjustments
+   ========================================================================== */
+
+/* ---- ≤ 1180px ----------------------------------------------------------- */
+@media (max-width: 1180px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .why-grid { grid-template-columns: repeat(3, 1fr); }
+  .why-grid .why-item:nth-child(3) { border-right: none; }
+  .why-grid .why-item:nth-child(n+4) { padding-top: var(--sp-6); border-top: 1px solid rgba(255, 255, 255, 0.1); }
+  .insights-grid { grid-template-columns: 1fr 1fr; }
+  .insight-card.is-featured { grid-column: span 2; grid-row: auto; }
+  .insight-card.is-featured .ic-image { aspect-ratio: 21/9; }
+  .expertise-strip .strip-grid { grid-template-columns: repeat(4, 1fr); }
+  .strip-item:nth-child(4n) { border-right: none; }
+  .strip-item:nth-child(n+5) { border-top: 1px solid var(--ag-line); }
+}
+
+/* ---- ≤ 980px ------------------------------------------------------------ */
+@media (max-width: 980px) {
+  :root { --header-h: 72px; }
+  .nav-primary { display: none; }
+  .nav-cta .btn:not(.menu-toggle) { display: none; }
+  .menu-toggle { display: flex; }
+
+  .hero { min-height: auto; padding-top: calc(var(--header-h) + 3rem); padding-bottom: 4rem; }
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-frame { max-width: 460px; margin: 0 auto; aspect-ratio: 4/4; }
+  .hero-trust { grid-template-columns: repeat(2, 1fr); gap: var(--sp-4); }
+  .hero-scroll { display: none; }
+
+  .about-band { grid-template-columns: 1fr; }
+  .about-visual { max-width: 520px; aspect-ratio: 6/5; }
+  .sectors-grid { grid-template-columns: repeat(2, 1fr); }
+  .projects-grid { grid-template-columns: repeat(2, 1fr); }
+  .insights-grid { grid-template-columns: 1fr; }
+  .insight-card.is-featured { grid-column: auto; }
+  .africa-grid { grid-template-columns: 1fr; }
+  .cta-inner { grid-template-columns: 1fr; }
+  .cta-actions { justify-content: flex-start; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .svc-detail { grid-template-columns: 1fr; }
+  .svc-detail.is-reverse > div:first-child { order: 1; }
+  .gov-pillars { grid-template-columns: 1fr; }
+  .process-grid { grid-template-columns: repeat(2, 1fr); gap: var(--sp-6) var(--sp-4); }
+  .process-grid::before { display: none; }
+  .why-grid { grid-template-columns: 1fr 1fr; }
+  .why-grid .why-item { border-right: 1px solid rgba(255, 255, 255, 0.1); padding-top: var(--sp-6); padding-bottom: var(--sp-3); }
+  .why-grid .why-item:nth-child(2n) { border-right: none; }
+
+  .services-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ---- ≤ 640px ------------------------------------------------------------ */
+@media (max-width: 640px) {
+  body { font-size: 15px; }
+  .section { padding: 3.5rem 0; }
+  .hero-actions .btn { width: 100%; justify-content: center; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-trust { grid-template-columns: 1fr 1fr; }
+  .sectors-grid { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .services-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .expertise-strip .strip-grid { grid-template-columns: repeat(2, 1fr); }
+  .strip-item:nth-child(2n) { border-right: none; }
+  .strip-item:nth-child(n+3) { border-top: 1px solid var(--ag-line); }
+  .form-row { grid-template-columns: 1fr; }
+  .about-points { grid-template-columns: 1fr; }
+  .africa-metrics { grid-template-columns: 1fr 1fr; }
+  .gov-pillars { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+  .why-grid .why-item { border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: var(--sp-5) 0; }
+  .why-grid .why-item:last-child { border-bottom: none; }
+  .nav-bar { grid-template-columns: auto auto; }
+  .brand-text .ag-tag { display: none; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+  .form-foot { justify-content: stretch; }
+  .form-foot .btn { width: 100%; justify-content: center; }
+}
+
+/* ---- ≥ 1480px (ultrawide) ---------------------------------------------- */
+@media (min-width: 1480px) {
+  .container { padding: 0 2rem; }
+}
+
+/* ---- Reduced motion ---------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
